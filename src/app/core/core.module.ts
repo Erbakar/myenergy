@@ -16,8 +16,6 @@ import { HttpCacheService } from './http/http-cache.service';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
 import { CacheInterceptor } from './http/cache.interceptor';
-import { SpreadsheetValidator } from '../pcip/products/product/spreadsheet/spreadsheet-validation.service';
-import { SpreadsheetColoring } from '../pcip/products/product/spreadsheet/spreadsheet-coloring.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
@@ -28,8 +26,6 @@ import { SpreadsheetColoring } from '../pcip/products/product/spreadsheet/spread
     HttpCacheService,
     ApiPrefixInterceptor,
     ErrorHandlerInterceptor,
-    SpreadsheetValidator,
-    SpreadsheetColoring,
     CacheInterceptor,
     {
       provide: HttpClient,

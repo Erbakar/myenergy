@@ -10,20 +10,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '@env/environment';
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { CopmanyModule } from './pcip/company/company.module';
 import { ShellModule } from './shell/shell.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ProductsModule } from './pcip/products/products.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { SuppliersModule } from './pcip/suppliers/suppliers.module';
-import { ImportModule } from './pcip/import/import.module';
 import { HotTableModule } from '@handsontable/angular';
 import { RegisterModule } from './login/register/register.module';
-import { CtiModule } from './cti/cti.module';
 import { InviteColleagueDialog } from './shared/dialog/invite-colleague/invite-colleague.component';
 import { DeleteConfirmDialog } from './shared/dialog/delete-confirm-dialog/delete-confirm-dialog.component';
 import { ConfirmDialog } from './shared/dialog/confirm-dialog/confirm-dialog.component';
@@ -129,17 +124,12 @@ export class SentryErrorHandler implements ErrorHandler {
     CoreModule,
     SharedModule,
     ShellModule,
-    CopmanyModule,
-    SuppliersModule,
     MatSortModule,
     MatSlideToggleModule,
-    ProductsModule,
-    ImportModule,
     MatSnackBarModule,
     LoginModule,
     RegisterModule,
     MatButtonModule,
-    CtiModule,
     MyEnergyModule,
     AdminModule,
     AngularResizedEventModule,

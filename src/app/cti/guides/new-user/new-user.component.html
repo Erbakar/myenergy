@@ -1,0 +1,155 @@
+<div class="login-container">
+  <div class="container">
+    <div class="login-box clearfix">
+      <div class="form">
+        <div class="page-head">
+          <span class="page-title" translate>Welcome to the CTI Tool</span>
+        </div>
+        <form (ngSubmit)="register()" [formGroup]="registerForm" novalidate>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-item">
+                <label class="d-block">
+                  <label translate>FIRST NAME</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="{{ 'Enter your first name' | translate }}"
+                    formControlName="firstname"
+                    autocomplete="firstname"
+                  />
+                  <span hidden translate>First name</span>
+                  <small
+                    [hidden]="
+                      registerForm.controls.firstname.valid ||
+                      registerForm.controls.firstname.untouched
+                    "
+                    class="text-danger"
+                    translate
+                  >
+                    First name is required
+                  </small>
+                </label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-item">
+                <label class="d-block">
+                  <label translate>LAST NAME</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="{{ 'Enter your last name' | translate }}"
+                    formControlName="lastname"
+                    autocomplete="lastname"
+                  />
+                  <span hidden translate>Last name</span>
+                  <small
+                    [hidden]="
+                      registerForm.controls.lastname.valid ||
+                      registerForm.controls.lastname.untouched
+                    "
+                    class="text-danger"
+                    translate
+                  >
+                    Last name is required
+                  </small>
+                </label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-item">
+                <label class="d-block">
+                  <label translate>EMAIL ADDRESS</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="{{ 'Enter your email' | translate }}"
+                    formControlName="email"
+                    trim
+                    autocomplete="email"
+                    disabled="registerForm.controls.email.valid"
+                  />
+                  <span hidden translate>Email</span>
+                  <small
+                    [hidden]="
+                      registerForm.controls.email.valid ||
+                      registerForm.controls.email.untouched
+                    "
+                    class="text-danger"
+                    translate
+                  >
+                    Valid Email is required
+                  </small>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="sub-headline">
+            <h2 translate>welcome.question</h2>
+            <span translate>welcome.text</span>
+          </div>
+
+          <div class="col-12">
+            <div class="row radio-box">
+              <div class="col">
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    formControlName="CTI_KNOWLEDGE"
+                    value="COMPLETELY NEW"
+                    name="CTI_KNOWLEDGE"
+                    id="r1"
+                  /><label for="r1" translate>
+                    <img
+                      src="../../../assets/img/reg1.png"
+                      style="margin-left: 53px"
+                      alt=""
+                    />
+                    I’m new</label
+                  >
+                </div>
+              </div>
+              <div class="col">
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    formControlName="CTI_KNOWLEDGE"
+                    value="HAVE SOME UNDERSTANDING"
+                    name="CTI_KNOWLEDGE"
+                    id="r2"
+                  /><label for="r2" translate>
+                    <img src="../../../assets/img/reg2.png" alt="" />
+                    I have some knowledge
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    formControlName="CTI_KNOWLEDGE"
+                    value="I’M VERY FAMILIAR"
+                    name="CTI_KNOWLEDGE"
+                    id="r3"
+                  /><label for="r3" translate>
+                    <img src="../../../assets/img/reg3.png" alt="" />
+                    I’m very familiar
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="btn-circular bg-shamrock big center"
+            type="submit"
+            [disabled]="registerForm.invalid"
+          >
+            <span translate>ACTIVATE ACCOUNT</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

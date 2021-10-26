@@ -1,0 +1,59 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+#dialog-wrapper {
+  position: relative;
+  top: 10%;
+  left: 10%;
+  width: 80vw;
+  height: 80vh;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.icon-close {
+  position: absolute;
+  right: 0;
+  font-size: 36px;
+  color: #1c195b;
+  border: solid 2px #1c195b;
+  border-radius: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+.form-box {
+  width: 48%;
+  display: block;
+  float: left;
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.item {
+  padding: 2rem;
+  height: calc(100% - 4rem);
+  border-radius: 0.2rem;
+  strong {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: bold;
+    color: $dark-slate-blue;
+  }
+  .sub-text {
+    display: block;
+    margin: -1rem 0 1rem;
+  }
+  .right {
+    position: relative;
+    top: -2rem;
+  }
+  a {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+.open {
+  background: $dark-slate-blue;
+  color: $white;
+  border: 0;
+}

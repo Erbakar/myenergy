@@ -1,0 +1,54 @@
+<section id="dialog-wrapper">
+  <div class="page-head">
+    <span class="page-title" translate>Add business level </span>
+  </div>
+  <p>
+    What is the name of the business level you wish to run an assessment for?
+  </p>
+
+  <form [formGroup]="businessForm" novalidate>
+    <div class="form-item">
+      <label class="d-block">
+        <label translate>Name of business level </label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your first name"
+          formControlName="name"
+          autocomplete="name"
+        />
+        <span hidden translate>business level name</span>
+        <small
+          [hidden]="
+            businessForm.controls.name.valid ||
+            businessForm.controls.name.untouched
+          "
+          class="text-danger"
+          translate
+        >
+          business level name is required
+        </small>
+      </label>
+    </div>
+  </form>
+
+  <div style="text-align: right; padding: 10px 0">
+    <div class="bottom-box">
+      <button
+        tabindex="0"
+        class="btn-circular dark-slate-blue-border"
+        (click)="onNoClick()"
+      >
+        Cancel
+      </button>
+      <button
+        tabindex="1"
+        class="btn-circular bg-shamrock"
+        [disabled]="businessForm.invalid"
+        (click)="onYesClick()"
+      >
+        Create
+      </button>
+    </div>
+  </div>
+</section>

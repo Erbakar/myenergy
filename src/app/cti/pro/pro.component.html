@@ -1,0 +1,174 @@
+<div *ngIf="!data" class="lds-roller">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<div class="pro" *ngIf="data">
+  <!-- <div class="header clearfix">
+    <div class="btn-circular guidance-button pro-btn float-right" [ngClass]="{ active: show }" (click)="openPatica()"
+      translate>
+      circularGuidance
+    </div>
+  </div> -->
+  <div class="head" *ngIf="data.length > 0">
+    <button class="btn-big" (click)="addBusinessLevel()">
+      <em class="icon icon-add"></em> <b translate>ADD NEW BUSINESS LEVEL</b>
+    </button>
+    <h1 translate>CTIPro_head1</h1>
+    <span translate>CTIPro_head2</span>
+    <span translate>CTIPro_head3</span>
+  </div>
+  <div class="head" *ngIf="data.length < 1">
+    <span translate>CTIPro_nonAssigned</span>
+  </div>
+  <div class="table-box" *ngFor="let level of data">
+    <div class="table-head-line">
+      <img
+        src="../../../assets/img/icon/pro-table.svg"
+        style="float: left"
+        alt=""
+      />
+      <div class="name">
+        <span
+          >{{ level.name }} &nbsp;
+          <em
+            (click)="editBusinessLevel(level)"
+            class="material-icons-outlined oval"
+            >mode_edit</em
+          ></span
+        >
+        <span>{{ level.type === 'Other' ? level.otherType : level.type }}</span>
+      </div>
+      <div class="btn-box">
+        <span (click)="manageMemeber(level)" class="member-btn"></span>
+        <button
+          (click)="addAssessment(level)"
+          class="btn-circular bg-real-grey float-right ml-2"
+          translate
+        >
+          ADD NEW ASSESSMENT
+        </button>
+      </div>
+    </div>
+    <div class="no-ass" *ngIf="level.assessments.length === 0">
+      <label translate>CTIPro_deleteText1 </label>
+      <b (click)="deleteLevel(level)" translate> CTIPro_deleteText2</b>.
+    </div>
+    <table class="table" *ngIf="level.assessments.length > 0">
+      <thead>
+        <tr>
+          <th scope="col" class="line1"></th>
+          <th scope="col" class="line2" translate>Assessment</th>
+          <th scope="col" class="line3" translate>Completion</th>
+          <th scope="col" class="line4" translate>Inflow mass</th>
+          <th scope="col" class="line5" translate>Circular inflow</th>
+          <th scope="col" class="line6" translate>Outflow mass</th>
+          <th scope="col" class="line7" translate>Circular outflow</th>
+          <th class="line8"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ass of level.assessments">
+          <th>
+            <mat-checkbox
+              [checked]="ass?.added"
+              [disabled]="checkDisabled && ass?.added !== true"
+              (change)="addAssests($event, ass)"
+            >
+            </mat-checkbox>
+          </th>
+          <td (click)="gotoAssessment(ass, level)">{{ ass.name }}</td>
+          <td (click)="gotoAssessment(ass, level)">
+            <div class="line" ngClass="step{{ ass.completion }}"></div>
+            <span
+              *ngIf="ass.completion === 0"
+              ngClass="step{{ ass.completion }}"
+              translate
+              >Not started</span
+            >
+            <span
+              *ngIf="ass.completion !== 7 && ass.completion !== 0"
+              ngClass="step{{ ass.completion }}"
+            >
+              <label translate>Step</label> {{ ass.completion }}
+              <label translate>completed</label>
+            </span>
+            <span
+              *ngIf="ass.completion === 7"
+              ngClass="step{{ ass.completion }}"
+              translate
+              >Assessment completed</span
+            >
+          </td>
+          <td (click)="gotoAssessment(ass, level)">{{ ass.inflowMass }} kg</td>
+          <td (click)="gotoAssessment(ass, level)">
+            {{ ass.circularInflow }} %
+          </td>
+          <td (click)="gotoAssessment(ass, level)">{{ ass.outflowMass }} kg</td>
+          <td (click)="gotoAssessment(ass, level)">
+            {{ ass.circularOutflow }} %
+          </td>
+          <td>
+            <div [ngClass]="{ active: ass.open }" class="settings">
+              <span (click)="settings(ass)" class="material-icons"
+                >more_vert</span
+              >
+              <div class="action shadow" *ngIf="ass.open === true">
+                <span mat-button (click)="gotoAssessment(ass, level)" translate
+                  >Edit assessment</span
+                >
+                <span
+                  mat-button
+                  (click)="removeAssessment(ass)"
+                  class="delete"
+                  translate
+                  >Delete assessment</span
+                >
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="select-box" *ngIf="selectAssetList.length > 0">
+    <div class="warning" *ngIf="selectAssetList.length < 2 && warningShow">
+      <em class="material-icons">info</em>
+      <b translate>Please select one more assessment to proceed</b>
+    </div>
+    <span
+      >{{ selectAssetList.length }} <b translate>assessment</b>
+      <ng-container *ngIf="selectAssetList.length > 1"
+        ><b translate>plural</b></ng-container
+      >
+      <b translate> selected</b></span
+    >
+    <em class="icon icon-close float-right ml-4" (click)="close()"></em>
+    <button
+      class="btn-circular bg-shamrock float-right ml-2"
+      (mouseover)="warningShow = true"
+      (mouseout)="warningShow = false"
+      [ngClass]="{ disable: selectAssetList.length < 2 }"
+      (click)="goToAggregate()"
+      translate
+    >
+      AGGREGATE
+    </button>
+    <button
+      class="btn-circular bg-shamrock float-right ml-2"
+      (mouseover)="warningShow = true"
+      (mouseout)="warningShow = false"
+      [ngClass]="{ disable: selectAssetList.length < 2 }"
+      (click)="goToCompare()"
+      translate
+    >
+      COMPARE
+    </button>
+  </div>
+</div>

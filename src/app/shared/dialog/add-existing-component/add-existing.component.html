@@ -1,0 +1,63 @@
+<section id="dialog-wrapper">
+  <h2 translate>material.select.title</h2>
+  <div class="full-width clearfix">
+    <mat-tab-group>
+      <mat-tab label="ALL">
+        <ul>
+          <li *ngFor="let item of items">
+            <mat-checkbox (change)="selectItem(item, $event)">{{
+              item.productName
+            }}</mat-checkbox>
+            <i>{{ item.bomType }}</i>
+          </li>
+        </ul>
+      </mat-tab>
+      <mat-tab label="Component" *ngIf="Product.length > 0">
+        <ul>
+          <li *ngFor="let item of Product">
+            <mat-checkbox (change)="selectItem(item, $event)">{{
+              item.productName
+            }}</mat-checkbox>
+            <i>{{ item.bomType }}</i>
+          </li>
+        </ul>
+      </mat-tab>
+      <mat-tab label="Material" *ngIf="Material.length > 0">
+        <ul>
+          <li *ngFor="let item of Material">
+            <mat-checkbox (change)="selectItem(item, $event)">{{
+              item.productName
+            }}</mat-checkbox>
+            <i>{{ item.bomType }}</i>
+          </li>
+        </ul>
+      </mat-tab>
+      <mat-tab label="Supplier" *ngIf="Supplier.length > 0">
+        <ul>
+          <li *ngFor="let item of Supplier">
+            <mat-checkbox (change)="selectItem(item, $event)">{{
+              item.productName
+            }}</mat-checkbox>
+            <i>{{ item.bomType }}</i>
+          </li>
+        </ul>
+      </mat-tab>
+    </mat-tab-group>
+    <div style="text-align: right; padding: 10px 0">
+      <button
+        tabindex="-1"
+        class="action btn btn-primary"
+        (click)="onNoClick()"
+      >
+        <span translate>bom.remove.cancel</span>
+      </button>
+      <button
+        tabindex="4"
+        class="action btn btn-primary"
+        (click)="onYesClick()"
+      >
+        <span translate>Create</span>
+      </button>
+    </div>
+  </div>
+</section>

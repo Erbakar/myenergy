@@ -1,0 +1,485 @@
+<div class="new-purches">
+  <h1>Purchases</h1>
+  <mat-tab-group [(selectedIndex)]="activePurchasTab">
+    <mat-tab label="Purchase details">
+      <div class="row">
+        <div class="col-7">
+          <div class="item">
+            <div class="head">
+              <h2>Add purchase</h2>
+              <em class="icon icon-close" id="close" (click)="close()"></em>
+            </div>
+            <strong>Purchase details</strong>
+            <form
+              (ngSubmit)="productDetailSave()"
+              [formGroup]="detailForm"
+              novalidate
+            >
+              <div class="form-item">
+                <label translate>Name of the purchase</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+              <div class="form-item">
+                <label translate>Select a product category</label>
+                <mat-select
+                  (selectionChange)="selectedCategory($event.value)"
+                  formControlName="categoryId"
+                >
+                  <mat-option disabled="true" value="Choose a category"
+                    >Choose a category</mat-option
+                  >
+                  <mat-option
+                    *ngFor="let category of categoryData"
+                    [value]="category.uuid"
+                  >
+                    {{ category.name }}
+                  </mat-option>
+                </mat-select>
+              </div>
+              <div class="form-item">
+                <label translate>Select a product sub-category</label>
+                <mat-select formControlName="subCategoryId">
+                  <mat-option disabled="true" value="Choose a sub-category"
+                    >Choose a sub-category</mat-option
+                  >
+                  <mat-option
+                    *ngFor="let subCategory of subCategories"
+                    [value]="subCategory.uuid"
+                  >
+                    {{ subCategory.name }}
+                  </mat-option>
+                </mat-select>
+              </div>
+              <div class="form-item">
+                <label translate>Quantity</label>
+                <input
+                  currencyMask
+                  [options]="{
+                    prefix: '',
+                    thousands: ',',
+                    decimal: '.',
+                    precision: 0,
+                    align: 'left'
+                  }"
+                  #currency
+                  type="text"
+                  class="form-control"
+                  formControlName="quantity"
+                />
+              </div>
+              <div class="form-item">
+                <label translate>Budget</label>
+                <input
+                  currencyMask
+                  [options]="{
+                    prefix: '€',
+                    thousands: ',',
+                    decimal: '.',
+                    precision: 0,
+                    align: 'left'
+                  }"
+                  #currency
+                  type="text"
+                  class="form-control"
+                  formControlName="budget"
+                />
+              </div>
+              <div class="form-item">
+                <label translate>Date</label>
+                <div class="two-item">
+                  <mat-select class="date-item first" formControlName="mounth">
+                    <mat-option
+                      *ngFor="let mounth of mounthList"
+                      [value]="mounth.num"
+                    >
+                      {{ mounth.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-select class="date-item" formControlName="year">
+                    <mat-option *ngFor="let year of yearList" [value]="year">
+                      {{ year }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <!-- <div class="form-item purchase-date">
+                <label translate>Date</label>
+                <input class="form-control" [formControl]="date" matInput [matDatepicker]="dp" placeholder="MM/YYYY" />
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker
+                  #dp
+                  startView="year"
+                  (monthSelected)="chosenMonthHandler($event, dp)"
+                  panelClass="example-month-picker"
+                >
+                </mat-datepicker>
+              </div> -->
+              <div class="form-item recurring">
+                <label translate>Recurring purchase?</label>
+                <mat-radio-group
+                  class="select custom-check-group"
+                  [formControlName]="'period'"
+                >
+                  <mat-radio-button class="radio-item long" value="NONE"
+                    >No</mat-radio-button
+                  >
+                  <mat-radio-button class="radio-item long" value="MONTHLY"
+                    >Monthly</mat-radio-button
+                  >
+                  <mat-radio-button class="radio-item long" value="QUARTERLY"
+                    >Quarterly</mat-radio-button
+                  >
+                  <mat-radio-button class="radio-item long" value="HALF_YEARLY"
+                    >Half-yearly</mat-radio-button
+                  >
+                  <mat-radio-button class="radio-item long last" value="YEARLY"
+                    >Yearly</mat-radio-button
+                  >
+                </mat-radio-group>
+              </div>
+              <button
+                [disabled]="
+                  detailForm.invalid ||
+                  detailForm.value.categoryId === 'Choose a category' ||
+                  detailForm.value.subCategoryId === 'Choose a sub-category'
+                "
+                type="submit"
+                class="btn-circular bg-shamrock center"
+              >
+                SAVE AND CONTINUE
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="item">
+            <div class="track">
+              <b>Track your progress</b>
+              <strong>Add purchase</strong>
+              <div class="proggres">
+                <span class="active"
+                  >Add purchase details
+                  <em class="material-icons-outlined"> chevron_right </em>
+                </span>
+                <span></span>
+                <span class="last"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Labels">
+      <div class="row" *ngIf="showLabelsForm">
+        <div class="col-7">
+          <div class="item clearfix">
+            <div class="head">
+              <h2>Add purchase</h2>
+              <em class="icon icon-close" id="close" (click)="close()"></em>
+            </div>
+            <strong>Labels</strong>
+            <div class="note">
+              Choose labels that apply to your product, select as many as apply.
+            </div>
+            <form [formGroup]="labelsForm" (ngSubmit)="labelsSubmit()">
+              <div class="radio-box clearfix" formGroupName="labels">
+                <div
+                  class="radio-item clearfix"
+                  *ngFor="let item of labelsData"
+                >
+                  <input
+                    type="checkbox"
+                    (change)="selectLabelList()"
+                    [formControlName]="item.uuid"
+                    id="{{ item.uuid }}"
+                  />
+                  <label for="{{ item.uuid }}">
+                    <img [src]="item.imageUrl" alt="" />
+                    <strong>{{ item.name }}</strong>
+                    <ng-container *ngIf="item.challenges">
+                      <div
+                        class="info"
+                        *ngFor="let challenge of item.challenges"
+                      >
+                        {{ challenge.name }}
+                        <em [ngClass]="{ active: challenge.score > 2 }"></em>
+                        <em [ngClass]="{ active: challenge.score > 1 }"></em>
+                        <em [ngClass]="{ active: challenge.score > 0 }"></em>
+                      </div>
+                    </ng-container>
+                  </label>
+                </div>
+              </div>
+              <button
+                [disabled]="!labelsButtonActive"
+                type="submit"
+                class="btn-circular bg-shamrock center"
+              >
+                SAVE AND CONTINUE
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="item">
+            <div class="track">
+              <b>Track your progress</b>
+              <strong>Add purchase</strong>
+              <div class="proggres">
+                <span class="pass" style="width: 33%"></span>
+                <span class="active" style="width: 33%"
+                  >Select labels
+                  <em class="material-icons-outlined"> chevron_right </em>
+                </span>
+                <span class="last" style="width: 33%"></span>
+              </div>
+              <div class="ask">
+                <span
+                  >You can ask a supplier to help you complete product
+                  information.</span
+                >
+                <button class="btn-circular bg-shamrock center">
+                  ASK SUPPLIER
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Product data">
+      <div class="row">
+        <div class="col-7">
+          <div class="item">
+            <div class="head">
+              <h2>Add purchase</h2>
+              <em class="icon icon-close" id="close" (click)="close()"></em>
+            </div>
+            <strong>Product data</strong>
+            <form
+              (ngSubmit)="productDataSave()"
+              [formGroup]="dataForm"
+              novalidate
+            >
+              <div class="form-item">
+                <label translate>Weight</label>
+                <input
+                  currencyMask
+                  [options]="{
+                    prefix: '',
+                    suffix: ' Kg',
+                    thousands: ',',
+                    decimal: '.',
+                    precision: 0,
+                    align: 'left'
+                  }"
+                  #currency
+                  type="text"
+                  class="form-control"
+                  formControlName="MYE1"
+                />
+              </div>
+              <div class="form-item">
+                <label translate>% recycled content</label>
+                <input
+                  (keyup)="
+                    dataForm.value.MYE2 > 100
+                      ? (MYE2 = 100)
+                      : (MYE2 = dataForm.value.MYE2)
+                  "
+                  [(ngModel)]="MYE2"
+                  currencyMask
+                  [options]="{
+                    prefix: '',
+                    suffix: '%',
+                    allowNegative: false,
+                    thousands: ',',
+                    decimal: '.',
+                    precision: 0,
+                    align: 'left'
+                  }"
+                  #currency
+                  type="text"
+                  class="form-control"
+                  formControlName="MYE2"
+                />
+              </div>
+              <div class="form-item">
+                <label translate>% renewable content</label>
+                <input
+                  currencyMask
+                  (keyup)="
+                    dataForm.value.MYE3 > 100
+                      ? (MYE3 = 100)
+                      : (MYE3 = dataForm.value.MYE3)
+                  "
+                  [(ngModel)]="MYE3"
+                  [options]="{
+                    prefix: '',
+                    suffix: '%',
+                    allowNegative: false,
+                    thousands: ',',
+                    decimal: '.',
+                    precision: 0,
+                    align: 'left'
+                  }"
+                  #currency
+                  type="text"
+                  class="form-control"
+                  formControlName="MYE3"
+                />
+              </div>
+              <div class="form-item">
+                <label translate>% recovery potential</label>
+                <input
+                  currencyMask
+                  (keyup)="
+                    dataForm.value.MYE4 > 100
+                      ? (MYE4 = 100)
+                      : (MYE4 = dataForm.value.MYE4)
+                  "
+                  [(ngModel)]="MYE4"
+                  [options]="{
+                    prefix: '',
+                    suffix: '%',
+                    allowNegative: false,
+                    thousands: ',',
+                    decimal: '.',
+                    precision: 0,
+                    align: 'left'
+                  }"
+                  #currency
+                  type="text"
+                  class="form-control"
+                  formControlName="MYE4"
+                />
+              </div>
+              <div class="form-item">
+                <label translate>% actual recovery</label>
+                <input
+                  currencyMask
+                  (keyup)="
+                    dataForm.value.MYE5 > 100
+                      ? (MYE5 = 100)
+                      : (MYE5 = dataForm.value.MYE5)
+                  "
+                  [(ngModel)]="MYE5"
+                  [options]="{
+                    prefix: '',
+                    suffix: '%',
+                    allowNegative: false,
+                    thousands: ',',
+                    decimal: '.',
+                    precision: 0,
+                    align: 'left'
+                  }"
+                  #currency
+                  type="text"
+                  class="form-control"
+                  formControlName="MYE5"
+                />
+              </div>
+              <div class="form-item">
+                <label translate>Can the product be repaired?</label>
+                <mat-radio-group
+                  class="select custom-check-group"
+                  [formControlName]="'MYE6'"
+                >
+                  <mat-radio-button class="radio-item long" value="Yes"
+                    >Yes</mat-radio-button
+                  >
+                  <mat-radio-button class="radio-item long" value="No"
+                    >No</mat-radio-button
+                  >
+                </mat-radio-group>
+              </div>
+              <div class="form-item">
+                <label translate>Can the product be refurbished?</label>
+                <mat-radio-group
+                  class="select custom-check-group"
+                  [formControlName]="'MYE7'"
+                >
+                  <mat-radio-button class="radio-item long" value="Yes"
+                    >Yes</mat-radio-button
+                  >
+                  <mat-radio-button class="radio-item long" value="No"
+                    >No</mat-radio-button
+                  >
+                </mat-radio-group>
+              </div>
+              <div class="form-item">
+                <label translate>Energy consumption during production</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="MYE8"
+                />
+              </div>
+              <div class="form-item">
+                <label translate>% renewable energy content</label>
+                <input
+                  currencyMask
+                  (keyup)="
+                    dataForm.value.MYE9 > 100
+                      ? (MYE9 = 100)
+                      : (MYE9 = dataForm.value.MYE9)
+                  "
+                  [(ngModel)]="MYE9"
+                  [options]="{
+                    prefix: '',
+                    suffix: '%',
+                    allowNegative: false,
+                    thousands: ',',
+                    decimal: '.',
+                    precision: 0,
+                    align: 'left'
+                  }"
+                  #currency
+                  type="text"
+                  class="form-control"
+                  formControlName="MYE9"
+                />
+              </div>
+              <button
+                [disabled]="dataForm.invalid"
+                type="submit"
+                class="btn-circular bg-shamrock center"
+              >
+                SAVE AND CONTINUE
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="item">
+            <div class="track">
+              <b>Track your progress</b>
+              <strong>Add purchase</strong>
+              <div class="proggres">
+                <span class="pass" style="width: 30%"></span>
+                <span class="pass" style="width: 30%"></span>
+                <span class="active last" style="width: 39%"
+                  >Add product data
+                  <em class="material-icons-outlined"> chevron_right </em>
+                </span>
+              </div>
+              <div class="ask">
+                <span
+                  >You can ask a supplier to help you complete product
+                  information.</span
+                >
+                <button class="btn-circular bg-shamrock center">
+                  ASK SUPPLIER
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

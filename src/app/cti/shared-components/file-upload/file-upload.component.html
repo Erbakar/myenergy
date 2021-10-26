@@ -1,0 +1,32 @@
+<section id="dialog-wrapper" class="custom-modal-box">
+  <div class="form-box">
+    <div class="item">
+      <div class="page-head">
+        <em class="icon icon-close" id="close" (click)="close()"></em>
+        <span class="page-title" translate>Import data</span>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <span class="sub-text" translate> fileUploadText</span>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-6">
+              <a
+                href="https://s3.eu-central-1.amazonaws.com/ctitool.com/CTI%2BImport%2Bsheet%2B20200120-001.xlsx"
+                class="btn-circular dark-slate-blue-border"
+                translate
+                >DOWNLOAD TEMPLATE</a
+              >
+            </div>
+            <div class="col-6">
+              <file-pond class="custom-btn" #myPond [options]="pondOptions">
+              </file-pond>
+            </div>
+          </div>
+        </div>
+      </div>
+      <code>{{ errorMessage }}</code>
+    </div>
+  </div>
+</section>

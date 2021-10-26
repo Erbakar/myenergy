@@ -1,0 +1,326 @@
+<div class="row">
+  <div class="col-6" *ngIf="data">
+    <div class="login-container mb-4">
+      <div class="login-box shadow item clearfix">
+        <div class="form">
+          <div class="page-head">
+            <span class="page-title" translate>organization</span>
+          </div>
+          <form (ngSubmit)="register()" [formGroup]="registerForm" novalidate>
+            <div class="row">
+              <div class="col">
+                <div class="form-item clearfix">
+                  <label translate="">organizationName</label>
+                  <input
+                    type="text"
+                    readonly
+                    class="form-control"
+                    placeholder="Enter the organization name"
+                    formControlName="organizationName"
+                    autocomplete="organizationName"
+                  />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-item clearfix">
+                  <label translate="">industry</label>
+                  <mat-select class="form-control" formControlName="industry">
+                    <mat-option
+                      [value]="item"
+                      [disabled]="item === 'Select industry'"
+                      *ngFor="let item of industries"
+                    >
+                      {{ item }}</mat-option
+                    >
+                  </mat-select>
+                  <span hidden translate>industry</span>
+                  <small
+                    [hidden]="
+                      registerForm.controls.industry.valid ||
+                      registerForm.controls.industry.untouched
+                    "
+                    class="text-danger"
+                    translate
+                  >
+                    industryRequired
+                  </small>
+                </div>
+              </div>
+              <div
+                class="col"
+                *ngIf="registerForm.controls.industry.value === 'Other'"
+              >
+                <div class="form-item clearfix">
+                  <label translate>createIndustry</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter industry"
+                    formControlName="industryOther"
+                    autocomplete="industryOther"
+                  />
+                  <span hidden translate>industry</span>
+                  <small
+                    [hidden]="
+                      registerForm.controls.industryOther.valid ||
+                      registerForm.controls.industryOther.untouched
+                    "
+                    class="text-danger"
+                    translate
+                  >
+                    industryRequired
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-item">
+                  <label class="d-block">
+                    <label translate>valueChainPosition</label>
+                    <mat-select class="form-control" formControlName="position">
+                      <mat-option
+                        [value]="item"
+                        *ngFor="let item of positions"
+                        >{{ item }}</mat-option
+                      >
+                    </mat-select>
+                    <span hidden translate>industry</span>
+                    <small
+                      [hidden]="
+                        registerForm.controls.position.valid ||
+                        registerForm.controls.position.untouched
+                      "
+                      class="text-danger"
+                      translate
+                    >
+                      position is required
+                    </small>
+                  </label>
+                </div>
+              </div>
+              <div
+                class="col"
+                *ngIf="registerForm.controls.position.value === 'Other'"
+              >
+                <div class="form-item">
+                  <label class="d-block">
+                    <label translate>createPosition</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter position"
+                      formControlName="positionOther"
+                      autocomplete="positionOther"
+                    />
+                    <span hidden translate>position</span>
+                    <small
+                      [hidden]="
+                        registerForm.controls.positionOther.valid ||
+                        registerForm.controls.positionOther.untouched
+                      "
+                      class="text-danger"
+                      translate
+                    >
+                      position is required
+                    </small>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="form-item">
+                  <label class="d-block">
+                    <label translate>companyAddress</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter your address"
+                      formControlName="address"
+                      autocomplete="address"
+                    />
+                    <span hidden translate>Company address</span>
+                    <small
+                      [hidden]="
+                        registerForm.controls.address.valid ||
+                        registerForm.controls.address.untouched
+                      "
+                      class="text-danger"
+                      translate
+                    >
+                      Company address is required
+                    </small>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-item">
+                  <label class="d-block">
+                    <label translate>companyRevenue</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      currencyMask
+                      [options]="{
+                        prefix: registerForm.controls.currenctType.value,
+                        thousands: ',',
+                        precision: 0,
+                        decimal: '.',
+                        align: 'left'
+                      }"
+                      formControlName="revenue"
+                      autocomplete="revenue"
+                    />
+                    <span hidden translate>companyRevenue</span>
+                    <small
+                      [hidden]="
+                        registerForm.controls.revenue.valid ||
+                        registerForm.controls.revenue.untouched
+                      "
+                      class="text-danger"
+                      translate
+                    >
+                      Company revenue required
+                    </small>
+                  </label>
+                  <div class="info combo">
+                    <mat-select formControlName="currenctType">
+                      <mat-option value="$">$</mat-option>
+                      <mat-option value="€">€</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              *ngIf="isAdmin"
+              class="btn-circular bg-shamrock big center"
+              type="submit"
+              [disabled]="registerForm.invalid"
+            >
+              <span translate>SAVE</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="feature && isUserAdmin">
+      <div class="row" *ngIf="feature.length > 0">
+        <div class="col-12 mb-4">
+          <div class="login-container">
+            <div class="shadow login-box item">
+              <div class="page-head">
+                <span class="page-title" translate>adminSetings</span>
+              </div>
+              <div class="admin">
+                <div class="form-item" *ngFor="let item of feature">
+                  <ng-container *ngIf="item.name === '2FA'">
+                    <label class="d-block">
+                      <label translate>{{ item.description }}</label>
+                      <div class="toggle-box">
+                        {{ item.description }} is
+                        {{ item.status ? 'TURNED ON' : 'TURNED OFF' }}
+                        <div class="toggle">
+                          <mat-slide-toggle
+                            [(ngModel)]="item.status"
+                            (change)="featureChage(item)"
+                          ></mat-slide-toggle>
+                        </div>
+                      </div>
+                    </label>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12" *ngIf="langguage.length > 1 && isUserAdmin">
+          <div class="shadow login-box item">
+            <div class="page-head">
+              <span class="page-title" translate>languageSetings</span>
+            </div>
+            <mat-select
+              [(ngModel)]="selectedLang"
+              (selectionChange)="setLanguage(selectedLang)"
+              class="form-control"
+            >
+              <mat-option [value]="item" *ngFor="let item of langguage">{{
+                item
+              }}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="col-6" *ngIf="data">
+    <div class="shadow item" style="height: inherit">
+      <div class="form-item with-icon clearfix">
+        <div class="page-head">
+          <span class="page-title" translate>colleagues</span>
+          <span class="add" (click)="addUser('material')" translate
+            >ADD A NEW USER</span
+          >
+        </div>
+        <div class="shadow user-box" [ngClass]="{ long: isUserAdmin }">
+          <div class="head">
+            <div class="user">Name</div>
+            <!-- <div class="assessments">Active assessments?</div> -->
+          </div>
+          <ul>
+            <li *ngFor="let item of userData; let i = index">
+              <div class="img-box">{{ item.ff }}{{ item.lf }}</div>
+              <div class="user">
+                <div
+                  class="name"
+                  [ngClass]="{ admin: item.admin }"
+                  *ngIf="item.fullname"
+                >
+                  {{ item.fullname }} <span>ADMIN</span>
+                </div>
+                <div
+                  class="name"
+                  [ngClass]="{ admin: item.admin }"
+                  *ngIf="!item.fullname && item.email"
+                >
+                  {{ item.email }}<span>ADMIN</span>
+                </div>
+                <!-- <ng-container *ngIf="!item.admin">
+                  <span class="role" [ngClass]="{first : idx === 0}" *ngFor="let r of item.roles let idx = index">{{ r.name }}</span>
+                </ng-container> -->
+              </div>
+              <!-- <div class="assessments">
+                {{i+1}}
+              </div> -->
+
+              <div
+                class="settings"
+                *ngIf="userEmail !== item.email && isAdmin"
+                [ngClass]="{ active: i == selectUser }"
+              >
+                <span class="event" (click)="settings(i)"></span>
+                <span class="material-icons"> more_vert </span>
+                <div class="action shadow" *ngIf="i == selectUser">
+                  <span mat-button *ngIf="!item.admin" (click)="makeAdmin(item)"
+                    >Make admin</span
+                  >
+                  <span mat-button *ngIf="item.admin" (click)="dropAdmin(item)"
+                    >Drop admin</span
+                  >
+                  <span mat-button (click)="removeItem(item)" class="delete"
+                    >Delete user</span
+                  >
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

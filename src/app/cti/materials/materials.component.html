@@ -1,0 +1,411 @@
+<div *ngIf="!freeOrganisation" class="fixed-steper">
+  <app-stepper></app-stepper>
+</div>
+<app-boxes></app-boxes>
+<div *ngIf="inflowResults && outflowResults">
+  <div *ngIf="!freeOrganisation" class="page-head">
+    <span class="page-title" translate>Inflow</span>
+  </div>
+  <ng-container *ngIf="inflowResults">
+    <div class="row btn-box" *ngIf="!freeOrganisation">
+      <div class="col-3">
+        <div class="btn-item shadow" (click)="selectEvent('fileUpload')">
+          <div class="icon">
+            <img src="../../../assets/img/icon/upload.svg" alt="" />
+          </div>
+          <span translate>Import data</span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="btn-item shadow" (click)="selectEvent('INFLOW')">
+          <div class="icon">
+            <img src="../../../assets/img/icon/add.svg" alt="" />
+          </div>
+          <span translate>Add inflow</span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div
+          class="btn-item shadow"
+          *ngIf="criticalBoxShow"
+          (click)="selectEvent('critical')"
+        >
+          <div class="icon">
+            <img src="../../../assets/img/icon/task.svg" alt="" />
+          </div>
+          <span translate>Critical materials</span>
+        </div>
+      </div>
+      <div class="col-3" *ngIf="steps">
+        <div
+          class="btn-item shadow"
+          [ngClass]="{ active: steps.inflow }"
+          (click)="flowComplate(!steps.inflow, 'CTI_INFLOW_DONE')"
+        >
+          <div class="icon">
+            <svg
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="16px"
+              height="16px"
+              viewBox="0 0 52 52"
+              enable-background="new 0 0 52 52"
+              xml:space="preserve"
+            >
+              <g>
+                <path
+                  class="path"
+                  d="M19.1,42.5L2.6,25.9c-0.6-0.6-0.6-1.6,0-2.2l2.2-2.2c0.6-0.6,1.6-0.6,2.2,0L19.4,34c0.4,0.4,1.1,0.4,1.5,0
+           L45.2,9.5c0.6-0.6,1.6-0.6,2.2,0l2.2,2.2c0.6,0.6,0.6,1.6,0,2.2L21.3,42.5C20.7,43.2,19.7,43.2,19.1,42.5z"
+                />
+              </g>
+            </svg>
+          </div>
+          <span translate>Inflow complete</span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <section
+    *ngIf="!freeOrganisation"
+    class="item-list-contenet"
+    [ngClass]="{ passive: activePageDetail }"
+  >
+    <ng-container *ngIf="inflowResults.length > 0">
+      <div
+        class="list-item claerfix"
+        [ngClass]="{ active: selectedMaterial.id == p.id && activePageDetail }"
+        *ngFor="let p of inflowResults"
+      >
+        <div class="action" (click)="showDetail(p, 'INFLOW')">
+          <div class="img box main"></div>
+          <div class="info box">
+            <span>{{ p.tradeName }}</span>
+            <label *ngIf="p.draft" translate>DRAFT</label>
+            <p translate>
+              Total Weight: {{ p.weight | number: environment.decimalFormat }}
+            </p>
+          </div>
+          <span class="critical sub" *ngIf="p.critical" translate
+            >CRITICAL</span
+          >
+          <span
+            class="priority sub"
+            [ngClass]="{ second: p.critical }"
+            *ngIf="p.priority"
+            translate
+          >
+            FOCUS FLOW
+          </span>
+          <div class="box float-right">
+            <div
+              class="img"
+              matTooltipPosition="right"
+              matTooltip="{{ p.responsibleOwnerInitalsFull }}
+          {{ p.responsibleOwnerInitalsEmail }}"
+            >
+              <span>{{ p.responsibleOwnerInitals }}</span>
+            </div>
+            <div class="cover-supplier">
+              <div
+                *ngIf="p.responsibleSupplierInitals"
+                matTooltipPosition="right"
+                matTooltip="{{ p.responsibleSupplierInitalsFull }}
+          {{ p.responsibleSupplierInitalsEmail }}"
+                class="img supplier"
+              >
+                <span>{{ p.responsibleSupplierInitals }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="oval dark-slate-blue-border"
+          *ngIf="selectedMaterial.id !== p.id || !activePageDetail"
+          (click)="showDetail(p, 'INFLOW')"
+        >
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <div
+          class="oval bg-dark-slate-blue"
+          *ngIf="selectedMaterial.id == p.id && activePageDetail"
+          (click)="closeDetail()"
+        >
+          <i class="fas fa-chevron-left"></i>
+        </div>
+      </div>
+      <mat-paginator
+        *ngIf="inflows.total > 10"
+        (page)="pageEventInflow($event)"
+        [length]="inflows.total"
+        [pageSize]="size"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+      >
+      </mat-paginator>
+    </ng-container>
+  </section>
+  <div *ngIf="inflowResults.length === 0" class="empty" translate>noInflow</div>
+
+  <div *ngIf="!freeOrganisation" class="page-head">
+    <span class="page-title" translate>Outflow</span>
+  </div>
+
+  <div class="row btn-box">
+    <div class="col-3">
+      <div class="btn-item shadow" (click)="selectEvent('fileUpload')">
+        <div class="icon">
+          <img src="../../../assets/img/icon/upload.svg" alt="" />
+        </div>
+        <span translate>Import data</span>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="btn-item shadow" (click)="selectEvent('OUTFLOW')">
+        <div class="icon">
+          <img src="../../../assets/img/icon/add.svg" alt="" />
+        </div>
+        <span translate>Add outflow</span>
+      </div>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-3" *ngIf="steps">
+      <div
+        class="btn-item shadow"
+        [ngClass]="{ active: steps.outflow }"
+        (click)="flowComplate(!steps.outflow, 'CTI_OUTFLOW_DONE')"
+      >
+        <div class="icon">
+          <svg
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            width="16px"
+            height="16px"
+            viewBox="0 0 52 52"
+            enable-background="new 0 0 52 52"
+            xml:space="preserve"
+          >
+            <g>
+              <path
+                class="path"
+                d="M19.1,42.5L2.6,25.9c-0.6-0.6-0.6-1.6,0-2.2l2.2-2.2c0.6-0.6,1.6-0.6,2.2,0L19.4,34c0.4,0.4,1.1,0.4,1.5,0
+           L45.2,9.5c0.6-0.6,1.6-0.6,2.2,0l2.2,2.2c0.6,0.6,0.6,1.6,0,2.2L21.3,42.5C20.7,43.2,19.7,43.2,19.1,42.5z"
+              />
+            </g>
+          </svg>
+        </div>
+        <span translate>Outflow complete</span>
+      </div>
+    </div>
+  </div>
+
+  <section
+    *ngIf="!freeOrganisation"
+    class="item-list-contenet"
+    [ngClass]="{ passive: activePageDetail }"
+  >
+    <ng-container *ngIf="outflowResults.length > 0">
+      <div
+        class="list-item claerfix"
+        [ngClass]="{ active: selectedMaterial.id == p.id && activePageDetail }"
+        *ngFor="let p of outflowResults"
+      >
+        <div class="action" (click)="showDetail(p, 'OUTFLOW')">
+          <div class="img box main"></div>
+          <div class="info box">
+            <span>{{ p.tradeName }}</span
+            ><label *ngIf="p.draft" translate>DRAFT</label>
+            <p translate>
+              Total Weight: {{ p.weight | number: environment.decimalFormat }}
+            </p>
+          </div>
+          <span class="critical sub" *ngIf="p.critical" translate
+            >CRITICAL</span
+          >
+          <span
+            class="priority sub"
+            [ngClass]="{ second: p.critical }"
+            *ngIf="p.priority"
+            translate
+          >
+            FOCUS FLOW
+          </span>
+          <div class="box float-right">
+            <div
+              class="img"
+              matTooltipPosition="right"
+              matTooltip="{{ p.responsibleOwnerInitalsFull }}
+            {{ p.responsibleOwnerInitalsEmail }}"
+            >
+              <span>{{ p.responsibleOwnerInitals }}</span>
+            </div>
+            <div class="cover-supplier"></div>
+          </div>
+        </div>
+        <div
+          class="oval dark-slate-blue-border"
+          *ngIf="selectedMaterial.id !== p.id || !activePageDetail"
+          (click)="showDetail(p, 'OUTFLOW')"
+        >
+          <i class="fas fa-chevron-right"></i>
+        </div>
+
+        <div
+          class="oval bg-dark-slate-blue"
+          *ngIf="selectedMaterial.id == p.id && activePageDetail"
+          (click)="closeDetail()"
+        >
+          <i class="fas fa-chevron-left"></i>
+        </div>
+      </div>
+      <mat-paginator
+        *ngIf="outflows.total > 10"
+        (page)="pageEventOutflow($event)"
+        [length]="outflows.total"
+        [pageSize]="size"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+      >
+      </mat-paginator>
+    </ng-container>
+  </section>
+
+  <div *ngIf="outflowResults.length === 0" class="empty" translate>
+    noOutflow
+  </div>
+</div>
+<section
+  class="detail-page"
+  *ngIf="activePageDetail"
+  [ngClass]="{
+    patica: isShowPatica,
+    active: activePageDetail,
+    closePatica: isHidePatica
+  }"
+>
+  <div class="main-box">
+    <div
+      (click)="closeDetail()"
+      class="btn-circular bg-dark-slate-blue close"
+      translate
+    >
+      CLOSE
+    </div>
+    <div class="page-head">
+      <span class="page-title"
+        >{{ selectedMaterial.type | titlecase }}
+        <span translate>details</span></span
+      >
+    </div>
+
+    <div class="main-content">
+      <div class="summary claerfix">
+        <div class="img box main"></div>
+        <div
+          class="info box"
+          [ngClass]="{ long: selectedMaterial.tradeName.length > 70 }"
+        >
+          <span>{{ selectedMaterial.tradeName }}</span>
+          <label *ngIf="selectedMaterial.draft" translate>DRAFT</label>
+          <dl>
+            <dt translate>Total Weight:</dt>
+            <dd>
+              {{ selectedMaterial.weight | number: environment.decimalFormat }}
+            </dd>
+          </dl>
+        </div>
+        <div
+          class="oval dark-slate-blue-border float-right"
+          (click)="materiaNavShow = !materiaNavShow"
+        >
+          <i class="fas fa-ellipsis-v"></i>
+          <div class="dropdown-box dropdown-menu show" *ngIf="materiaNavShow">
+            <button
+              class="dropdown-item"
+              tabindex="0"
+              (click)="removeMaterial()"
+              translate
+            >
+              Remove
+            </button>
+            <button
+              class="dropdown-item"
+              tabindex="1"
+              (click)="inviteColleague()"
+              translat
+            >
+              Assign a Colleague
+            </button>
+          </div>
+        </div>
+        <div (click)="styleEvent()">
+          <div
+            class="btn-circular dark-slate-blue-border mh float-right"
+            (click)="openPaticaEvent(false)"
+            translate
+          >
+            Guidance
+          </div>
+        </div>
+        <div class="box float-right" (click)="inviteColleague()">
+          <div
+            class="img"
+            matTooltipPosition="right"
+            matTooltip="{{ selectedMaterial.responsibleOwnerInitalsFull }}
+            {{ selectedMaterial.responsibleOwnerInitalsEmail }}"
+          >
+            <span>{{ selectedMaterial.responsibleOwnerInitals }}</span>
+            <!-- <i class="red"></i> -->
+          </div>
+          <div
+            *ngIf="selectedMaterial.responsibleSupplierInitals"
+            matTooltipPosition="right"
+            matTooltip="{{ selectedMaterial.responsibleSupplierInitalsFull }}
+          {{ selectedMaterial.responsibleSupplierInitalsEmail }}"
+            class="img supplier"
+          >
+            <span>{{ selectedMaterial.responsibleSupplierInitals }}</span>
+            <!-- <i class="red"></i> -->
+          </div>
+        </div>
+      </div>
+
+      <section *ngIf="activePageDetail" [ngClass]="{ patica: isShowPatica }">
+        <app-inflow-question
+          *ngIf="selectedMaterial.type === 'INFLOW'"
+          [selectedFlow]="selectedMaterial.id"
+        >
+        </app-inflow-question>
+        <app-outflow-question
+          *ngIf="selectedMaterial.type === 'OUTFLOW'"
+          [selectedFlow]="selectedMaterial.id"
+        >
+        </app-outflow-question>
+        <!-- <app-question [selectedFlow]="selectedMaterial.id"></app-question> -->
+      </section>
+    </div>
+  </div>
+</section>
+
+<div
+  *ngIf="isShowPatica"
+  (click)="closePatica()"
+  class="btn-circular bg-dark-slate-blue temp guidace-btn"
+  translate
+>
+  Close Guidance
+</div>
+
+<div class="custom-modal" *ngIf="showModal">
+  <div class="shadow" (click)="hideModal()"></div>
+  <app-add-material *ngIf="showAddFlow"></app-add-material>
+  <app-critical-material *ngIf="showCriticalMaterial"></app-critical-material>
+  <app-file-upload *ngIf="showFileUpload"></app-file-upload>
+</div>

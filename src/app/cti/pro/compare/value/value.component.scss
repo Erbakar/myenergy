@@ -1,0 +1,203 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.content {
+  background: #e3e5ec;
+  padding-left: 20px;
+  padding-right: 20px;
+  .chart-box {
+    background: #fff;
+    .head {
+      background: #f8f8fa;
+      border-radius: 8px 0px 0px 0px;
+      .col-2 {
+        text-indent: 10px;
+      }
+      .col-1,
+      .col-2 {
+        font-weight: bold;
+        font-size: 10px;
+        line-height: 5;
+      }
+      .col-8 {
+        div {
+          cursor: pointer;
+          font-weight: bold;
+          font-size: 10px;
+          line-height: 5;
+          margin-right: 10px;
+          display: inline-block;
+          padding: 0 10px 0 20px;
+          text-indent: 20px;
+          position: relative;
+          label {
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 5;
+          }
+          &:before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            opacity: 0.8;
+            border-radius: 2px;
+            display: inline-block;
+            position: absolute;
+            top: 20px;
+            left: 5px;
+          }
+          &.criticalMaterial {
+            &:before {
+              background: #ff7497;
+            }
+          }
+          &.technical {
+            &:before {
+              background: #96cded;
+            }
+          }
+          &.non-food {
+            &:before {
+              background: #b3ded8;
+            }
+          }
+          &.food {
+            &:before {
+              background: #fcdaae;
+            }
+          }
+          &.other {
+            &:before {
+              background: #807ea3;
+            }
+          }
+          &.defultBg {
+            &:before {
+              background: #dddddd;
+            }
+          }
+          &.none {
+            padding-left: 10px;
+            &:before {
+              display: none;
+            }
+          }
+          &.active {
+            background: #e3e5ec;
+          }
+          &.long {
+            width: 140px;
+          }
+        }
+      }
+    }
+    .table {
+      width: 100%;
+      .line {
+        border-top: solid 1px #cfd1d7;
+      }
+      .col-2 {
+        .name {
+          padding-left: 10px;
+        }
+        span {
+          font-size: 10px;
+          padding-top: 5px;
+        }
+        strong {
+          font-size: 14px;
+          position: relative;
+          top: -2px;
+        }
+      }
+      .col-1 {
+        span {
+          font-size: 10px;
+          &.pt {
+            padding-top: 10px;
+          }
+        }
+        .mass {
+          padding-left: 0;
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: 0.01em;
+          color: #757575;
+          padding-top: 15px;
+          white-space: nowrap;
+          text-indent: 0;
+        }
+      }
+      .volume {
+        padding-left: 0;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.01em;
+        color: #757575;
+        padding-top: 15px;
+        white-space: nowrap;
+        display: inline-block;
+        width: 160px;
+      }
+      .chart {
+        padding-right: 20px;
+        span {
+          display: inline-block;
+          font-weight: bold;
+          font-size: 14px;
+          height: 24px;
+          position: relative;
+          top: 12px;
+          &.first {
+            text-align: left;
+            border-radius: 8px 0px 0px 8px;
+            padding-left: 5px;
+          }
+          &.last {
+            text-align: right;
+            border-radius: 0px 8px 8px 0px;
+            padding-right: 5px;
+          }
+          &.criticalMaterial {
+            background: #ff7497;
+          }
+          &.technical {
+            background: #96cded;
+          }
+          &.non-food {
+            background: #b3ded8;
+          }
+          &.food {
+            background: #fcdaae;
+          }
+          &.other {
+            background: #807ea3;
+          }
+          &.defultBg {
+            background: #dddddd;
+          }
+        }
+      }
+      span {
+        display: block;
+      }
+    }
+  }
+}
+.sort {
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 5;
+  padding-left: 10px;
+  label {
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 5;
+  }
+  &.active {
+    background: #e3e5ec;
+  }
+}
+.ti-10 {
+  text-indent: 10px;
+}

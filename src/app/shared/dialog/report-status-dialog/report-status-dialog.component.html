@@ -1,0 +1,24 @@
+<section id="dialog-wrapper">
+  <div class="page-head">
+    <span class="page-title">{{ data['title'] }}</span>
+  </div>
+  <p>{{ data['message'] }}</p>
+  <div style="text-align: right; padding: 10px 0">
+    <button
+      tabindex="0"
+      class="btn-circular dark-slate-blue-border"
+      (click)="onNoClick()"
+      translate
+    >
+      No
+    </button>
+    <button
+      tabindex="1"
+      class="btn-circular bg-shamrock"
+      (click)="onYesClick()"
+      translate
+    >
+      Yes
+    </button>
+  </div>
+</section>

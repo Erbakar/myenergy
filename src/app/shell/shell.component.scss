@@ -1,0 +1,40 @@
+@import "src/theme/theme-variables";
+
+#main {
+  display: block;
+  overflow-x: hidden;
+
+  #left-nav {
+    display: block;
+    float: left;
+    width: 88px;
+    background: $white;
+    position: fixed;
+    box-shadow: 0 11px 15px 0 rgba(0, 0, 0, 0),
+      0 9px 46px 8px rgba(0, 0, 0, 0.1), 0 24px 38px 3px rgba(0, 0, 0, 0.1);
+    z-index: 9999999999;
+  }
+
+  #main-content {
+    display: block;
+    float: right;
+    background: $main;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: calc(100% - 88px);
+    min-height: calc(100vh);
+    padding: 6rem 2rem 2rem;
+    &.darkBG {
+      background: #1c195b;
+    }
+  }
+
+  #header {
+    background-color: $white;
+    display: block;
+    position: fixed;
+    width: 100%;
+    padding: 0 32px 0 103px;
+    z-index: 999999999;
+  }
+}

@@ -1,0 +1,84 @@
+<section id="dialog-wrapper">
+  <em class="icon icon-close" (click)="onNoClick()"></em>
+  <div class="page-head">
+    <span class="page-title" translate>Edit business level </span>
+  </div>
+  <form [formGroup]="businessForm" novalidate>
+    <div class="form-item">
+      <label class="d-block">
+        <label translate>Name of the business level</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ 'Enter business level name' | translate }}"
+          formControlName="name"
+          autocomplete="name"
+        />
+        <span hidden translate>business level name</span>
+        <small
+          [hidden]="
+            businessForm.controls.name.valid ||
+            businessForm.controls.name.untouched
+          "
+          class="text-danger"
+          translate
+        >
+          Business level name is required
+        </small>
+      </label>
+    </div>
+    <div class="form-item">
+      <label class="d-block">
+        <label translate
+          >Choose the type of business level that you want to assess</label
+        >
+        <mat-form-field class="form-control defult-select">
+          <mat-select formControlName="type">
+            <mat-option
+              [value]="item"
+              [disabled]="item === 'Select business level'"
+              *ngFor="let item of businessLevels"
+              >{{ item }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <span hidden translate>Select type of business level</span>
+        <small
+          [hidden]="
+            businessForm.controls.type.valid ||
+            businessForm.controls.type.untouched
+          "
+          class="text-danger"
+          translate
+        >
+          Select type of business level is required
+        </small>
+      </label>
+    </div>
+    <div class="form-item" *ngIf="businessForm.controls.type.value === 'Other'">
+      <label class="d-block">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ 'Enter type of business level' | translate }}"
+          formControlName="otherType"
+          autocomplete="otherType"
+        />
+      </label>
+    </div>
+  </form>
+
+  <div style="text-align: right; padding: 10px 0">
+    <div class="bottom-box">
+      <button
+        tabindex="1"
+        style="text-transform: uppercase"
+        class="btn-circular bg-shamrock"
+        [disabled]="businessForm.invalid"
+        (click)="onYesClick()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</section>

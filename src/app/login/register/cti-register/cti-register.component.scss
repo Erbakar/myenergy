@@ -1,0 +1,133 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.login-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url(../../../../assets/img/login-bg.jpg) center center;
+  background-size: cover;
+
+  .user-info-box {
+    background: $pale-lilac;
+    padding: 2rem 3rem;
+
+    .logo {
+      width: 1.3rem;
+      margin-bottom: 1rem;
+      margin-top: -0.2rem;
+      margin-left: 1rem;
+    }
+    .wbscd {
+      width: 11rem;
+      margin-bottom: 1rem;
+    }
+    .page-head {
+      height: 2.5rem;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+    .spot {
+      display: block;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 4.5rem;
+      font-size: 15px;
+    }
+  }
+
+  .login-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -185px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 370px;
+    z-index: 3;
+    background: #fafafa;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    .form {
+      padding: 1rem;
+      .page-head {
+        height: 2.5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        .create {
+          float: right;
+        }
+      }
+    }
+    form {
+      padding: 1rem;
+    }
+
+    .form-item {
+      height: auto;
+      padding: 0;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+
+      &:hover {
+        background: transparent;
+      }
+
+      label {
+        width: 100%;
+        font-size: 0.81rem;
+        top: 0;
+        height: auto;
+        font-weight: bold;
+      }
+    }
+
+    .checkbox-group {
+      display: block;
+      margin-bottom: 1rem;
+
+      .checkbox-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-left: 25px;
+      }
+
+      .checkbox label input[type="checkbox"] + span {
+        width: 1rem;
+        height: 1rem;
+
+        &:before {
+          font-size: 10px;
+          position: relative;
+          top: -14px;
+        }
+      }
+    }
+
+    .big {
+      float: right;
+      line-height: 0;
+      margin-top: 1rem;
+      span {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    }
+    .fas {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: relative;
+      top: -0.6rem;
+      line-height: 0;
+    }
+    .forgot {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+}

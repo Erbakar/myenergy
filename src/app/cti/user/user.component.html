@@ -1,0 +1,167 @@
+<div class="row">
+  <div class="col-6">
+    <div class="item shadow clearfix">
+      <div class="page-head">
+        <span class="page-title" translate>User profile </span>
+      </div>
+      <form
+        (ngSubmit)="register()"
+        [formGroup]="registerForm"
+        *ngIf="user"
+        novalidate
+      >
+        <div class="form-item">
+          <label class="d-block">
+            <label translate>First name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="{{ 'Enter your first name' | translate }}"
+              formControlName="firstName"
+              autocomplete="first name"
+            />
+            <span hidden translate>First name</span>
+            <small
+              [hidden]="
+                registerForm.controls.firstName.valid ||
+                registerForm.controls.firstName.untouched
+              "
+              class="text-danger"
+              translate
+            >
+              First name is required
+            </small>
+          </label>
+        </div>
+        <div class="form-item">
+          <label class="d-block">
+            <label translate>Last name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter your last name"
+              formControlName="lastName"
+              autocomplete="last name"
+            />
+            <span hidden translate>Last name</span>
+            <small
+              [hidden]="
+                registerForm.controls.lastName.valid ||
+                registerForm.controls.lastName.untouched
+              "
+              class="text-danger"
+              translate
+            >
+              Last name is required
+            </small>
+          </label>
+        </div>
+        <div class="form-item">
+          <label class="d-block">
+            <label translate>Email address</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter your email"
+              formControlName="email"
+              trim
+              disabled="true"
+              autocomplete="email"
+            />
+            <span hidden translate>Email</span>
+            <small
+              [hidden]="
+                registerForm.controls.email.valid ||
+                registerForm.controls.email.untouched
+              "
+              class="text-danger"
+              translate
+            >
+              Valid Email is required
+            </small>
+          </label>
+        </div>
+        <button
+          class="btn-circular bg-shamrock big float-right"
+          type="submit"
+          [disabled]="registerForm.invalid"
+        >
+          <span translate>Save</span>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="item shadow clearfix">
+      <div class="page-head">
+        <span class="page-title" translate>Change your password </span>
+      </div>
+      <form class="set-password" [formGroup]="changePasswordForm" *ngIf="user">
+        <div class="form-group">
+          <label for="password" class="control-label" translate
+            >Current Password</label
+          >
+          <i
+            *ngIf="changePasswordForm.controls.oldPassword.value"
+            class="fa fa-eye"
+            (mousedown)="currenttype = 'text'"
+            (mouseup)="currenttype = 'password'"
+          ></i>
+          <input
+            [type]="currenttype"
+            class="form-control"
+            formControlName="oldPassword"
+            placeholder="{{ 'Please enter your current password' | translate }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password" class="control-label" translate
+            >New Password</label
+          >
+          <i
+            class="fa fa-eye"
+            *ngIf="changePasswordForm.controls.password.value"
+            (mousedown)="type = 'text'"
+            (mouseup)="type = 'password'"
+          ></i>
+          <input
+            [type]="type"
+            class="form-control"
+            formControlName="password"
+            (keyup)="passwordRegex(changePasswordForm.controls.password.value)"
+            placeholder="{{ 'Please enter your new password' | translate }}"
+          />
+          <p class="help-block" *ngFor="let e of errors">{{ e }}</p>
+        </div>
+        <div class="form-group">
+          <label for="confirmedPassword" class="control-label" translate
+            >Confirmed Password</label
+          >
+          <input
+            [type]="type"
+            class="form-control"
+            formControlName="confirmedPassword"
+            (keyup)="
+              isConfirmed(
+                changePasswordForm.controls.password.value,
+                changePasswordForm.controls.confirmedPassword.value
+              )
+            "
+            placeholder="{{ 'Please re-enter your new password' | translate }}"
+          />
+          <p class="help-block" *ngIf="!isConfirm" translate>
+            passwordPageAllert
+          </p>
+        </div>
+        <button
+          type="submit"
+          class="btn-circular bg-shamrock big float-right"
+          (click)="chanepassword()"
+          [disabled]="!changePasswordForm.valid || !isRegex || !isConfirm"
+        >
+          <span>Change</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

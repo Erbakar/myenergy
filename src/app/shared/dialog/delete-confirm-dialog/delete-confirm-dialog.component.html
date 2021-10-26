@@ -1,0 +1,34 @@
+<section id="dialog-wrapper" *ngIf="data">
+  <div class="page-head">
+    <span class="page-title">{{ data['title'] }}</span>
+  </div>
+  <p>{{ data['message'] }}</p>
+  <div style="text-align: right; padding: 10px 0">
+    <button
+      tabindex="0"
+      class="btn-circular dark-slate-blue-border"
+      (click)="onNoClick()"
+      translate
+    >
+      Cancel
+    </button>
+    <button
+      tabindex="1"
+      class="btn-circular bg-shamrock ml-2"
+      *ngIf="!data.yesButtonText"
+      (click)="onYesClick()"
+      translate
+    >
+      Remove
+    </button>
+    <button
+      tabindex="1"
+      class="btn-circular bg-shamrock ml-2"
+      *ngIf="data.yesButtonText"
+      (click)="onYesClick()"
+      translate
+    >
+      {{ data['yesButtonText'] }}
+    </button>
+  </div>
+</section>

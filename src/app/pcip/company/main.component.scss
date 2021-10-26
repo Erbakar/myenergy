@@ -1,0 +1,42 @@
+.fix-height {
+  display: flex;
+  align-items: stretch;
+}
+.item {
+  padding: 2rem;
+  background: #fff;
+  height: 100%;
+}
+.row {
+  position: relative;
+  .detail {
+    position: absolute;
+    top: 0;
+    right: -100%;
+    transition: all 0.5s ease;
+    &.active {
+      right: 0;
+      transition: all 0.8s ease;
+    }
+  }
+  .company {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    transition: all 0.5s ease;
+    &.active {
+      left: 0;
+      transition: all 0.5s ease;
+    }
+  }
+  .user {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transition: all 0.5s ease;
+    &.active {
+      left: 0;
+      transition: all 0.5s ease;
+    }
+  }
+}

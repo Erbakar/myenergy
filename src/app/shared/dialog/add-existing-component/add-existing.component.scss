@@ -1,0 +1,36 @@
+h2 {
+  display: block;
+  margin-bottom: 2rem;
+}
+.mat-form-field {
+  display: block;
+}
+
+.full-width {
+  width: 100%;
+  border: 0;
+  padding: 0;
+  margin-bottom: 2rem;
+  label {
+    width: 58%;
+  }
+}
+ul {
+  padding: 0;
+  list-style-type: none;
+  max-height: 300px;
+  overflow-y: auto;
+  li {
+    display: block;
+    padding: 10px 10px 10px 5px;
+    font-size: 14px;
+    font-weight: bold;
+
+    &:nth-child(even) {
+      background: #f2f2f2;
+    }
+    i {
+      float: right;
+    }
+  }
+}

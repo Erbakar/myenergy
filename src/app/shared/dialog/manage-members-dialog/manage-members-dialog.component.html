@@ -1,0 +1,162 @@
+<section id="dialog-wrapper" *ngIf="data">
+  <em class="icon icon-close" (click)="onNoClick()"></em>
+  <div class="page-head">
+    <span class="page-title">Members in this business level</span>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="pro">
+        <div class="table-box">
+          <div class="table-head-line">
+            <img
+              src="../../../assets/img/icon/pro-table.svg"
+              style="float: left"
+              alt=""
+            />
+            <div class="name">
+              <span>{{ data.name }}</span>
+              <span>{{ data.type }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <strong>Current members</strong>
+
+      <div class="shadow item mt-4" style="height: inherit">
+        <div class="form-item with-icon clearfix">
+          <div class="user-box" [ngClass]="{ long: isUserAdmin }">
+            <div class="head">
+              <div class="user">Name</div>
+              <!-- <div class="assessments">Active assessments?</div> -->
+            </div>
+            <ul>
+              <li *ngFor="let item of members; let i = index">
+                <div class="img-box">{{ item.ff }}{{ item.lf }}</div>
+                <div class="user">
+                  <div
+                    class="name"
+                    [ngClass]="{ admin: item.admin }"
+                    *ngIf="item.fullname"
+                  >
+                    {{ item.fullname }} <span>ADMIN</span>
+                  </div>
+                  <div
+                    class="name"
+                    [ngClass]="{ admin: item.admin }"
+                    *ngIf="!item.fullname && item.email"
+                  >
+                    {{ item.email }}<span>ADMIN</span>
+                  </div>
+                  <span
+                    class="role"
+                    [ngClass]="{ first: idx === 0 }"
+                    *ngFor="let r of item.roles; let idx = index"
+                    >{{ r.name }}</span
+                  >
+                </div>
+                <!-- <div class="assessments">
+                    {{i+1}}
+                  </div> -->
+
+                <div
+                  class="settings"
+                  *ngIf="userEmail !== item.email && isAdmin"
+                  [ngClass]="{ active: i == selectUser }"
+                >
+                  <span class="event" (click)="settings(i)"></span>
+                  <span class="material-icons"> more_vert </span>
+                  <div class="action shadow" *ngIf="i == selectUser">
+                    <span mat-button (click)="removeMember(item)" class="delete"
+                      >Remove member from this business level</span
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6" style="position: relative">
+      <strong>Select members to add to this business level</strong>
+      <button
+        class="btn-circular bg-real-grey float-right ml-2"
+        (click)="inviteNewMember()"
+        style="position: relative; top: -10px"
+      >
+        INVITE NEW MEMBER
+      </button>
+      <div class="shadow item mt-4" style="height: inherit">
+        <div class="form-item with-icon clearfix">
+          <div class="user-box" [ngClass]="{ long: isUserAdmin }">
+            <div class="head">
+              <div class="user">Name</div>
+              <!-- <div class="assessments">Active assessments?</div> -->
+            </div>
+            <ul>
+              <li *ngFor="let item of userData; let i = index">
+                <div class="img-box">{{ item.ff }}{{ item.lf }}</div>
+                <div class="user">
+                  <div
+                    class="name"
+                    [ngClass]="{ admin: item.admin }"
+                    *ngIf="item.fullname"
+                  >
+                    {{ item.fullname }} <span>ADMIN</span>
+                  </div>
+                  <div
+                    class="name"
+                    [ngClass]="{ admin: item.admin }"
+                    *ngIf="!item.fullname && item.email"
+                  >
+                    {{ item.email }}<span>ADMIN</span>
+                  </div>
+                  <span
+                    class="role"
+                    [ngClass]="{ first: idx === 0 }"
+                    *ngFor="let r of item.roles; let idx = index"
+                    >{{ r.name }}</span
+                  >
+                </div>
+                <!-- <div class="assessments">
+                  {{i+1}}
+                </div> -->
+
+                <span
+                  class="material-icons-outlined"
+                  (click)="addMember(item)"
+                  [ngClass]="{ active: item.added }"
+                >
+                  add
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="select-box" *ngIf="memberList.length > 0">
+        <span
+          >{{ memberList.length }} member<ng-container
+            *ngIf="memberList.length > 1"
+            >s</ng-container
+          >
+          selected</span
+        >
+        <em
+          class="icon icon-close float-right ml-4"
+          (click)="clearMemberArray()"
+        ></em>
+        <button
+          (click)="addMemberPut()"
+          class="btn-circular bg-shamrock float-right ml-2"
+        >
+          ADD MEMBER
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

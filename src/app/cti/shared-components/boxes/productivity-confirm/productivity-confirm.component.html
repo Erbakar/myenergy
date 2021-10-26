@@ -1,0 +1,66 @@
+<section id="dialog-wrapper" class="custom-modal-box">
+  <div class="form-box" *ngIf="data">
+    <div class="page-head">
+      <span class="page-title" translate>Circular material productivity</span>
+    </div>
+    <form class="clearfix" [formGroup]="productivity" (ngSubmit)="onSubmit()">
+      <div class="item clearfix">
+        <label translate
+          >step1.label4
+          <strong>{{ selectedUnitDetails.businessLevel }}</strong></label
+        >
+        <input
+          type="text"
+          class="form-control"
+          currencyMask
+          [options]="{
+            prefix: '',
+            suffix: '',
+            thousands: '.',
+            allowNegative: false,
+            decimal: ',',
+            precision: 0,
+            align: 'left'
+          }"
+          formControlName="budget"
+        />
+        <div class="info combo">
+          <mat-select
+            (selectionChange)="unitChangeEvent($event.value)"
+            formControlName="currency"
+          >
+            <mat-option value="$">$</mat-option>
+            <mat-option value="€">€</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <small translate>productivityNote</small>
+      <div class="item clearfix">
+        <label translate>Total mass of linear inflow</label>
+        <input
+          type="text"
+          formControlName="linearInflowWeight"
+          class="form-control"
+          currencyMask
+          [options]="{
+            prefix: '',
+            suffix: '',
+            thousands: '.',
+            allowNegative: false,
+            decimal: ',',
+            precision: 0,
+            align: 'left'
+          }"
+          disabled
+        />
+        <div class="info combo">
+          <mat-select formControlName="mass">
+            <mat-option value="kg">kg</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <span class="back" (click)="cancel()" translate>BACK</span>
+      <button class="save" translate>SAVE</button>
+    </form>
+  </div>
+</section>

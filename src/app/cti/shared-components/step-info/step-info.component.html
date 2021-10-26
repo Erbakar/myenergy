@@ -1,0 +1,7 @@
+<div class="slider-box" *ngIf="trustUrl">
+  <owl-carousel-o [options]="customOptions">
+    <ng-template carouselSlide *ngFor="let url of trustUrl">
+      <object [data]="url" frameborder="0"></object>
+    </ng-template>
+  </owl-carousel-o>
+</div>

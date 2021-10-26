@@ -1,0 +1,31 @@
+@import "src/theme/theme-variables";
+
+.page-head {
+  display: flex;
+  justify-content: space-around;
+
+  span {
+    font-size: 0.81rem;
+    font-weight: 600;
+    color: rgba(28, 25, 91, 0.5) !important;
+    text-align: center;
+    height: 2.5rem;
+    width: 25%;
+    padding-bottom: 5px;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    .notification {
+      position: relative;
+      position: relative;
+      display: inline-block;
+      top: 0;
+    }
+
+    &.active {
+      padding-bottom: 4px;
+      color: $dark-slate-blue !important;
+      border-bottom: solid 2px $watermelon;
+    }
+  }
+}

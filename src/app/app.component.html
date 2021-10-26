@@ -1,0 +1,33 @@
+<router-outlet></router-outlet>
+
+<div (window:resize)="onResize($event)">
+  <div
+    class="mobile-allert"
+    *ngIf="this.event < 1024 && environmentName === 'cti'"
+  >
+    <div class="content">
+      <div class="-info-box">
+        <img src="../../assets/img/WBCSDCIQ2.png" class="logo" alt="" />
+        <span class="page-title">CTI Tool</span>
+        <span class="spot" translate>mobileAlert </span>
+        <a class="spot" href="https://app.ctitool.com"> app.ctitool.com</a>
+      </div>
+    </div>
+  </div>
+  <div
+    class="mobile-allert"
+    *ngIf="this.event < 1024 && environmentName === 'myenergy'"
+  >
+    <div class="content">
+      <div class="-info-box">
+        <img src="../assets/img/myenergylogo.svg" class="logo" alt="" />
+        <span class="page-title">My Energy</span>
+        <span class="spot" translate
+          >The My Energy does not support mobile web. Please use a desktop to
+          login by going to
+        </span>
+        <a class="spot" href="https://app.myenergy.com"> app.myenergy.com</a>
+      </div>
+    </div>
+  </div>
+</div>

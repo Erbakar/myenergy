@@ -1,0 +1,124 @@
+<div class="page-head">
+  <span class="page-title" translate>sitemap.main.title.add_user</span>
+</div>
+<div class="page-body">
+  <div class="full-width clearfix">
+    <label class="label" translate>user.add.email_address</label>
+    <mat-form-field class="defult-form-element">
+      <input matInput [(ngModel)]="data.email" name="data.email" />
+    </mat-form-field>
+  </div>
+  <div class="full-width clearfix">
+    <label class="label" translate>user.add.first_name</label>
+    <mat-form-field class="defult-form-element">
+      <input matInput [(ngModel)]="data.firstName" name="data.firstName" />
+    </mat-form-field>
+  </div>
+  <div class="full-width clearfix">
+    <label class="label" translate>user.add.middle_name</label>
+    <mat-form-field class="defult-form-element">
+      <input matInput [(ngModel)]="data.middleName" name="data.middleName" />
+    </mat-form-field>
+  </div>
+  <div class="full-width clearfix">
+    <label class="label" translate>user.add.last_name</label>
+    <mat-form-field class="defult-form-element">
+      <input matInput [(ngModel)]="data.lastName" name="data.lastName" />
+    </mat-form-field>
+  </div>
+  <div class="full-width clearfix">
+    <i class="material-icons">info</i>
+    <i class="info" translate>user.add.assign_role</i>
+  </div>
+  <div class="full-width clearfix">
+    <strong style="display: block; text-align: center">Types of roles</strong>
+  </div>
+  <div class="full-width clearfix">
+    <div class="checkbox-group">
+      <div class="checkbox">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="roles.administrator"
+            name="roles.administrator"
+            class="ng-untouched ng-valid ng-dirty ng-valid-parse ng-not-empty"
+            aria-invalid="false"
+          />
+          <span class="icon-check"></span>
+        </label>
+      </div>
+    </div>
+    <label class="label check" translate>Administrator</label>
+    <span class="check-info">
+      An administrator has the highest rights in the Circular IQ application.
+      They are allowed to do almost everything, including user management.</span
+    >
+  </div>
+  <div class="full-width clearfix">
+    <div class="checkbox-group">
+      <div class="checkbox">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="roles.productManager"
+            name="roles.productManager"
+            class="ng-untouched ng-valid ng-dirty ng-valid-parse ng-not-empty"
+            aria-invalid="false"
+          />
+          <span class="icon-check"></span>
+        </label>
+      </div>
+    </div>
+    <label class="label check" translate>Product Manager</label>
+    <span class="check-info">user.role.manager </span>
+  </div>
+  <div class="full-width clearfix">
+    <div class="checkbox-group">
+      <div class="checkbox">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="roles.sustainabilityDataManager"
+            name="roles.sustainabilityDataManager"
+            class="ng-untouched ng-valid ng-dirty ng-valid-parse ng-not-empty"
+            aria-invalid="false"
+          />
+          <span class="icon-check"></span>
+        </label>
+      </div>
+    </div>
+    <label class="label check" translate>Sustainability data manager</label>
+    <span class="check-info">
+      This user will be answering questions and update data into the system. Up
+      to date data is the key ingredient for the platform.</span
+    >
+  </div>
+  <div class="full-width clearfix">
+    <div class="checkbox-group">
+      <div class="checkbox">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="roles.authorizer"
+            name="roles.authorizer"
+            class="ng-untouched ng-valid ng-dirty ng-valid-parse ng-not-empty"
+            aria-invalid="false"
+          />
+          <span class="icon-check"></span>
+        </label>
+      </div>
+    </div>
+    <label class="label check" translate>Authorizer</label>
+    <span class="check-info"
+      >An authorizer role means a user is able to view and authorize product
+      data.
+    </span>
+  </div>
+
+  <button
+    class="btn-circular ng-binding float-center"
+    (click)="inviteUser(data, roles)"
+  >
+    <span translate>material.invite_supplier.title</span>
+  </button>
+</div>

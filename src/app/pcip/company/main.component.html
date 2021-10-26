@@ -1,0 +1,17 @@
+<div class="row fix-height">
+  <div class="col-6 company" [ngClass]="{ active: !activeUser.id }">
+    <div class="shadow item clearfix">
+      <app-company></app-company>
+    </div>
+  </div>
+  <div class="col-6 user" [ngClass]="{ active: activeUser.id }">
+    <div class="shadow item clearfix">
+      <app-users (selectedUserItem)="selectedUser($event)"></app-users>
+    </div>
+  </div>
+  <div class="col-6 detail" [ngClass]="{ active: activeUser.id }">
+    <div class="shadow item clearfix">
+      <app-user-detail [activeUser]="activeUser"></app-user-detail>
+    </div>
+  </div>
+</div>

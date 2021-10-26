@@ -1,0 +1,492 @@
+<div class="new-purches">
+  <h1>Product recommendation</h1>
+  <mat-tab-group [(selectedIndex)]="activePurchasTab">
+    <mat-tab label="Product details">
+      <div class="row">
+        <div class="col-7">
+          <div class="item">
+            <div class="head">
+              <h2>&nbsp;</h2>
+              <em class="icon icon-close" id="close" (click)="close()"></em>
+            </div>
+            <strong>Product details</strong>
+            <app-family
+              (setBrickUuid)="selectedSubCategory($event)"
+            ></app-family>
+            <form
+              *ngIf="criteriaData"
+              (ngSubmit)="criteriaSubmit(true)"
+              [formGroup]="criteriaForm"
+              novalidate
+            >
+              <strong>Select your circular criteria for this product</strong>
+              <div class="disclaimer">
+                <div class="row">
+                  <div class="col-9">
+                    <strong>Disclaimer:</strong>
+                    <p>
+                      The labels and criteria presented here are for
+                      recommendation purposes only.
+                    </p>
+                    <p>
+                      Each buyer is solely responsible for adapting these to
+                      their specific needs and the context of the contract.
+                    </p>
+                  </div>
+                  <div class="col-3">
+                    <span class="btn-circular grey-border">I UNDERSTAND</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row criteria-check" formGroupName="criteria">
+                <div class="col-4" *ngFor="let item of allCriteria">
+                  <b>{{ item.name }}</b>
+                  <div
+                    class="check-item clearfix"
+                    [ngClass]="{ match: cr.match }"
+                    *ngFor="let cr of item.criteria"
+                  >
+                    <input
+                      type="checkbox"
+                      [formControlName]="cr.uuid"
+                      [id]="cr.uuid"
+                    />
+                    <label [for]="cr.uuid">
+                      <span>{{ cr.name }}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn-circular bg-shamrock center">
+                SEARCH LABELS
+              </button>
+            </form>
+
+            <ng-container *ngIf="labelsSplitData">
+              <strong style="margin-bottom: 10px">Labels</strong>
+              <div class="empty">
+                Select product category and circular criteria to see suggested
+                labels.
+              </div>
+              <div>
+                <h5>
+                  Choose the highest scoring labels that apply to your circular
+                  criteria and that match your preference. Select as many as
+                  apply.
+                </h5>
+                <form [formGroup]="labelsForm" (ngSubmit)="labelsSubmit()">
+                  <div class="radio-box clearfix" formGroupName="labels">
+                    <div
+                      class="clearfix"
+                      *ngFor="
+                        let labels of labelsSplitData
+                          | slice
+                            : 0
+                            : (criteriaArray.length > 2
+                                ? 2
+                                : criteriaArray.length);
+                        let i = index
+                      "
+                    >
+                      <div class="criteria-met">
+                        <em
+                          [ngClass]="{
+                            allselected:
+                              i === 0 ? allSelectedClass1 : allSelectedClass2
+                          }"
+                          (click)="allLabelSelected(labels[0].match, i)"
+                        ></em
+                        ><b
+                          >{{ labels[0].match }} out of
+                          {{ criteriaArray.length }}</b
+                        >
+                        circular criteria met
+                      </div>
+                      <div
+                        class="radio-item clearfix"
+                        *ngFor="let label of labels"
+                      >
+                        <input
+                          type="checkbox"
+                          (change)="selectLabelList(label.match, i)"
+                          [formControlName]="label.uuid"
+                          [id]="label.uuid"
+                        />
+                        <label [for]="label.uuid" class="clearfix">
+                          <strong>{{ label.name }}</strong>
+                          <img [src]="label.imageUrl" alt="" />
+                          <div
+                            class="info"
+                            [ngClass]="{ green: cr.match }"
+                            *ngFor="let cr of label.criteria"
+                          >
+                            {{ cr.name }}
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                    <ng-container
+                      *ngIf="criteriaArray.length > 2 && showMoreLabels"
+                    >
+                      <div class="criteria-met">
+                        <b> less than {{ labelsSplitData[1][0].match }}</b>
+                        circular criteria met
+                      </div>
+                      <div
+                        class="clearfix"
+                        *ngFor="
+                          let labels of labelsSplitData
+                            | slice: 2:criteriaArray.length
+                        "
+                      >
+                        <div
+                          class="radio-item clearfix"
+                          *ngFor="let label of labels"
+                        >
+                          <input
+                            type="checkbox"
+                            (change)="selectLabelList()"
+                            [formControlName]="label.uuid"
+                            [id]="label.uuid"
+                          />
+                          <label [for]="label.uuid" class="clearfix">
+                            <strong>{{ label.name }}</strong>
+                            <img [src]="label.imageUrl" alt="" />
+                            <div
+                              class="info"
+                              [ngClass]="{ green: cr.match }"
+                              *ngFor="let cr of label.criteria"
+                            >
+                              {{ cr.name }}
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                  <ng-container *ngIf="labelsSplitData.length > 2">
+                    <span
+                      class="btn-circular grey-border more"
+                      (click)="showMoreLabels = true"
+                      *ngIf="!showMoreLabels"
+                    >
+                      SHOW MORE LABELS
+                      <em class="material-icons-outlined">expand_more</em>
+                    </span>
+                    <span
+                      class="btn-circular grey-border more"
+                      (click)="showMoreLabels = false"
+                      *ngIf="showMoreLabels"
+                    >
+                      SHOW LESS LABELS
+                      <em class="material-icons-outlined">expand_less</em>
+                    </span>
+                  </ng-container>
+
+                  <div class="col-12">
+                    <div class="row footer-btn-box">
+                      <div class="col-6">
+                        <span
+                          >Download a label selection and product information
+                          document to share with your colleagues and
+                          suppliers.</span
+                        >
+                        <em class="btn-circular grey-border">DOWLOAD PDF</em>
+                      </div>
+                      <div class="col-6">
+                        <span
+                          >Request product from suppliers by sharing label
+                          selection and product information directly from the
+                          platform.</span
+                        >
+                        <button
+                          [disabled]="!labelsButtonActive"
+                          type="submit"
+                          class="btn-circular bg-shamrock center"
+                        >
+                          REQUEST PRODUCT
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="item" style="margin-bottom: 20px">
+            <div class="track">
+              <b>Track your progress</b>
+              <strong>Product recommendation</strong>
+              <div class="proggres">
+                <span class="active"
+                  >Select circular criteria
+                  <em class="material-icons-outlined"> chevron_right </em>
+                </span>
+                <span></span>
+                <span class="last"></span>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="right-info">
+              <strong>About sustainability goals and criteria</strong>
+              <b>How do circular criteria help tackle sustainability goals?</b>
+              <span
+                >The circular criteria help you select products that comply with
+                circularity standards and climate legislation. For example, when
+                you choose products manufactured using renewable energy and that
+                consume lower energy during usage, you are complying with
+                <b>EU Renewable Energy Directive.</b> While your municipality
+                complies with EU climate legislation, it’s also helping reach
+                2030 renewables target.</span
+              >
+              <div class="focus">
+                <b>Want to learn more?</b>
+                <a href="#"
+                  >Click here to learn more about the circular criteria and how
+                  they relate to each sustainability challenge.</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="supplier">
+      <div class="row">
+        <div class="col-7">
+          <div class="item">
+            <div class="head">
+              <h2>&nbsp;</h2>
+              <button (click)="setActiveTab(0)" class="btn-circular">
+                <em class="material-icons-outlined"> chevron_left </em>GO BACK
+              </button>
+              <em class="icon icon-close" id="close" (click)="close()"></em>
+            </div>
+            <strong
+              >Ask supplier for product recommendation
+              <button
+                class="btn-circular bg-dark-slate-blue head-btn"
+                (click)="invaiteSupplierModal()"
+              >
+                INVITE SUPPLIER
+              </button>
+            </strong>
+            <span
+              >If can't find a supplier in the list below, you can invite them
+              to the platform.</span
+            >
+            <ng-container *ngIf="supplierList">
+              <form
+                style="padding: 0; margin: 10px 0 20px"
+                [formGroup]="supplierForm"
+                novalidate
+              >
+                <div class="row supplier-check" formGroupName="supplier">
+                  <div
+                    class="supplier-item clearfix"
+                    *ngFor="let sup of supplierList"
+                  >
+                    <ng-container *ngIf="!sup.uuid">
+                      <input type="checkbox" disabled="true" checked="true" />
+                      <label>
+                        <strong>{{ sup.name }}</strong>
+                        <span>{{ sup.email }}</span>
+                      </label>
+                    </ng-container>
+                    <ng-container *ngIf="sup.uuid">
+                      <input
+                        type="checkbox"
+                        [formControlName]="sup.uuid"
+                        [id]="sup.uuid"
+                      />
+                      <label [for]="sup.uuid">
+                        <strong>{{ sup.name }}</strong>
+                        <span>lorem ipsun</span>
+                      </label>
+                    </ng-container>
+                  </div>
+                </div>
+              </form>
+              <button
+                (click)="productSupplierSave()"
+                style="display: block; margin: 10px auto 0"
+                class="btn-circular bg-shamrock center"
+              >
+                SELECT AND CONTINUE
+              </button>
+            </ng-container>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="item" style="margin-bottom: 20px">
+            <div class="track">
+              <b>Track your progress</b>
+              <strong>Product recommendation</strong>
+              <div class="proggres">
+                <span class="pass" style="width: 33%"></span>
+                <span class="active" style="width: 33%"
+                  >Select suppliers
+                  <em class="material-icons-outlined"> chevron_right </em>
+                </span>
+
+                <span class="last" style="width: 33%"></span>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="right-info">
+              <strong>About sustainability goals and criteria</strong>
+              <b>How do circular criteria help tackle sustainability goals?</b>
+              <span
+                >The circular criteria help you select products that comply with
+                circularity standards and climate legislation. For example, when
+                you choose products manufactured using renewable energy and that
+                consume lower energy during usage, you are complying with
+                <b>EU Renewable Energy Directive.</b> While your municipality
+                complies with EU climate legislation, it’s also helping reach
+                2030 renewables target.</span
+              >
+              <div class="focus">
+                <b>Want to learn more?</b>
+                <a href="#"
+                  >Click here to learn more about the circular criteria and how
+                  they relate to each sustainability challenge.</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Confirm product request">
+      <div class="row">
+        <div class="col-7" *ngIf="allprocurementData">
+          <div class="item">
+            <div class="head">
+              <h2>&nbsp;</h2>
+              <button (click)="setActiveTab(1)" class="btn-circular">
+                <em class="material-icons-outlined"> chevron_left </em>GO BACK
+              </button>
+              <em class="icon icon-close" id="close" (click)="close()"></em>
+            </div>
+            <strong>Confirm product request</strong>
+            <div class="text-box">
+              <label translate>Your message</label>
+              <textarea type="text" class="form-control"> </textarea>
+            </div>
+            <div class="overview">
+              <strong>Selected suppliers</strong>
+              <div class="list">
+                <div class="item" *ngFor="let sup of selectedSuppliers">
+                  <strong>{{ sup }}</strong>
+                  <span>Lerom ipsun</span>
+                </div>
+                <div class="item">
+                  <strong>sup.name</strong>
+                  <span>Lerom ipsun</span>
+                </div>
+              </div>
+              <strong>*Product details</strong>
+              <span class="family"
+                >allprocurementData.familyUuid / allprocurementData.classUuid
+              </span>
+              <table>
+                <tr>
+                  <td><strong>[Brick] Product group</strong></td>
+                  <td>
+                    <span
+                      >{{ allprocurementData.brickUuid }}
+                      <em class="material-icons-outlined"> expand_more </em>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Product description</strong></td>
+                  <td>
+                    <span>{{ allprocurementData.description }}</span>
+                  </td>
+                </tr>
+              </table>
+              <strong> Selected circular criteria</strong>
+              <div class="list">
+                <div class="item" *ngFor="let item of allCriteria">
+                  <strong>Resource depletion</strong>
+                  <span
+                    class="criteria"
+                    [ngClass]="{ focus: cr.focus, selected: cr.selected }"
+                    *ngFor="let cr of item.criteria"
+                    ><em></em> {{ cr.name }}</span
+                  >
+                </div>
+              </div>
+              <strong>Selected labels</strong>
+              <div class="list">
+                <div class="item" *ngFor="let label of labelUuids">
+                  <span style="margin-bottom: 20px">{{ label }}</span>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/1/10/BLUE_ANGEL_Logo.png"
+                    alt=""
+                  />
+                  <div class="info green active">Resource depletion</div>
+                  <div class="info green active">Resource depletion</div>
+                  <div class="info green">Resource depletion</div>
+                  <div class="info green">Resource depletion</div>
+                </div>
+              </div>
+              <button
+                type="submit"
+                (click)="recommendationConfirm()"
+                class="btn-circular bg-shamrock center"
+              >
+                CONFIRM REQUEST
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="item" style="margin-bottom: 20px">
+            <div class="track">
+              <b>Track your progress</b>
+              <strong>Confirm product request</strong>
+              <div class="proggres">
+                <span class="pass" style="width: 29.5%"></span>
+                <span class="pass" style="width: 29.5%"></span>
+                <span class="active last" style="width: 40%"
+                  >Confirm request
+                  <em class="material-icons-outlined"> chevron_right </em>
+                </span>
+
+                <!-- <span class="last" style="width: 33%"></span> -->
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="right-info">
+              <strong>About sustainability goals and criteria</strong>
+              <b>How do circular criteria help tackle sustainability goals?</b>
+              <span
+                >The circular criteria help you select products that comply with
+                circularity standards and climate legislation. For example, when
+                you choose products manufactured using renewable energy and that
+                consume lower energy during usage, you are complying with
+                <b>EU Renewable Energy Directive.</b> While your municipality
+                complies with EU climate legislation, it’s also helping reach
+                2030 renewables target.</span
+              >
+              <div class="focus">
+                <b>Want to learn more?</b>
+                <a href="#"
+                  >Click here to learn more about the circular criteria and how
+                  they relate to each sustainability challenge.</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,502 @@
+<ng-container *ngIf="data && storyblok">
+  <h1 class="myenergy">{{ storyblok.myenergy_dashboard_pagetitle }}</h1>
+  <div class="myenergy-box" *ngIf="!data.MYE_CLICKED_CHOOSE_CHALLENGE">
+    <h2>{{ storyblok.myenergy_dashboard_howtostart_title }}</h2>
+    <div class="row">
+      <div class="col-6">
+        <ul>
+          <!-- firstBoxActiveItem === 1 ||
+          (!data.MYE_CLICKED_LEARN_CHALLENGES_VIDEO && !data.MYE_CLICKED_LEARN_PROCUREMENT_VIDEO) -->
+          <li
+            [ngClass]="{
+              pass: true,
+              active: firstBoxActiveItem !== 2 && firstBoxActiveItem !== 3
+            }"
+            (click)="setFirstBoxActiveItem(1)"
+          >
+            <div class="row">
+              <div class="col-1">
+                <div class="number">1</div>
+              </div>
+              <div class="col-11">
+                <span>{{ storyblok.myenergy_dashboard_howtostart_text1 }}</span>
+              </div>
+            </div>
+          </li>
+          <!-- !data.MYE_CLICKED_LEARN_PROCUREMENT_VIDEO &&
+          (data.MYE_CLICKED_LEARN_CHALLENGES_VIDEO || firstBoxActiveItem === 2) -->
+          <li
+            [ngClass]="{
+              pass: data.MYE_CLICKED_LEARN_CHALLENGES_VIDEO,
+              active: firstBoxActiveItem === 2
+            }"
+            (click)="setFirstBoxActiveItem(2)"
+          >
+            <div class="row">
+              <div class="col-1">
+                <div class="number">2</div>
+              </div>
+              <div class="col-11">
+                <span>{{ storyblok.myenergy_dashboard_howtostart_text2 }}</span>
+              </div>
+            </div>
+          </li>
+          <!-- active: data.MYE_CLICKED_LEARN_PROCUREMENT_VIDEO || firstBoxActiveItem === 3 -->
+          <li
+            [ngClass]="{
+              pass: data.MYE_CLICKED_LEARN_PROCUREMENT_VIDEO,
+              active: firstBoxActiveItem === 3
+            }"
+            (click)="setFirstBoxActiveItem(3)"
+          >
+            <div class="row">
+              <div class="col-1">
+                <div class="number">3</div>
+              </div>
+              <div class="col-11">
+                <span>{{ storyblok.myenergy_dashboard_howtostart_text3 }}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-6">
+        <!-- ||
+            (!data.MYE_CLICKED_LEARN_CHALLENGES_VIDEO && !data.MYE_CLICKED_LEARN_PROCUREMENT_VIDEO) -->
+        <div
+          *ngIf="firstBoxActiveItem !== 2 && firstBoxActiveItem !== 3"
+          style="padding: 56.25% 0 0 0; position: relative"
+        >
+          <iframe
+            src="https://player.vimeo.com/video/556651572"
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+        <!-- !data.MYE_CLICKED_LEARN_PROCUREMENT_VIDEO &&
+            (data.MYE_CLICKED_LEARN_CHALLENGES_VIDEO || firstBoxActiveItem === 2) -->
+        <div
+          *ngIf="firstBoxActiveItem === 2"
+          style="padding: 56.25% 0 0 0; position: relative"
+        >
+          <iframe
+            src="https://player.vimeo.com/video/402354283"
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+        <!-- *ngIf="data.MYE_CLICKED_LEARN_PROCUREMENT_VIDEO || firstBoxActiveItem === 3" -->
+
+        <div
+          *ngIf="firstBoxActiveItem === 3"
+          style="padding: 56.25% 0 0 0; position: relative"
+        >
+          <iframe
+            src="https://player.vimeo.com/video/168837403"
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="myenergy-box custom-owl" *ngIf="data.MYE_CLICKED_CHOOSE_CHALLENGE && !selectedChallenges">
+    <h2>Challenges</h2>
+    <span
+      >Choose up to three challenges to focus on during your circular procurement, based on your municipality's
+      sustainability goals. <br />
+      The more challenges you choose, the more impact you create. You can learn more about each challenge in the
+      circular guidance.</span
+    >
+    <div class="more">
+      <label (click)="infoChallenges = true">LEARN MORE</label>
+      <div class="box" *ngIf="infoChallenges">
+        <em class="icon icon-close" (click)="infoChallenges = false"></em>
+        <strong>Challenges</strong>
+        <owl-carousel-o [options]="moreOptions">
+          <ng-template carouselSlide>
+            <span class="mb-4"
+              >Choose a procurement process to start adding your purchases to the platform. Learn more about both
+              procurements in the Circular Guidance.</span
+            >
+          </ng-template>
+          <ng-template carouselSlide>
+            <span class="mb-4"
+              >Choose a procurement process to start adding your purchases to the platform. Learn more about both
+              procurements in the Circular Guidance.</span
+            >
+          </ng-template>
+          <ng-template carouselSlide>
+            <span class="mb-4"
+              >Choose a procurement process to start adding your purchases to the platform. Learn more about both
+              procurements in the Circular Guidance.</span
+            >
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+    </div>
+
+    <h2>Select challenges</h2>
+    <ng-container *ngIf="challengesData">
+      <form [formGroup]="challengesForm" (ngSubmit)="challengesSubmit()">
+        <div class="row radio-box">
+          <div class="col">
+            <div class="radio-item">
+              <input
+                type="checkbox"
+                [(ngModel)]="challengesData.resourceDepletion"
+                formControlName="resourceDepletion"
+                value="Resource depletion"
+                id="resourceDepletion"
+              />
+              <label for="resourceDepletion">
+                <strong>Resource depletion</strong>
+                <span class="mb-3"
+                  >Focus on products that are manufractured with non-virgin, renewable or refurbished materials.</span
+                >
+                <div class="info">7 Labels included</div>
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="radio-item">
+              <input
+                type="checkbox"
+                [(ngModel)]="challengesData.wasteGeneration"
+                formControlName="wasteGeneration"
+                value="Waste generation"
+                id="wasteGeneration"
+              /><label for="wasteGeneration">
+                <strong>Waste generation</strong>
+                <span class="mb-3"
+                  >Focus on products whose materials can be (or will be) recycled, repurposed, refurbished, reused or
+                  can biodegrade.</span
+                >
+                <div class="info">10 labels available</div>
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="radio-item">
+              <input
+                type="checkbox"
+                [(ngModel)]="challengesData.climateChange"
+                formControlName="climateChange"
+                value="Climate change"
+                id="climateChange"
+              /><label for="climateChange">
+                <strong>Climate change</strong>
+                <span class="mb-3"
+                  >Focus on products manufactured with renewable energy sources or with low energy consumption (if
+                  applicable).</span
+                >
+                <div class="info">9 labels included</div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="text-center">
+        <button
+          class="btn-circular bg-shamrock"
+          [disabled]="
+            !challengesData.climateChange && !challengesData.wasteGeneration && !challengesData.resourceDepletion
+          "
+          (click)="setGoal(challengesForm)"
+        >
+          SELECT AND CONTINUE
+        </button>
+      </div>
+    </ng-container>
+  </div> -->
+
+  <!-- <div class="myenergy-box custom-owl" *ngIf="selectedChallenges">
+    <div class="row">
+      <div class="col">
+        <h2>storyblok.title</h2>
+        <span class="mb-4">storyblok.focus <b> selectedChallenges </b>. </span>
+        <span> storyblok.desc </span>
+        <div class="more">
+          <label (click)="infoChallengesDone = true" style="text-transform: uppercase">
+            storyblok.link selectedChallenges
+          </label>
+          <div class="box" *ngIf="infoChallengesDone">
+            <em class="icon icon-close" (click)="infoChallengesDone = false"></em>
+            <strong>LEARN MORE ABOUT WASTE GENERATION</strong>
+            <owl-carousel-o [options]="moreOptions">
+              <ng-template carouselSlide>
+                <span class="mb-4"
+                  >Choose a procurement process to start adding your purchases to the platform. Learn more about both
+                  procurements in the Circular Guidance.</span
+                >
+              </ng-template>
+              <ng-template carouselSlide>
+                <span class="mb-4"
+                  >Choose a procurement process to start adding your purchases to the platform. Learn more about both
+                  procurements in the Circular Guidance.</span
+                >
+              </ng-template>
+              <ng-template carouselSlide>
+                <span class="mb-4"
+                  >Choose a procurement process to start adding your purchases to the platform. Learn more about both
+                  procurements in the Circular Guidance.</span
+                >
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="text-right" style="margin-top: 100px">
+          <button class="btn-circular real-grey-border" (click)="selectedChallenges = null">storyblok.button</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-4">
+      <div class="myenergy-box custom-owl">
+        <h2>{{ storyblok.myenergy_dashboard_recommendation_title }}</h2>
+        <span class="mb-4">{{
+          storyblok.myenergy_dashboard_recommendation_desc
+        }}</span>
+        <div class="more">
+          <label (click)="infoRecommendation = true">{{
+            storyblok.myenergy_dashboard_recommendation_more_text
+          }}</label>
+          <div class="box" *ngIf="infoRecommendation">
+            <em
+              class="icon icon-close"
+              (click)="infoRecommendation = false"
+            ></em>
+            <strong>{{
+              storyblok.myenergy_dashboard_recommendation_more_title
+            }}</strong>
+            <owl-carousel-o [options]="moreOptions">
+              <ng-template carouselSlide>
+                <span class="mb-4">{{
+                  storyblok.myenergy_dashboard_recommendation_more_slide1
+                }}</span>
+              </ng-template>
+              <ng-template carouselSlide>
+                <span class="mb-4">{{
+                  storyblok.myenergy_dashboard_recommendation_more_slide2
+                }}</span>
+              </ng-template>
+              <ng-template carouselSlide>
+                <span class="mb-4">{{
+                  storyblok.myenergy_dashboard_recommendation_more_slide3
+                }}</span>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+        <div class="absolute-center">
+          <button
+            class="btn-circular bg-shamrock"
+            routerLink="/myenergy/product-recommendation"
+          >
+            {{ storyblok.myenergy_dashboard_recommendation_more_button }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="myenergy-box custom-owl">
+        <h2>{{ storyblok.myenergy_dashboard_purchases_title }}</h2>
+        <span class="mb-4"
+          >{{ storyblok.myenergy_dashboard_purchases_desc }}
+          <br />
+          {{ storyblok.myenergy_dashboard_purchases_desc2 }}</span
+        >
+        <div class="more">
+          <label (click)="infoPurchases = true">{{
+            storyblok.myenergy_dashboard_purchases_more_text
+          }}</label>
+          <div class="box" *ngIf="infoPurchases">
+            <em class="icon icon-close" (click)="infoPurchases = false"></em>
+            <strong>{{
+              storyblok.myenergy_dashboard_purchases_more_title
+            }}</strong>
+            <owl-carousel-o [options]="moreOptions">
+              <ng-template carouselSlide>
+                <span class="mb-4">{{
+                  storyblok.myenergy_dashboard_purchases_more_slide1
+                }}</span>
+              </ng-template>
+              <ng-template carouselSlide>
+                <span class="mb-4">{{
+                  storyblok.myenergy_dashboard_purchases_more_slide2
+                }}</span>
+              </ng-template>
+              <ng-template carouselSlide>
+                <span class="mb-4">{{
+                  storyblok.myenergy_dashboard_purchases_more_slide3
+                }}</span>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="item">
+              <h2>{{ storyblok.myenergy_dashboard_purchases_left_title }}</h2>
+              <span class="mb-4">{{
+                storyblok.myenergy_dashboard_purchases_left_desc
+              }}</span>
+              <div class="more" *ngIf="!data.MYE_HIDE_DIRECT_PROCUREMENT_VIDEO">
+                <label (click)="infoVideoModal('direct')">{{
+                  storyblok.myenergy_dashboard_purchases_left_linktext
+                }}</label>
+              </div>
+              <div class="text-center">
+                <button
+                  class="btn-circular bg-shamrock"
+                  (click)="setGoal(challengesForm, 'direct-procurement')"
+                >
+                  {{ storyblok.myenergy_dashboard_purchases_left_desc }}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="item">
+              <h2>
+                {{ storyblok.myenergy_dashboard_purchases_right_modal_title }}
+              </h2>
+              <span class="mb-4">{{
+                storyblok.myenergy_dashboard_purchases_right_desc
+              }}</span>
+              <div class="more" *ngIf="!data.MYE_HIDE_TENDER_PROCUREMENT_VIDEO">
+                <label (click)="infoVideoModal('tender')">{{
+                  storyblok.myenergy_dashboard_purchases_right_linktext
+                }}</label>
+              </div>
+              <div class="text-center">
+                <button
+                  class="btn-circular bg-shamrock"
+                  (click)="setGoal(challengesForm, 'tender-procurement')"
+                >
+                  {{ storyblok.myenergy_dashboard_purchases_right_button }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="myenergy-box" *ngIf="!data.MYE_CLOSED_WHY_PROCUREMENT_BOX">
+    <em class="icon icon-close" (click)="hideProcurement()"></em>
+    <h2>{{ storyblok.myenergy_dashboard_whyiscircular_title }}</h2>
+    <div class="row">
+      <div class="col-6">
+        <span class="big mb-4">{{
+          storyblok.myenergy_dashboard_whyiscircular_desc
+        }}</span>
+        <span class="mb-4"
+          >{{ storyblok.myenergy_dashboard_whyiscircular_subdesc1 }}
+        </span>
+        <span>{{ storyblok.myenergy_dashboard_whyiscircular_subdesc2 }}</span>
+      </div>
+      <div class="col-6">
+        <div style="padding: 56.25% 0 0 0; position: relative">
+          <iframe
+            src="https://player.vimeo.com/video/402354283"
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="myenergy-box" style="padding-bottom: 94px">
+        <h2>{{ storyblok.myenergy_dashboard_label_title }}</h2>
+        <span class="mb-4">
+          {{ storyblok.myenergy_dashboard_label_desc }}
+        </span>
+        <owl-carousel-o [options]="labelsOptions">
+          <ng-template carouselSlide>
+            <img src="../../../assets/img/myenergy-label/6557.png" alt="" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="../../../assets/img/myenergy-label/6558.png" alt="" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="../../../assets/img/myenergy-label/6557.png" alt="" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="../../../assets/img/myenergy-label/6559.png" alt="" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="../../../assets/img/myenergy-label/6557.png" alt="" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="../../../assets/img/myenergy-label/6558.png" alt="" />
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="myenergy-box" style="padding-bottom: 40px">
+        <h2>{{ storyblok.myenergy_dashboard_pasteclimat_title }}</h2>
+        <span class="mb-4">
+          {{ storyblok.myenergy_dashboard_pasteclimat_desc }}</span
+        >
+        <owl-carousel-o [options]="climateOptions">
+          <ng-template carouselSlide>
+            <img src="../../../assets/img/icon/PC.png" alt="" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="../../../assets/img/icon/PC.png" alt="" />
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="../../../assets/img/icon/PC.png" alt="" />
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+</ng-container>

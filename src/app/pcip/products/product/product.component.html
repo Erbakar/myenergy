@@ -1,0 +1,51 @@
+<div class="page-head">
+  <!-- <a [routerLinkActive]="['active']" routerLink="/products/{{ productId }}/questionnaire" translate
+    >product.header.tab.label.questionnaire</a
+  >
+  <a [routerLinkActive]="['active']" routerLink="/products/{{ productId }}/bom" translate
+    >product.header.tab.label.bill_of_materials</a
+  >
+  <a [routerLinkActive]="['active']" routerLink="/products/{{ productId }}/certifications" translate
+    >product.header.tab.label.certifications</a
+  >
+  <a [routerLinkActive]="['active']" routerLink="/products/{{ productId }}/results" translate
+    >product.header.tab.label.results</a
+  > -->
+
+  <span class="active"> PRODUCT DETAILS </span>
+  <span> MATERIAL</span>
+  <span>
+    REUTILIZATION
+    <div class="notification">2</div></span
+  >
+  <span> CERTIFICATES</span>
+
+  <!-- <div class="nav-box">
+    <i class="material-icons nav" (click)="navShow = !navShow">more_vert</i>
+    <table *ngIf="navShow">
+      <thead>
+        <tr>
+          <th>
+            <span>{{ selectedProduct?.displayName }}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="data?.canInviteColleague" (click)="inviteColleague()">
+          <td><i class="material-icons">emoji_people</i><span>Invite a colleague</span></td>
+        </tr>
+        <tr *ngIf="data?.canInviteSupplier" (click)="inviteExistingSupplier()">
+          <td><i class="material-icons">emoji_people</i><span>Change ownership of this product</span></td>
+        </tr>
+        <tr *ngIf="data?.canUnlock">
+          <td><i class="material-icons">emoji_people</i><span>Request to update data</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th><i class="material-icons"> delete</i><span>Delete this product</span></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div> -->
+</div>

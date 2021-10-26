@@ -1,0 +1,125 @@
+<section id="dialog-wrapper" class="custom-modal-box">
+  <div class="form-box" *ngIf="data">
+    <div class="page-head">
+      <span class="page-title" translate>Water circularity</span>
+    </div>
+    <form class="clearfix" [formGroup]="water" (ngSubmit)="onSubmit()">
+      <strong translate>Water inflow</strong>
+      <div class="item clearfix">
+        <label translate>Total circular water withdrawal</label>
+        <input
+          type="text"
+          class="form-control"
+          currencyMask
+          [options]="{
+            prefix: '',
+            suffix: '',
+            thousands: '.',
+            allowNegative: false,
+            decimal: ',',
+            precision: 0,
+            align: 'left'
+          }"
+          formControlName="circularWaterWithdrawal"
+        />
+        <div class="info combo">
+          <mat-select
+            (selectionChange)="unitChangeEvent($event.value)"
+            formControlName="waterUnit"
+          >
+            <mat-option value="l">l</mat-option>
+            <mat-option value="m3">m3</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="item clearfix">
+        <label translate>Total water withdrawal</label>
+        <input
+          type="text"
+          class="form-control"
+          currencyMask
+          [options]="{
+            prefix: '',
+            suffix: '',
+            thousands: '.',
+            allowNegative: false,
+            decimal: ',',
+            precision: 0,
+            align: 'left'
+          }"
+          formControlName="totalWaterWithdrawal"
+        />
+        <div class="info combo">
+          <mat-select
+            formControlName="waterUnit"
+            (selectionChange)="unitChangeEvent($event.value)"
+          >
+            <mat-option value="l">l</mat-option>
+            <mat-option value="m3">m3</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <small translate>waterNote</small>
+      <strong translate>Water outflow</strong>
+      <div class="item clearfix">
+        <label translate>Total circular water discharge</label>
+        <input
+          type="text"
+          class="form-control"
+          currencyMask
+          [options]="{
+            prefix: '',
+            suffix: '',
+            thousands: '.',
+            allowNegative: false,
+            decimal: ',',
+            precision: 0,
+            align: 'left'
+          }"
+          formControlName="circularWaterDischarge"
+        />
+        <div class="info combo">
+          <mat-select
+            formControlName="waterUnit"
+            (selectionChange)="unitChangeEvent($event.value)"
+          >
+            <mat-option value="l">l</mat-option>
+            <mat-option value="m3">m3</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="item clearfix">
+        <label translate>Total water withdrawal</label>
+        <input
+          type="text"
+          class="form-control"
+          currencyMask
+          disabled
+          [value]="water.value.totalWaterWithdrawal"
+          [(ngModel)]="test"
+          [options]="{
+            prefix: '',
+            suffix: '',
+            thousands: '.',
+            allowNegative: false,
+            decimal: ',',
+            precision: 0,
+            align: 'left'
+          }"
+          formControlName="totalWaterWithdrawal"
+        />
+        <div class="info combo">
+          <mat-select
+            formControlName="waterUnit"
+            (selectionChange)="unitChangeEvent($event.value)"
+          >
+            <mat-option value="l">l</mat-option>
+            <mat-option value="m3">m3</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <span class="back" (click)="cancel()" translate>BACK</span>
+      <button class="save" translate>SAVE</button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,148 @@
+<div class="fixed-steper"><app-stepper></app-stepper></div>
+<div class="row" *ngIf="data">
+  <div class="col-6">
+    <div class="item shadow clearfix">
+      <div class="page-head">
+        <span class="page-title" translate>Step 2. Indicators</span>
+      </div>
+      <div class="form-item clearfix">
+        <div class="select active">
+          <div class="head" translate>CLOSE THE LOOP</div>
+          <ul>
+            <li class="selected" translate>
+              <i class="fas fa-check-circle"></i>% circular inflow
+            </li>
+            <li class="selected" translate>
+              <i class="fas fa-check-circle"></i>% circular outflow
+            </li>
+            <li
+              [ngClass]="{ selected: data.waterCircularity }"
+              (click)="data.waterCircularity = !data.waterCircularity"
+              translate
+            >
+              <i class="fas fa-check-circle"></i>% water circularity
+              <div
+                class="tool-tip shadow show"
+                *ngIf="selectedProduct === 'water'"
+              >
+                <span translate> selectIndicator</span>
+              </div>
+            </li>
+            <li
+              [ngClass]="{ selected: data.renewableEnergy }"
+              (click)="data.renewableEnergy = !data.renewableEnergy"
+              translate
+            >
+              <i class="fas fa-check-circle"></i>% renewable energy
+              <div
+                class="tool-tip shadow show"
+                *ngIf="selectedProduct === 'energy'"
+              >
+                <span translate> selectIndicator</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="select"
+          [ngClass]="{
+            active:
+              data.criticalInflow ||
+              data.recoveryType ||
+              data.onSiteWaterCirculation
+          }"
+        >
+          <div class="head" translate>OPTIMIZE THE LOOP</div>
+          <ul>
+            <li
+              [ngClass]="{ selected: data.criticalInflow }"
+              (click)="data.criticalInflow = !data.criticalInflow"
+              translate
+            >
+              <i class="fas fa-check-circle"></i>% critical inflow
+              <div
+                class="tool-tip shadow show"
+                *ngIf="selectedProduct === 'critical'"
+              >
+                <span translate> selectIndicator</span>
+              </div>
+            </li>
+            <li
+              [ngClass]="{ selected: data.recoveryType }"
+              (click)="data.recoveryType = !data.recoveryType"
+              translate
+            >
+              <i class="fas fa-check-circle"></i>% recovery type
+              <div
+                class="tool-tip shadow show"
+                *ngIf="selectedProduct === 'recovery'"
+              >
+                <span translate> selectIndicator</span>
+              </div>
+            </li>
+            <li
+              [ngClass]="{ selected: data.onSiteWaterCirculation }"
+              (click)="
+                data.onSiteWaterCirculation = !data.onSiteWaterCirculation
+              "
+              translate
+            >
+              <i class="fas fa-check-circle"></i>% onsite water circulation
+              <div
+                class="tool-tip shadow show"
+                *ngIf="selectedProduct === 'circulation'"
+              >
+                <span translate> selectIndicator</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="select"
+          [ngClass]="{
+            active: data.circularMaterialProductivity || data.ctiRevenue
+          }"
+        >
+          <div class="head" translate>VALUE THE LOOP</div>
+          <ul>
+            <li
+              [ngClass]="{ selected: data.circularMaterialProductivity }"
+              (click)="
+                data.circularMaterialProductivity = !data.circularMaterialProductivity
+              "
+              translate
+            >
+              <i class="fas fa-check-circle"></i>circular material productivity
+              <div
+                class="tool-tip shadow show"
+                *ngIf="selectedProduct === 'productivity'"
+              >
+                <span translate> selectIndicator</span>
+              </div>
+            </li>
+            <li
+              [ngClass]="{ selected: data.ctiRevenue }"
+              (click)="data.ctiRevenue = !data.ctiRevenue"
+              translate
+            >
+              <i class="fas fa-check-circle"></i>CTI revenue
+              <div
+                class="tool-tip shadow show"
+                *ngIf="selectedProduct === 'revenue'"
+              >
+                <span translate> selectIndicator</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button
+        (click)="saveStep2(data)"
+        class="btn btn-circular bg-shamrock big mb-3"
+        translate
+      >
+        SAVE
+      </button>
+    </div>
+  </div>
+</div>

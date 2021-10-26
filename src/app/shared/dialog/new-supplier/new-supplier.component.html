@@ -1,0 +1,144 @@
+<section
+  id="dialog-wrapper"
+  class="dialog-wrapper"
+  *ngIf="activeStep == 'first' && data && unitName"
+>
+  <div class="page-head">
+    <span class="page-title" translate
+      ><span translate>SUPPLIER ACCOUNT</span>Add a new user</span
+    >
+  </div>
+
+  <form [formGroup]="createUserFrom" novalidate>
+    <div class="form-item">
+      <label class="d-block">
+        <label translate>Supplier's company</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ 'addMaterial.addSupplier.placeholder1' | translate }}"
+          formControlName="organization"
+          autocomplete="organization"
+        />
+        <span hidden translate>Supplier's company</span>
+        <small
+          [hidden]="
+            createUserFrom.controls.organization.valid ||
+            createUserFrom.controls.organization.untouched
+          "
+          class="text-danger"
+          translate
+        >
+          Supplier's company is required
+        </small>
+      </label>
+    </div>
+    <div class="form-item">
+      <label class="d-block">
+        <label>Email</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ 'addMaterial.addSupplier.placeholder2' | translate }}"
+          formControlName="email"
+          trim
+        />
+        <span hidden translate>Email</span>
+        <small
+          [hidden]="
+            createUserFrom.controls.email.valid ||
+            createUserFrom.controls.email.untouched
+          "
+          class="text-danger"
+          translate
+        >
+          Email is required
+        </small>
+      </label>
+    </div>
+    <div class="label" translate>Your message</div>
+    <div class="inviteText">
+      <b translate>Hello!</b> {{ unitName }},<br />
+      <b translate>addMaterial.addSupplier.message</b>
+    </div>
+  </form>
+  <button
+    tabindex="4"
+    [disabled]="!createUserFrom.valid"
+    class="btn-circular bg-shamrock float-right"
+    (click)="checkMail()"
+    translate
+  >
+    SEND INVITATION
+  </button>
+  <button
+    tabindex="3"
+    class="btn-circular dark-slate-blue-border float-right"
+    (click)="onNoClick()"
+    translate
+  >
+    CANCEL
+  </button>
+</section>
+<section
+  id="dialog-wrapper"
+  class="dialog-wrapper"
+  *ngIf="activeStep == 'second' && data && unitName"
+>
+  <div class="page-head">
+    <span class="page-title" translate>Confirmation</span>
+  </div>
+  <div class="col-12">
+    <div class="warning row">
+      <div class="col-2">
+        <span><i class="fas fa-exclamation-triangle"></i></span>
+      </div>
+      <div class="col-10" translate>addMaterial.addColleague.message</div>
+    </div>
+  </div>
+
+  <div class="label" translate>Your message</div>
+  <div class="inviteText">
+    <b translate>Hello from</b> {{ unitName }},<br />
+    <b translate
+      >We are currently gathering information about our products as part of our
+      efforts to become a circular business. We kindly invite you to join the
+      CTI Tool to support us with some specific material inflow and outflow
+      information.</b
+    >
+  </div>
+  <div class="label" translate>Material added</div>
+  <div class="item shadow">
+    <div class="img-box"></div>
+    <div class="name">{{ data.selectMaterial.displayName }}</div>
+    <span class="check"><i class="fas fa-check"></i></span>
+  </div>
+  <div class="label" translate>Material assigned to</div>
+  <div class="item shadow">
+    <div class="img-box"></div>
+    <div class="name">{{ createUserFrom.controls.email.value }}</div>
+    <span class="check"><i class="fas fa-check"></i></span>
+  </div>
+  <button
+    tabindex="4"
+    [disabled]="!createUserFrom.controls.email.value"
+    class="btn-circular bg-shamrock float-right"
+    (click)="onYesClick()"
+    translate
+  >
+    CONFIRM
+  </button>
+  <button
+    tabindex="3"
+    class="btn-circular dark-slate-blue-border float-right"
+    (click)="onNoClick()"
+    translate
+  >
+    CANCEL
+  </button>
+</section>
+
+<div class="row slider-item">
+  <span class="active" [ngClass]="{ active: activeStep == 'first' }"></span>
+  <span class="active" [ngClass]="{ active: activeStep == 'second' }"></span>
+</div>

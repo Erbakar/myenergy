@@ -1,0 +1,31 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.item {
+  background: $white;
+  padding: 0.5rem 1rem 1rem;
+  border-radius: 1rem;
+  .btn-box {
+    display: flex;
+    .btn-circular {
+      width: 7rem;
+      height: 2.8rem;
+      line-height: 1.1;
+      text-align: center;
+      align-items: stretch;
+      margin-right: 0.5rem;
+      &.one {
+        line-height: 2.3;
+      }
+      &.pasive {
+        display: none;
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      &.active {
+        background: $dark-slate-blue;
+        color: $white;
+      }
+    }
+  }
+}

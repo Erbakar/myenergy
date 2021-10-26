@@ -1,0 +1,79 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+#dialog-wrapper {
+  position: relative;
+}
+
+.icon-close {
+  position: absolute;
+  right: 0;
+  font-size: 36px;
+  color: #1c195b;
+  border: solid 2px #1c195b;
+  border-radius: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.form-item {
+  height: auto;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    background: transparent;
+  }
+  .defult-select {
+    height: 50px;
+    padding: 0 10px;
+    margin-top: 0;
+  }
+  label {
+    width: 100%;
+    font-size: 0.81rem;
+    top: 0;
+    height: auto;
+    font-weight: bold;
+    .name-input {
+      padding-left: 0;
+      border: 0;
+      font-size: 0.81rem;
+      top: 0;
+      height: auto;
+      font-weight: bold;
+      color: #1c195b;
+    }
+  }
+  .text-danger {
+    background: #fff;
+    width: 80%;
+  }
+}
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+.dots {
+  text-align: center;
+  span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 3px;
+    border: 2px solid #e3e5ec;
+    box-sizing: border-box;
+    border-radius: 28px;
+    &.active {
+      border: 2px solid #1c195b;
+      background: #1c195b;
+    }
+  }
+}
+.owl-nav {
+  display: none;
+}

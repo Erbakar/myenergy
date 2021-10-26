@@ -1,0 +1,165 @@
+<div class="purches">
+  <div *ngIf="directData; else empty">
+    <div id="filter">
+      <div class="row filter">
+        <div class="col">
+          <h4>Labels</h4>
+          <mat-select [(ngModel)]="selectLabel">
+            <mat-option
+              *ngFor="let label of ['Show All', 2, 3, 4, 5]"
+              [value]="label"
+            >
+              {{ label }}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div class="col">
+          <h4>Product category</h4>
+          <mat-select [(ngModel)]="selectCategory">
+            <mat-option
+              *ngFor="let label of ['Choose a category', 2, 3, 4, 5]"
+              [value]="label"
+            >
+              {{ label }}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div class="col">
+          <h4>Time period</h4>
+          <mat-form-field appearance="fill" class="example-form-field">
+            <mat-label>Chooose a time period</mat-label>
+            <mat-date-range-input [rangePicker]="rangePicker">
+              <input matStartDate placeholder="Start date" />
+              <input matEndDate placeholder="End date" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="rangePicker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker>
+              <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancel</button>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  matDateRangePickerApply
+                >
+                  Apply
+                </button>
+              </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <h4>Amount</h4>
+          <mat-select [(ngModel)]="selectAmount">
+            <mat-option
+              *ngFor="let label of ['Choose amount', 2, 3, 4, 5]"
+              [value]="label"
+            >
+              {{ label }}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div class="col">
+          <h4>Sort by</h4>
+          <mat-select [(ngModel)]="selectSort">
+            <mat-option
+              *ngFor="let label of ['Newest to oldest', 2, 3, 4, 5]"
+              [value]="label"
+            >
+              {{ label }}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+    <div class="perioad" *ngFor="let time of [1]">
+      <h2>APRIL 2020</h2>
+      <div class="item clearfix" *ngFor="let item of directData">
+        <div class="img-box">
+          <img *ngIf="item.imgUrl" [src]="item.imgUrl" alt="" />
+        </div>
+        <div class="product-info">
+          <div class="name">{{ item.name }}</div>
+          <div class="recurring">{{ item.period }} RECURRING</div>
+          <div class="date">
+            Added: {{ item.creation_date | date: 'd MMMM y' }}
+          </div>
+        </div>
+        <div class="labels">
+          <h3>Labels</h3>
+          <img src="../../../../assets/img/myenergy-label/labels.png" alt="" />
+          <img src="../../../../assets/img/myenergy-label/labels.png" alt="" />
+          <img src="../../../../assets/img/myenergy-label/labels.png" alt="" />
+        </div>
+        <!-- <div class="impact">
+          <h3>Circular impact</h3>
+          <div class="chart">
+            <div class="active" [style.width.%]="item * 2"></div>
+            <div class="text">{{ item * 2 }} % of spent of circularity data</div>
+          </div>
+        </div> -->
+        <!-- <div [ngClass]="{ active: ass.open }" class="settings">
+          <span (click)="settings(ass)" class="material-icons">more_vert</span>
+          <div class="action shadow" *ngIf="ass.open === true">
+            <span mat-button (click)="gotoAssessment(ass, level)" translate>Edit assessment</span>
+            <span mat-button (click)="removeAssessment(ass)" class="delete" translate>Delete assessment</span>
+          </div>
+        </div> -->
+        <div [ngClass]="{ active: item.open }" class="settings">
+          <span (click)="settings(item)" class="material-icons">more_vert</span>
+          <div class="action shadow" *ngIf="item.open === true">
+            <span
+              mat-button
+              [routerLink]="[
+                '/myenergy/purchases/direct-procurement/overview/',
+                item.uuid
+              ]"
+              translate
+              >Edit purchase</span
+            >
+            <span
+              mat-button
+              (click)="removePurchas(item)"
+              class="delete"
+              translate
+              >Delete purchase</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #empty>
+    <div class="empty">
+      <img src="../../../assets/img/icon/emptyInbox.svg" alt="" />
+      <h2>Oops, no purchases yet.</h2>
+      <div class="col-6 offset-3">
+        <div class="row">
+          <div class="col">
+            <span>Learn how to add purchases via procurement.</span>
+            <button
+              class="btn-circular real-grey-border"
+              (click)="infoVideoModal('direct')"
+            >
+              WATCH DEMO
+            </button>
+          </div>
+          <div class="col">
+            <span>Add your first purchase via direct procurement.</span>
+            <button
+              [routerLink]="[
+                '/myenergy/purchases/direct-procurement/purchase/detail/new'
+              ]"
+              class="btn-circular bg-shamrock"
+            >
+              ADD PURCHASE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

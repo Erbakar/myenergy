@@ -1,0 +1,159 @@
+.product-form {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 3rem 1rem 0;
+}
+
+.product-form .example-full-width {
+  display: block;
+  float: left;
+  width: 46%;
+  margin: 0 2% 10px;
+
+  span,
+  mat-radio-button {
+    margin-right: 10px;
+  }
+}
+
+.product-form .line {
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(219, 219, 219, 0.3);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(219, 219, 219, 0.3);
+  box-shadow: 0px 3px 5px 0px rgba(219, 219, 219, 0.3);
+  margin-bottom: 20px;
+}
+
+.full-width {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  border-bottom: solid 1px #c9d1e0;
+  padding: 10px 20px;
+  position: relative;
+
+  i {
+    color: #1c195b;
+    position: absolute;
+    right: -10px;
+    top: 30px;
+    cursor: pointer;
+  }
+
+  .full-width-child {
+    width: 100%;
+    display: flex;
+    padding: 10px 0 10px 20px;
+    border: none;
+  }
+
+  label {
+    display: block;
+    width: 40%;
+    float: left;
+    font-size: 13px;
+    font-weight: 700;
+    padding-top: 15px;
+
+    &.full {
+      width: 100%;
+    }
+
+    &.long {
+      padding-top: 5px;
+    }
+  }
+
+  .defult-form-element {
+    display: block;
+    width: 60%;
+    height: 48px;
+    line-height: 48px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid #b0bdd1;
+    float: left;
+    line-height: 15px;
+    overflow: hidden;
+    padding: 0 10px;
+    margin-top: 10px;
+
+    &.error {
+      border-color: lightcoral;
+    }
+
+    input {
+      position: relative;
+      top: -20px;
+    }
+
+    select {
+      position: relative;
+      top: -35px;
+    }
+
+    &.textarea {
+      height: 148px;
+      line-height: 18px;
+      padding: 1px 10px;
+      margin-bottom: 20px;
+
+      textarea.mat-input-element {
+        height: 148px;
+      }
+    }
+  }
+
+  .file-uplaoad-name {
+    margin: 0 20px;
+    border-bottom: solid 1px #000;
+    padding: 0 0 7px;
+  }
+
+  a {
+    display: block;
+    color: #000;
+    text-decoration: underline;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .file-upload {
+    border-radius: 0;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-infix {
+    height: 48px;
+    line-height: 48px;
+  }
+
+  .input-btn {
+    display: block;
+    float: left;
+    height: 48px;
+    line-height: 46px;
+    border-radius: 10px;
+    min-width: 80px;
+    max-width: 220px;
+    background: #edeff1;
+    padding: 0 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid #b0bdd1;
+    cursor: pointer;
+
+    &.focus {
+      background: transparent;
+    }
+
+    &.noLineHeight {
+      line-height: 22px;
+    }
+  }
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}

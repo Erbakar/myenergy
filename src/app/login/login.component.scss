@@ -1,0 +1,208 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.login-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url(../../assets/img/login-bg.jpg) center center;
+  background-size: cover;
+
+  .user-info-box {
+    background: $pale-lilac;
+    height: 100vh;
+    padding: 2.5rem 3rem 2rem;
+
+    .logo {
+      display: block;
+      width: 300px;
+      margin-left: -10px;
+    }
+
+    .page-head {
+      height: 2.5rem;
+      padding: 0;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .spot {
+      display: block;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 6.2rem;
+    }
+  }
+  .logo-vertical {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -315px;
+    margin-left: -44px;
+  }
+  .login-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -200px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 392px;
+    z-index: 3;
+    background: #fafafa;
+    border-radius: 1rem;
+    overflow: hidden;
+    &.core {
+      width: 500px;
+      margin-left: -250px;
+      margin-top: -150px;
+    }
+
+    .form {
+      padding: 1rem;
+
+      .page-head {
+        height: 2.5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        .create {
+          float: right;
+        }
+      }
+    }
+
+    form {
+      padding: 1rem;
+    }
+
+    .form-item {
+      height: auto;
+      padding: 0;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+
+      &:hover {
+        background: transparent;
+      }
+
+      label {
+        width: 100%;
+        font-size: 0.81rem;
+        top: 0;
+        height: auto;
+        font-weight: bold;
+      }
+    }
+
+    .checkbox-group {
+      display: block;
+      margin-bottom: 1rem;
+
+      .checkbox-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-left: 25px;
+      }
+
+      .checkbox label input[type="checkbox"] + span {
+        width: 1rem;
+        height: 1rem;
+
+        &:before {
+          font-size: 10px;
+          position: relative;
+          top: -14px;
+        }
+      }
+    }
+
+    .big {
+      float: right;
+      line-height: 0;
+      span {
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+    }
+    .fas {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: relative;
+      top: -0.6rem;
+      line-height: 0;
+    }
+    .forgot {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  }
+  &.myenergy {
+    background: $myenergy;
+    .login-box {
+      background: $myenergy;
+      height: 432px;
+      margin-top: -230px;
+      .page-title {
+        font-size: 24px;
+        color: $myenergy;
+      }
+      span {
+        font-style: normal;
+        color: $myenergy;
+        line-height: 20px;
+        letter-spacing: 0.01em;
+      }
+      .form {
+        color: #ffffff;
+        .page-head {
+          margin-bottom: 50px;
+          .page-title {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 28px;
+            line-height: 40px;
+            color: #ffffff;
+          }
+        }
+        .form-item label {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 16px;
+          color: #ffffff;
+        }
+      }
+      .my-forgot {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 40px;
+        letter-spacing: 0.01em;
+        color: #e3e5ec;
+      }
+      .login-button {
+        float: right;
+        height: 36px;
+        span {
+          color: #ffffff;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 0;
+          letter-spacing: 0.01em;
+        }
+      }
+    }
+    .user-info-box {
+      background: #f6f4f7;
+      border-radius: 16px !important;
+      height: inherit;
+      padding: 56px;
+      .spot {
+        margin-bottom: 2.2rem;
+      }
+    }
+  }
+}

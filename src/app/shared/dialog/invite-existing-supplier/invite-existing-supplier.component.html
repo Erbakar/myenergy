@@ -1,0 +1,126 @@
+<section id="dialog-wrapper" *ngIf="create">
+  <div class="full-width clearfix">
+    <h2 translate>material.invite_supplier.title</h2>
+
+    <div class="create">
+      <span translate>material.invite.or</span>
+      <b translate (click)="create = false">Select</b>
+      <span translate>material.invite_supplier.an_existing_user</span>
+    </div>
+  </div>
+
+  <div class="select">
+    <label translate>material.invite_supplier.new_supplier_email</label>
+    <input
+      placeholder="Fill in the supplier email"
+      (keyup)="emailVal(new.email)"
+      [(ngModel)]="new.email"
+      name="new.email"
+    />
+    <ng-container *ngIf="isShowOtherFields">
+      <label translate>material.invite_supplier.supplier_first_name</label>
+      <input
+        placeholder="Fill in the supplier first name"
+        [disabled]="!isNewUser"
+        [(ngModel)]="new.firstname"
+        name="new.firstname"
+      />
+      <label translate>material.invite_supplier.supplier_middle_name</label>
+      <input
+        placeholder="Fill in the supplier midlle name"
+        [disabled]="!isNewUser"
+        [(ngModel)]="new.middlename"
+        name="new.middlename"
+      />
+      <label translate>material.invite_supplier.supplier_last_name</label>
+      <input
+        placeholder="Fill in the supplier last name"
+        [disabled]="!isNewUser"
+        [(ngModel)]="new.lastname"
+        name="new.lastname"
+      />
+      <label translate>material.invite_supplier.supplier_organisation</label>
+      <input
+        placeholder="Fill in the supplier organisation"
+        [(ngModel)]="new.organisationName"
+        name="new.organisationName"
+      />
+    </ng-container>
+  </div>
+  <strong translate>products.product.invite_certifier.text_label</strong>
+  <textarea
+    [(ngModel)]="message"
+    name="message"
+    name=""
+    id=""
+    rows="5"
+  ></textarea>
+  <div style="text-align: right; padding: 10px 0">
+    <button
+      tabindex="-1"
+      class="btn-circular bg-watermelon"
+      (click)="onNoClick()"
+    >
+      <span translate>bom.remove.cancel</span>
+    </button>
+    <button
+      tabindex="4"
+      [disabled]="isDisabled"
+      class="btn-circular bg-shamrock last"
+      (click)="createNewSupplier(new, message)"
+    >
+      <span translate>products.product.invite_verifier.send_invite</span>
+    </button>
+  </div>
+</section>
+
+<section id="dialog-wrapper" *ngIf="!create">
+  <div class="full-width clearfix">
+    <h2 translate>material.invite_supplier.title</h2>
+    <input
+      placeholder="Search your members and suppliers"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+    />
+    <div class="create">
+      <span translate>material.invite.or</span>
+      <b translate (click)="create = true">Create</b>
+      <span translate>material.invite.temporary_account</span>
+    </div>
+  </div>
+  <ul>
+    <li *ngFor="let item of filterItems" (click)="selectItem(item)">
+      <i class="material-icons icon">shopping_basket</i>
+      <div>{{ (item?.users)[0].fullname }}</div>
+      <span>{{ (item?.users)[0].email }}</span>
+      <div>{{ item?.alias }}</div>
+      <i *ngIf="item?.selected" class="material-icons check"> done </i>
+    </li>
+  </ul>
+
+  <strong translate>products.product.invite_certifier.text_label</strong>
+  <textarea
+    [(ngModel)]="message"
+    name="message"
+    name=""
+    id=""
+    rows="5"
+  ></textarea>
+  <div style="text-align: right; padding: 10px 0">
+    <button
+      tabindex="-1"
+      class="bg-watermelon btn-circular"
+      (click)="onNoClick()"
+    >
+      <span translate>bom.remove.cancel</span>
+    </button>
+    <button
+      tabindex="4"
+      [disabled]="isDisabled"
+      class="btn-circular bg-shamrock last"
+      (click)="onYesClick(message)"
+    >
+      <span translate>products.product.invite_verifier.send_invite</span>
+    </button>
+  </div>
+</section>

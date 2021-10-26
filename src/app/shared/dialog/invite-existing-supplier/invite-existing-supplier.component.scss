@@ -1,0 +1,146 @@
+#dialog-wrapper {
+  background: #f6f8fd;
+  margin-left: -24px;
+  width: calc(100% + 48px);
+  margin-bottom: -24px;
+  margin-top: -24px;
+}
+
+.full-width {
+  display: block;
+  background: #fff;
+  width: 100%;
+  margin-left: 0;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 10px 19px 0 #dae4f4;
+}
+
+h2 {
+  display: block;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 20px;
+}
+
+input {
+  display: block;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 14px;
+  border-radius: 5px;
+  outline: none;
+  border: solid 1px;
+  margin-bottom: 2rem;
+}
+
+.create {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+  b {
+    padding: 2px 8px;
+    border-radius: 15px;
+    position: relative;
+    top: -12px;
+    margin: 0 3px;
+    border: solid 1px;
+    cursor: pointer;
+  }
+}
+
+.mat-form-field {
+  display: block;
+}
+
+.select {
+  padding-top: 20px;
+  max-height: 250px;
+  overflow-y: auto;
+
+  label {
+    color: #253e4e;
+    line-height: 2em;
+    text-transform: uppercase;
+    padding: 0 24px;
+    display: inline-block;
+    max-width: 100%;
+    font-weight: 700;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  border-bottom: 1px solid #c7d6ee;
+
+  li {
+    display: block;
+    padding: 20px 24px 20px 72px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #c7d6ee;
+    color: #58666e;
+    font-weight: 400;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      background: #dae4f4;
+    }
+
+    span {
+      font-weight: 100;
+      color: #a2b6d7;
+    }
+
+    .check {
+      position: absolute;
+      right: 20px;
+      top: 40%;
+      color: #1c195b;
+      font-size: 1.5em;
+    }
+
+    .icon {
+      position: absolute;
+      left: 20px;
+      top: 35%;
+      font-size: 2em;
+    }
+  }
+}
+
+strong {
+  display: block;
+  margin-bottom: 10px;
+  padding: 0 24px;
+}
+
+textarea {
+  display: block;
+  border-radius: 10px;
+  padding: 10px;
+  width: calc(100% - 48px);
+  max-width: calc(100% - 48px);
+  margin: 0 auto;
+  line-height: 26px;
+  color: #555;
+  font-size: 14px;
+}
+
+.last {
+  margin-right: 24px;
+  margin-left: 10px;
+}
+.btn-circular {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  span {
+    font-weight: 400;
+    line-height: 0;
+  }
+}

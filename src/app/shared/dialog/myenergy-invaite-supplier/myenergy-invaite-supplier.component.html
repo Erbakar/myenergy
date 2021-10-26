@@ -1,0 +1,75 @@
+<section id="dialog-wrapper">
+  <em class="icon icon-close" (click)="onNoClick()"></em>
+  <div class="page-head">
+    <span class="page-title">Add new supplier</span>
+  </div>
+  <form [formGroup]="createUserFrom" novalidate>
+    <div class="form-item">
+      <label>Email</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter your supplier e-mail"
+        formControlName="email"
+        trim
+      />
+      <span hidden translate>Email</span>
+      <small
+        [hidden]="
+          createUserFrom.controls.email.valid ||
+          createUserFrom.controls.email.untouched
+        "
+        class="text-danger"
+        translate
+      >
+        Email is required
+      </small>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-item">
+          <label translate>First name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your supplier first name"
+            formControlName="firstName"
+          />
+          <span hidden translate>First name</span>
+          <small
+            [hidden]="
+              createUserFrom.controls.firstName.valid ||
+              createUserFrom.controls.firstName.untouched
+            "
+            class="text-danger"
+            translate
+          >
+            First name is required
+          </small>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-item">
+          <label translate>Last name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your supplier last name"
+            formControlName="lastName"
+          />
+          <span hidden translate>Last name</span>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div style="text-align: center; padding: 20px 0 0">
+    <button
+      tabindex="1"
+      class="btn-circular bg-shamrock ml-2"
+      (click)="onYesClick()"
+      translate
+    >
+      SEND INVITATION
+    </button>
+  </div>
+</section>

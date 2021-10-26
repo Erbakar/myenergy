@@ -1,0 +1,198 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.item {
+  background: $white;
+  padding: 1rem 2rem;
+  width: calc (100% -15px) !important;
+  h3 {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: normal;
+    padding: 0;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
+  }
+  h6 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .head-text {
+    display: block;
+    list-style-type: none;
+    padding: 1.5rem 0 0;
+    height: 3rem;
+  }
+
+  .center {
+    display: block;
+    margin: 1.5rem auto 0;
+  }
+}
+strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: normal;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.input-area {
+  display: block;
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+
+  .input-box {
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    height: 3rem;
+    width: 100%;
+    position: relative;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
+
+    em {
+      position: absolute;
+      top: -8px;
+      left: 7px;
+      border-radius: 100%;
+      background: #1c195b;
+      height: 2rem;
+      width: 2rem;
+      text-align: center;
+      line-height: 1.9rem;
+      margin-right: 1rem;
+      color: #fff;
+      font-style: normal;
+      font-weight: bold;
+      z-index: 2;
+    }
+    i {
+      position: absolute;
+      top: -8px;
+      left: 7px;
+      border-radius: 20px;
+      padding: 0 10px;
+      background: #1c195b;
+      height: 2rem;
+      width: auto;
+      text-align: center;
+      line-height: 2rem;
+      margin-right: 1rem;
+      color: #fff;
+      font-style: normal;
+      font-weight: bold;
+      z-index: 2;
+    }
+    textarea {
+      position: relative;
+      top: -0.9rem;
+      height: 3rem;
+      border-radius: 0.5rem;
+      padding: 0.9rem 6rem 0.9rem 3rem;
+      border: solid 2px $pale-lilac;
+      color: $dark-slate-blue;
+      font-size: 0.81rem;
+      transition: all 0.3s ease-in-out;
+      overflow: hidden;
+      line-height: 0.8rem;
+      resize: none;
+      &:focus {
+        border-color: $dark-slate-blue;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+    &:hover {
+      background: transparent;
+    }
+    .float-right {
+      position: absolute;
+      padding: 0.3rem 1rem;
+      top: -8px;
+      right: 7px;
+    }
+  }
+  // &.filled {
+  //   transition: all 0.3s ease-in-out;
+  //   height: 9.6rem;
+  //   .input-box {
+  //     height: 8rem !important;
+  //     transition: all 0.3s ease-in-out;
+  //     textarea {
+  //       height: 8rem !important;
+  //       transition: all 0.3s ease-in-out;
+  //       overflow: auto;
+  //     }
+  //   }
+  // }
+}
+.patica-sidebar.open {
+  top: 255px !important;
+}
+
+.foot-question {
+  margin-top: 1rem;
+  h3 {
+    font-size: 1rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .item {
+    border-radius: 0.5rem;
+    margin-bottom: 10px;
+  }
+  .input-box {
+    margin-bottom: 0.5rem;
+  }
+  input {
+    position: relative;
+    display: block;
+    height: 3rem;
+    border-radius: 0.5rem;
+    padding: 0.9rem;
+    border: solid 2px #e8e8ef;
+    color: #1c195b;
+    font-size: 0.81rem;
+    width: 100%;
+  }
+  .delete {
+    top: 11px;
+  }
+  .add {
+    margin-top: 1rem;
+  }
+}
+
+.add {
+  padding: 0.3rem 1rem;
+  b {
+    display: inline-block;
+    background: $dark-slate-blue;
+    color: $white;
+    width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1-2rem;
+    font-weight: bold;
+    border-radius: 50%;
+    margin: 0 3px 0 -10px;
+    font-size: 0.75rem;
+  }
+}
+.add-mat {
+  cursor: pointer;
+  font-size: 2rem;
+}
+.delete {
+  cursor: pointer;
+  color: $dark-slate-blue;
+  position: absolute;
+  top: -4px;
+  right: 7px;
+  font-size: 1.5rem;
+}

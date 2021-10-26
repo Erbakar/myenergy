@@ -1,0 +1,157 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.item-box {
+  background: $pale-grey;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 222;
+  overflow: hidden;
+  .item {
+    padding-left: 2rem;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    strong {
+      padding-top: 1rem;
+      display: block;
+      font-weight: bold;
+      line-height: 1.25rem;
+      white-space: nowrap;
+    }
+
+    span {
+      padding-bottom: 1rem;
+      display: block;
+      font-size: 0.81rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    i {
+      color: $shamrock;
+      font-size: 1rem;
+      margin-left: 0.3rem;
+      position: relative;
+      top: 3px;
+    }
+
+    a {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      z-index: 3;
+    }
+  }
+
+  .next {
+    background: #f3f3f7;
+    color: #a6a6bb;
+
+    &:before {
+      z-index: 2;
+      position: absolute;
+      left: -5px;
+      top: 0;
+      content: "";
+      width: 40px;
+      height: 73px;
+      background: url(../../../../assets/img/arrow.png) left center no-repeat;
+      background-size: contain;
+    }
+  }
+
+  .prev {
+    &:after {
+      position: absolute;
+      left: -5px;
+      top: 0;
+      content: "";
+      width: 40px;
+      height: 73px;
+      background: url(../../../../assets/img/arrow.png) left center no-repeat;
+      background-size: contain;
+    }
+  }
+
+  .first {
+    &:before {
+      background: transparent;
+    }
+
+    &:after {
+      background: transparent;
+    }
+  }
+
+  .active {
+    background: $white !important;
+    color: $dark-slate-blue;
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 38px 0 38px 20px;
+      border-color: transparent transparent transparent #f3f3f7 !important;
+    }
+
+    &:after {
+      position: absolute;
+      z-index: 1;
+      right: -20px;
+      top: 0;
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 38px 0 38px 20px;
+      border-color: transparent transparent transparent #fff !important;
+    }
+  }
+}
+.btn-box {
+  display: block;
+  float: left;
+  width: 50%;
+  .one {
+    zoom: 0.7;
+    width: 7rem;
+    margin-top: 0.5rem;
+    &.active {
+      background: $dark-slate-blue !important;
+      color: $white;
+    }
+  }
+}
+.navigation {
+  background: #fff;
+  padding: 1rem 5rem 1rem 0;
+  border-radius: 0 0 0.5rem 0.5rem;
+  position: relative;
+  top: -2.1rem;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  &.extraped {
+    padding-right: 9rem;
+  }
+  .btn-circular {
+    margin-left: 1rem;
+    zoom: 0.9;
+    &.done {
+      border-color: #e6f7ec;
+      background: #e6f7ec;
+      color: #45c674;
+    }
+    &.active {
+      border-color: $real-grey !important;
+      background: $real-grey !important;
+      color: $dark-slate-blue;
+    }
+  }
+}

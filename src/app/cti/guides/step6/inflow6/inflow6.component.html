@@ -1,0 +1,303 @@
+<div class="clearfix" [ngClass]="{ 'col-6': isPatica }">
+  <h6 translate>step6InflowInfoText</h6>
+  <div class="shadow item" style="padding: 20px">
+    <div class="page-head">
+      <span class="page-title" translate>Inflow</span>
+      <div
+        class="btn-circular grey-border guidance-button float-right"
+        [ngClass]="{ active: isPatica }"
+        (click)="openPatica(!isPatica)"
+        translate
+      >
+        Step 6 Guidance
+      </div>
+    </div>
+    <div class="clearfix">
+      <h3 translate>Inflow risks</h3>
+      <form [formGroup]="form" (ngSubmit)="next2()" *ngIf="isShow">
+        <div class="row" formGroupName="question">
+          <div class="col-6" [ngClass]="{ 'col-12': isPatica }">
+            <div class="question">
+              <label for="market" class="big" translate>Market</label>
+              <textarea
+                id="market"
+                autosize
+                [formControlName]="'market'"
+                [(ngModel)]="data.market"
+                matInput
+              ></textarea>
+              <div class="row mt-2">
+                <div class="col-6">
+                  <label translate>THREAT</label>
+                  <mat-radio-group
+                    class="shadow clearfix radio-content"
+                    aria-label="THREAT"
+                    [formControlName]="'marketThreat'"
+                    [(ngModel)]="data.marketThreat"
+                  >
+                    <mat-radio-button
+                      value="{{ i }}"
+                      (click)="uncheck('marketThreat', i, data.marketThreat)"
+                      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]"
+                      >{{ i }}</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+                <div class="col-6 last">
+                  <label translate>VULNERABILITY </label>
+                  <mat-radio-group
+                    class="shadow clearfix radio-content"
+                    aria-label="VULNERABILITY"
+                    [formControlName]="'marketVulnerability'"
+                    [(ngModel)]="data.marketVulnerability"
+                  >
+                    <mat-radio-button
+                      value="{{ i }}"
+                      (click)="
+                        uncheck(
+                          'marketVulnerability',
+                          i,
+                          data.marketVulnerability
+                        )
+                      "
+                      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]"
+                      >{{ i }}</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6" [ngClass]="{ 'col-12': isPatica }">
+            <div class="question">
+              <label for="Operational" class="big" translate>Operational</label>
+              <textarea
+                id="Operational"
+                autosize
+                [formControlName]="'operational'"
+                [(ngModel)]="data.operational"
+                matInput
+              ></textarea>
+              <div class="row mt-2">
+                <div class="col-6">
+                  <label translate>THREAT</label>
+                  <mat-radio-group
+                    class="shadow clearfix radio-content"
+                    [formControlName]="'operationalThreat'"
+                    [(ngModel)]="data.operationalThreat"
+                    aria-label="THREAT"
+                  >
+                    <mat-radio-button
+                      value="{{ i }}"
+                      (click)="
+                        uncheck('operationalThreat', i, data.operationalThreat)
+                      "
+                      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]"
+                      >{{ i }}</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+                <div class="col-6 last">
+                  <label translate>VULNERABILITY </label>
+                  <mat-radio-group
+                    class="shadow clearfix radio-content"
+                    [formControlName]="'operationalVulnerability'"
+                    [(ngModel)]="data.operationalVulnerability"
+                    aria-label="VULNERABILITY"
+                  >
+                    <mat-radio-button
+                      value="{{ i }}"
+                      (click)="
+                        uncheck(
+                          'operationalVulnerability',
+                          i,
+                          data.operationalVulnerability
+                        )
+                      "
+                      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]"
+                      >{{ i }}</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6" [ngClass]="{ 'col-12': isPatica }">
+            <div class="question">
+              <label for="business" class="big" translate>Business</label>
+              <textarea
+                id="business"
+                matInput
+                autosize
+                [formControlName]="'business'"
+                [(ngModel)]="data.business"
+              ></textarea>
+              <div class="row mt-2">
+                <div class="col-6">
+                  <label translate>THREAT</label>
+                  <mat-radio-group
+                    class="shadow clearfix radio-content"
+                    [formControlName]="'businessThreat'"
+                    [(ngModel)]="data.businessThreat"
+                    aria-label="THREAT"
+                  >
+                    <mat-radio-button
+                      value="{{ i }}"
+                      (click)="
+                        uncheck('businessThreat', i, data.businessThreat)
+                      "
+                      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]"
+                      >{{ i }}</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+                <div class="col-6 last">
+                  <label translate>VULNERABILITY </label>
+                  <mat-radio-group
+                    class="shadow clearfix radio-content"
+                    [formControlName]="'businessVulnerability'"
+                    [(ngModel)]="data.businessVulnerability"
+                    aria-label="VULNERABILITY"
+                  >
+                    <mat-radio-button
+                      value="{{ i }}"
+                      (click)="
+                        uncheck(
+                          'businessVulnerability',
+                          i,
+                          data.businessVulnerability
+                        )
+                      "
+                      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]"
+                      >{{ i }}</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6" [ngClass]="{ 'col-12': isPatica }">
+            <div class="question">
+              <label for="legal" class="big" translate>Legal</label>
+              <textarea
+                id="legal"
+                matInput
+                autosize
+                [formControlName]="'legal'"
+                [(ngModel)]="data.legal"
+              ></textarea>
+              <div class="row mt-2">
+                <div class="col-6">
+                  <label translate>THREAT</label>
+                  <mat-radio-group
+                    class="shadow clearfix radio-content"
+                    [formControlName]="'legalThreat'"
+                    [(ngModel)]="data.legalThreat"
+                    aria-label="THREAT"
+                  >
+                    <mat-radio-button
+                      value="{{ i }}"
+                      (click)="uncheck('legalThreat', i, data.legalThreat)"
+                      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]"
+                      >{{ i }}</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+                <div class="col-6 last">
+                  <label translate>VULNERABILITY </label>
+                  <mat-radio-group
+                    class="shadow clearfix radio-content"
+                    [formControlName]="'legalVulnerability'"
+                    [(ngModel)]="data.legalVulnerability"
+                    aria-label="VULNERABILITY"
+                  >
+                    <mat-radio-button
+                      value="{{ i }}"
+                      (click)="
+                        uncheck(
+                          'legalVulnerability',
+                          i,
+                          data.legalVulnerability
+                        )
+                      "
+                      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]"
+                      >{{ i }}</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <h3 translate>Inflow opportunities</h3>
+          </div>
+
+          <div class="col-6">
+            <div class="question">
+              <label for="opportunitiesMarket" class="big" translate
+                >Market</label
+              >
+              <textarea
+                id="opportunitiesMarket"
+                autosize
+                matInput
+                [formControlName]="'opportunitiesMarket'"
+                [(ngModel)]="data.opportunitiesMarket"
+              ></textarea>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="question">
+              <label for="opportunitiesOperational" class="big" translate
+                >Operational</label
+              >
+              <textarea
+                id="opportunitiesOperational"
+                autosize
+                matInput
+                [formControlName]="'opportunitiesOperational'"
+                [(ngModel)]="data.opportunitiesOperational"
+              ></textarea>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="question">
+              <label for="opportunitiesBusiness" class="big" translate
+                >Business</label
+              >
+              <textarea
+                id="opportunitiesBusiness"
+                autosize
+                matInput
+                [formControlName]="'opportunitiesBusiness'"
+                [(ngModel)]="data.opportunitiesBusiness"
+              ></textarea>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="question">
+              <label for="opportunitiesLegal" class="big" translate
+                >Legal</label
+              >
+              <textarea
+                id="opportunitiesLegal"
+                autosize
+                matInput
+                [formControlName]="'opportunitiesLegal'"
+                [(ngModel)]="data.opportunitiesLegal"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <button
+          class="btn-circular bg-shamrock big center"
+          type="submit"
+          translate
+        >
+          GO NEXT
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

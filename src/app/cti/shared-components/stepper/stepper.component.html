@@ -1,0 +1,273 @@
+<div class="container-fluid" *ngIf="step">
+  <div class="row item-box">
+    <div
+      routerLink="/cti/guide/step1"
+      class="col item"
+      [ngClass]="[
+        step.step1 && activeStep != 'step1' ? 'prev' : 'next',
+        activeStep == 'step1' ? 'active' : ''
+      ]"
+    >
+      <strong translate
+        >STEP 1<i class="material-icons" *ngIf="step.step1"
+          >check_circle</i
+        ></strong
+      >
+      <span translate>Define the scope</span>
+    </div>
+    <div
+      routerLink="/cti/guide/step2"
+      class="col item"
+      [ngClass]="[
+        step.step2 && activeStep != 'step2' ? 'prev' : 'next',
+        activeStep == 'step2' ? 'active col-2' : '',
+        activeStep == 'step1' ? 'first' : ''
+      ]"
+    >
+      <strong translate
+        >STEP 2
+        <i class="material-icons" *ngIf="step.step2">check_circle</i></strong
+      >
+      <span translate>Select the indicators</span>
+    </div>
+    <div
+      routerLink="/cti/guide/materials/step3"
+      class="col item"
+      [ngClass]="[
+        step.step3 && activeStep != 'step3' ? 'prev' : 'next',
+        activeStep == 'step3' ? 'active col-2' : '',
+        activeStep == 'step2' ? 'first' : ''
+      ]"
+    >
+      <strong translate
+        >STEP 3<i class="material-icons" *ngIf="step.step3"
+          >check_circle</i
+        ></strong
+      >
+      <span translate>Collect data</span>
+    </div>
+    <div
+      routerLink="/cti/guide/step4"
+      class="col item"
+      [ngClass]="[
+        step.step4 && activeStep != 'step4' ? 'prev' : 'next',
+        activeStep == 'step4' ? 'active col-2' : '',
+        activeStep == 'step3' ? 'first' : ''
+      ]"
+    >
+      <strong translate
+        >STEP 4<i class="material-icons" *ngIf="step.step4"
+          >check_circle</i
+        ></strong
+      >
+      <span translate>Calculate</span>
+    </div>
+
+    <div
+      routerLink="/cti/guide/step5"
+      class="col item"
+      [ngClass]="[
+        step.step5 && activeStep != 'step5' ? 'prev' : 'next',
+        activeStep == 'step5' ? 'active col-2' : '',
+        activeStep == 'step4' ? 'first' : ''
+      ]"
+    >
+      <div class="btn-box">
+        <strong translate
+          >STEP 5<i class="material-icons" *ngIf="step.step5"
+            >check_circle</i
+          ></strong
+        >
+        <span translate>Analyze</span>
+      </div>
+    </div>
+    <div
+      routerLink="/cti/guide/step6"
+      class="col item"
+      [ngClass]="[
+        step.step6 && activeStep != 'step6' ? 'prev' : 'next',
+        activeStep == 'step6' ? 'active col-2' : '',
+        activeStep == 'step5' ? 'first' : ''
+      ]"
+    >
+      <div class="btn-box">
+        <strong translate
+          >STEP 6<i class="material-icons" *ngIf="step.step6"
+            >check_circle</i
+          ></strong
+        >
+        <span translate>Prioritize</span>
+      </div>
+    </div>
+    <div
+      routerLink="/cti/guide/step7"
+      class="col item"
+      [ngClass]="[
+        step.step7 && activeStep != 'step7' ? 'prev' : 'next',
+        activeStep == 'step7' ? 'active col-2' : '',
+        activeStep == 'step6' ? 'first' : ''
+      ]"
+    >
+      <strong translate
+        >STEP 7<i class="material-icons" *ngIf="step.step7"
+          >check_circle</i
+        ></strong
+      >
+      <span translate>Apply</span>
+    </div>
+  </div>
+  <div
+    class="row"
+    *ngIf="
+      activeStep == 'step6' &&
+      (activeCase6 == 'inflow6' ||
+        activeCase6 == 'outflow6' ||
+        activeCase6 == 'strategy' ||
+        activeCase6 == 'water' ||
+        activeCase6 == 'business-case')
+    "
+  >
+    <div class="navigation shadow" [ngClass]="{ extraped: !criticalBoxShow }">
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{ active: activeCase6 == 'inflow6', done: step.step6Inflow }"
+        (click)="setActiveCase6('inflow6')"
+        translate
+      >
+        Inflow
+      </div>
+      <div
+        *ngIf="criticalBoxShow"
+        class="btn-circular grey-border"
+        [ngClass]="{
+          active: activeCase6 == 'business-case',
+          done: step.step6Business
+        }"
+        (click)="setActiveCase6('business-case')"
+        translate
+      >
+        Critical materials
+      </div>
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{
+          active: activeCase6 == 'outflow6',
+          done: step.step6Outflow
+        }"
+        (click)="setActiveCase6('outflow6')"
+        translate
+      >
+        Outflow
+      </div>
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{
+          active: activeCase6 == 'strategy',
+          done: step.step6Strategy
+        }"
+        (click)="setActiveCase6('strategy')"
+        translate
+      >
+        Energy
+      </div>
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{ active: activeCase6 == 'water', done: step.step6Water }"
+        (click)="setActiveCase6('water')"
+        translate
+      >
+        Water
+      </div>
+    </div>
+  </div>
+  <div
+    class="row"
+    *ngIf="
+      activeStep == 'step5' &&
+      (activeCase5 == 'inflow-question' ||
+        activeCase5 == 'inflow' ||
+        activeCase5 == 'outflow-question' ||
+        activeCase5 == 'outflow' ||
+        activeCase5 == 'energyAnalaysis' ||
+        activeCase5 == 'waterAnalaysis' ||
+        activeCase5 == 'step5Download')
+    "
+  >
+    <div class="navigation shadow">
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{
+          active: activeCase5 == 'inflow-question',
+          done: step.step5InflowQuestion
+        }"
+        (click)="setActiveCase5('inflow-question')"
+        translate
+      >
+        INFLOW QUESTIONS
+      </div>
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{ active: activeCase5 == 'inflow', done: step.step5Inflow }"
+        (click)="setActiveCase5('inflow')"
+        translate
+      >
+        INFLOW ANALYSIS
+      </div>
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{
+          active: activeCase5 == 'outflow-question',
+          done: step.step5OutflowQuestion
+        }"
+        (click)="setActiveCase5('outflow-question')"
+        translate
+      >
+        OUTFLOW QUESTIONS
+      </div>
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{
+          active: activeCase5 == 'outflow',
+          done: step.step5Outflow
+        }"
+        (click)="setActiveCase5('outflow')"
+        translate
+      >
+        OUTFLOW ANALYSIS
+      </div>
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{
+          active: activeCase5 == 'energyAnalaysis',
+          done: step.step5Energy
+        }"
+        (click)="setActiveCase5('energyAnalaysis')"
+        translate
+      >
+        ENERGY ANALYSIS
+      </div>
+      <div
+        class="btn-circular grey-border"
+        [ngClass]="{
+          active: activeCase5 == 'waterAnalaysis',
+          done: step.step5Water
+        }"
+        (click)="setActiveCase5('waterAnalaysis')"
+        translate
+      >
+        WATER ANALYSIS
+      </div>
+      <div
+        class="btn-circular grey-border bg-dark-slate-blue"
+        [ngClass]="{
+          active: activeCase5 == 'step5Download',
+          done: step.step5Download
+        }"
+        (click)="setActiveCase5('step5Download')"
+        translate
+      >
+        DOWNLOAD REPORT
+      </div>
+    </div>
+  </div>
+</div>

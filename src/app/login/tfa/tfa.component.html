@@ -1,0 +1,38 @@
+<div class="login-container">
+  <div class="login-box clearfix">
+    <div class="container">
+      <div class="form">
+        <form (ngSubmit)="tfa()" [formGroup]="tfaForm" novalidate>
+          <div class="form-item">
+            <label class="d-block">
+              <label translate>TFA Code</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="code"
+                autocomplete="code"
+              />
+              <span hidden translate>Code</span>
+              <small
+                [hidden]="
+                  tfaForm.controls.code.valid || tfaForm.controls.code.untouched
+                "
+                class="text-danger"
+                translate
+              >
+                Code is required
+              </small>
+            </label>
+          </div>
+          <button
+            class="btn-circular bg-shamrock big"
+            type="submit"
+            [disabled]="tfaForm.invalid || isLoading"
+          >
+            <span translate>Sign in</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

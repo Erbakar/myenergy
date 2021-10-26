@@ -1,0 +1,48 @@
+<div class="page-head">
+  <span class="page-title">{{ data?.fullname }}</span>
+</div>
+
+<div class="page-body" *ngIf="data">
+  <div class="full-width clearfix">
+    <label class="label" translate>FIRST NAME</label>
+    <mat-form-field class="defult-form-element">
+      <input
+        matInput
+        [(ngModel)]="data.firstname"
+        name="data.firstname"
+        readonly
+      />
+    </mat-form-field>
+  </div>
+  <div class="full-width clearfix">
+    <label class="label" translate>MIDDLE NAME</label>
+    <mat-form-field class="defult-form-element">
+      <input
+        matInput
+        [(ngModel)]="data.middlename"
+        name="data.middlename"
+        readonly
+      />
+    </mat-form-field>
+  </div>
+  <div class="full-width clearfix">
+    <label class="label" translate>LAST NAME</label>
+    <mat-form-field class="defult-form-element">
+      <input
+        matInput
+        [(ngModel)]="data.lastname"
+        name="data.lastname"
+        readonly
+      />
+    </mat-form-field>
+  </div>
+  <div class="full-width clearfix">
+    <label class="label" translate>EMAIL ADDRESS</label>
+    <mat-form-field class="defult-form-element">
+      <input matInput [(ngModel)]="data.email" name="data.email" readonly />
+    </mat-form-field>
+  </div>
+  <!-- <button class="btn-circular ng-binding float-center" (click)="saveChangeUser(data)" mat-button>
+      <span translate>save_changes</span>
+    </button> -->
+</div>

@@ -1,0 +1,19 @@
+<div class="shadow clearfix">
+  <div class="page-head">
+    <span class="page-title" translate>Your circularity</span>
+  </div>
+  <div class="wrapper">
+    <div id="chart"></div>
+    <div class="row foot-info" *ngIf="serviceData">
+      <div class="col" translate>
+        Total mass of inflow
+        <strong>{{ serviceData.displayInflowWeight }} Kg</strong>
+      </div>
+      <div class="col"></div>
+      <div class="col" translate>
+        Total mass of outflow
+        <strong>{{ serviceData.displayOutflowWeight }} Kg</strong>
+      </div>
+    </div>
+  </div>
+</div>

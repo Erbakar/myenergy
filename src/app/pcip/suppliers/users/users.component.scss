@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  color: #000;
+}
+th.mat-header-cell {
+  font-weight: bold;
+}
+td.mat-cell[_ngcontent-c6],
+td.mat-footer-cell[_ngcontent-c6] {
+  color: #333;
+  font-weight: normal;
+}
+tr.mat-footer-row,
+tr.mat-row {
+  cursor: pointer;
+}

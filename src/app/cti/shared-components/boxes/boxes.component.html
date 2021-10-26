@@ -1,0 +1,155 @@
+<div *ngIf="Inicators && data" style="position: relative" id="dl-box">
+  <dl
+    [ngClass]="{
+      active: Inicators.renewableEnergy,
+      pasive: !Inicators.renewableEnergy,
+      full: data.energy.renewablePercentage && Inicators.renewableEnergy,
+      emty: !data.energy.renewablePercentage && Inicators.renewableEnergy
+    }"
+  >
+    <dt><span translate>Renewable</span> <span translate>energy</span></dt>
+    <dd>
+      <b
+        >{{
+          data.energy.renewablePercentage | number: environment.integerFormat
+        }}%</b
+      >
+      <span class="add" (click)="updateEvent('energy')" translate>ADD</span>
+      <span class="update" (click)="updateEvent('energy')" translate
+        >UPDATE</span
+      >
+      <span class="select" (click)="selectEvent('energy', 0)" translate
+        >SELECT</span
+      >
+    </dd>
+  </dl>
+  <dl
+    [ngClass]="{
+      active: Inicators.waterCircularity,
+      pasive: !Inicators.waterCircularity,
+      full: data.water.waterCircularity && Inicators.waterCircularity,
+      emty: !data.water.waterCircularity && Inicators.waterCircularity
+    }"
+  >
+    <dt><span translate>Water</span><span translate>circularity</span></dt>
+    <dd>
+      <b>
+        {{
+          data.water.waterCircularity | number: environment.integerFormat
+        }}%</b
+      >
+      <span class="add" (click)="updateEvent('water')" translate>ADD</span>
+      <span class="update" (click)="updateEvent('water')" translate
+        >UPDATE</span
+      >
+      <span class="select" (click)="selectEvent('water', 1)" translate
+        >SELECT</span
+      >
+    </dd>
+  </dl>
+  <dl
+    [ngClass]="{
+      active: Inicators.onSiteWaterCirculation,
+      pasive: !Inicators.onSiteWaterCirculation,
+      full:
+        data.onSiteWater.onSiteWaterCircularity &&
+        Inicators.onSiteWaterCirculation,
+      emty:
+        !data.onSiteWater.onSiteWaterCircularity &&
+        Inicators.onSiteWaterCirculation
+    }"
+  >
+    <dt>
+      <span translate>Onsite water</span><span translate>circulation</span>
+    </dt>
+    <dd>
+      <b
+        >{{
+          data.onSiteWater.onSiteWaterCircularity
+            | number: environment.integerFormat
+        }}x</b
+      >
+      <span class="add" (click)="updateEvent('circulation')" translate
+        >ADD</span
+      >
+      <span class="update" (click)="updateEvent('circulation')" translate
+        >UPDATE</span
+      >
+      <span class="select" (click)="selectEvent('circulation', 2)" translate
+        >SELECT</span
+      >
+    </dd>
+  </dl>
+  <dl
+    [ngClass]="{
+      active: Inicators.circularMaterialProductivity,
+      pasive: !Inicators.circularMaterialProductivity,
+      full:
+        data.productivity.productivity &&
+        Inicators.circularMaterialProductivity,
+      emty:
+        !data.productivity.productivity &&
+        Inicators.circularMaterialProductivity
+    }"
+  >
+    <dt>
+      <span translate>Circular material</span
+      ><span translate>productivity</span>
+    </dt>
+    <dd>
+      <b
+        >{{ data.productivity.currency
+        }}{{
+          data.productivity.productivity | number: environment.integerFormat
+        }}/kg</b
+      >
+      <span class="add" (click)="updateEvent('productivity')" translate
+        >ADD</span
+      >
+      <span class="update" (click)="updateEvent('productivity')" translate
+        >UPDATE</span
+      >
+      <span class="select" (click)="selectEvent('productivity', 3)" translate
+        >SELECT</span
+      >
+    </dd>
+  </dl>
+  <dl
+    [ngClass]="{
+      active: Inicators.ctiRevenue,
+      pasive: !Inicators.ctiRevenue,
+      full: data.productivity.budget && Inicators.ctiRevenue,
+      emty: !data.productivity.budget && Inicators.ctiRevenue
+    }"
+  >
+    <dt><span>CTI</span><span translate>revenue</span></dt>
+    <dd>
+      <b
+        >{{ data.ctiRevenue.currency
+        }}{{
+          data.ctiRevenue.ctirevenue | number: environment.integerFormat
+        }}</b
+      >
+      <span class="add" (click)="updateEvent('revenue')" translate>ADD</span>
+      <span class="update" (click)="updateEvent('revenue')" translate
+        >UPDATE</span
+      >
+      <span class="select" (click)="selectEvent('revenue', 4)" translate
+        >SELECT</span
+      >
+    </dd>
+  </dl>
+  <div class="tool-tip shadow" [ngClass]="{ show: tooltipShow }">
+    <span> You can select this indicator in Step 2.</span>
+    <button (click)="goToTheStep2()">GO TO STEP 2</button>
+  </div>
+</div>
+
+<div class="custom-modal" *ngIf="showModal">
+  <div class="shadow" (click)="hideModal()"></div>
+  <app-energy-confirm *ngIf="showEnergy"></app-energy-confirm>
+  <app-water-confirm *ngIf="showWater"></app-water-confirm>
+  <app-onsitewater-confirm *ngIf="showCirculation"></app-onsitewater-confirm>
+  <app-productivity-confirm *ngIf="showProductivity"></app-productivity-confirm>
+  <app-revenue-confirm *ngIf="showRevenue"></app-revenue-confirm>
+</div>

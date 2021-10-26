@@ -1,0 +1,55 @@
+@import "src/theme/theme-variables";
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  color: #000;
+}
+
+th.mat-header-cell {
+  font-weight: bold;
+}
+
+td.mat-cell[_ngcontent-c6],
+td.mat-footer-cell[_ngcontent-c6] {
+  color: #333;
+  font-weight: normal;
+}
+
+tr.mat-footer-row,
+tr.mat-row {
+  cursor: pointer;
+}
+
+.detail-page {
+  top: 10rem !important;
+}
+
+.oval {
+  line-height: 2.5rem !important;
+}
+.add {
+  cursor: pointer;
+  span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    position: relative;
+    left: 1rem;
+    top: 0.5rem;
+    color: $dark-slate-blue;
+  }
+  .oval {
+    line-height: 2.3rem !important;
+  }
+}
+.btn-circular {
+  padding: 0.5rem 20px 0.5rem 15px;
+}

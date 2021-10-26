@@ -1,0 +1,80 @@
+{
+  "en": {
+    "step1": {
+      "path": 4,
+      "Module": "8026c102d998956257c2d4ac7cce1c59"
+    },
+    "step2": {
+      "path": 5,
+      "Module": "25cc38d6c83b273d275bc186bc33d20a"
+    },
+    "step3": {
+      "path": 6,
+      "Module": "8254d9f3170b5559aaf470f515de9415"
+    },
+    "dashboard": {
+      "path": 6,
+      "Module": "1586960736994"
+    },
+    "step5Intro": {
+      "path": 8,
+      "Module": "2919eef40f9b601c43ee1bcf06a76da8"
+    },
+    "step5InflowQuestion": {
+      "path": 8,
+      "Module": "2919eef40f9b601c43ee1bcf06a76da8"
+    },
+    "step5Inflow": {
+      "path": 8,
+      "Module": "6b7adef87e144dea43b209c3ca86f34c"
+    },
+    "step5OutflowQuestion": {
+      "path": 8,
+      "Module": "2938190fa6aef02ce2f07a90a8a41d73"
+    },
+    "step5Outflow": {
+      "path": 8,
+      "Module": "2938190fa6aef02ce2f07a90a8a41d73"
+    },
+    "step5Energy": {
+      "path": 8,
+      "Module": "2938190fa6aef02ce2f07a90a8a41d73"
+    },
+    "step5Water": {
+      "path": 8,
+      "Module": "2938190fa6aef02ce2f07a90a8a41d73"
+    },
+    "step6Intro": {
+      "path": 9,
+      "Module": "e255c42577a3c2c8dcc86782b75fec41"
+    },
+    "step6Inflow": {
+      "path": 9,
+      "Module": "7afd2a789dd17bf12ccefba66a330dae"
+    },
+    "step6Critical": {
+      "path": 9,
+      "Module": "036e132f6f664b1112f07001b3b96f00"
+    },
+    "step6Outflow": {
+      "path": 9,
+      "Module": "a3281157513fda29573ceccde5b0bb61"
+    },
+    "step6Energy": {
+      "path": 9,
+      "Module": "d6f4ce62dd0b8654392d9e9b695a3ab7"
+    },
+    "step6Water": {
+      "path": 9,
+      "Module": "d6f4ce62dd0b8654392d9e9b695a3ab7"
+    },
+    "step7Intro": {
+      "path": 10,
+      "Module": "b800c5cb4899c95ed8fc8b675ecc3927"
+    },
+    "step7SmartTarget": {
+      "path": 10,
+      "Module": "4c006bef384e8f7511899778abcadac6"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<div class="pro">
+  <div class="compare-box clearfix">
+    <div class="head">
+      <strong translate>Aggregate</strong>
+      <!-- <button class="btn-circular bg-dark-slate-blue float-right ml-2" translate>DOWNLOAD REPORT</button> -->
+    </div>
+    <div class="main-content clearfix">
+      <div class="major-part shadow">
+        <div class="row">
+          <div
+            class="col"
+            (click)="seletedMajorPart = 'close'"
+            [ngClass]="{ seleted: seletedMajorPart === 'close' }"
+          >
+            <div class="part">
+              <strong translate>Close the loop</strong>
+              <p translate>aggregate.subtext1</p>
+            </div>
+          </div>
+          <div
+            class="col border"
+            (click)="seletedMajorPart = 'optimize'"
+            [ngClass]="{ seleted: seletedMajorPart === 'optimize' }"
+          >
+            <div class="part">
+              <strong translate>Optimize the loop</strong>
+              <p translate>aggregate.subtext2</p>
+            </div>
+          </div>
+          <div
+            class="col"
+            (click)="seletedMajorPart = 'value'"
+            [ngClass]="{ seleted: seletedMajorPart === 'value' }"
+          >
+            <div class="part">
+              <strong translate>Value the loop</strong>
+              <p translate>aggregate.subtext3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-aggregate-close
+        *ngIf="seletedMajorPart === 'close'"
+        [data]="data"
+      ></app-aggregate-close>
+      <app-aggregate-optimize
+        *ngIf="seletedMajorPart === 'optimize'"
+        [data]="data"
+      ></app-aggregate-optimize>
+      <app-aggregate-value
+        *ngIf="seletedMajorPart === 'value'"
+        [data]="data"
+      ></app-aggregate-value>
+    </div>
+  </div>
+</div>

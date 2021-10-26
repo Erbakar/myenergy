@@ -1,0 +1,58 @@
+.form-item {
+  padding: 0;
+  height: 46px;
+  margin: 0 0 10px;
+
+  label {
+    height: initial;
+    top: 10px;
+    width: 50%;
+  }
+  .form-control {
+    float: right;
+    width: 50%;
+    border: 0;
+    border: 1px solid #e3e5ec;
+    border-radius: 8px;
+    :focus {
+      background: #fff !important;
+    }
+    input {
+      width: 100%;
+      height: 100%;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.01em;
+      color: #7c8b95;
+    }
+  }
+  .two-item {
+    float: right;
+    width: 50%;
+    .date-item {
+      float: left;
+      width: 48%;
+      &.first {
+        margin-right: 4%;
+      }
+    }
+  }
+  &.big {
+    height: 76px;
+    label {
+      top: 30px;
+    }
+    textarea {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #253e4e;
+      height: 100%;
+      resize: none;
+    }
+  }
+}
+
+.mat-select {
+  border: 1px solid #e3e5ec;
+}

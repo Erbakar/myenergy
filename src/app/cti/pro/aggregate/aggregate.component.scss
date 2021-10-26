@@ -1,0 +1,48 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.pro {
+  margin-top: -70px;
+  .compare-box {
+    background: #00b140;
+    border-radius: 16px;
+    padding-bottom: 60px;
+    .head {
+      padding: 20px;
+      strong {
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 40px;
+        letter-spacing: -0.01em;
+        color: #ffffff;
+      }
+    }
+    .main-content {
+      background: #e3e5ec;
+      .major-part {
+        overflow: hidden;
+        .border {
+          border-left: solid 1px #1c195b !important;
+          border-right: solid 1px #1c195b !important;
+        }
+        .seleted {
+          background: #fff;
+        }
+        .part {
+          padding: 10px;
+          cursor: pointer;
+        }
+        strong {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+          font-size: 18px;
+        }
+        p {
+          font-size: 14px;
+          letter-spacing: 0.01em;
+        }
+      }
+    }
+  }
+}

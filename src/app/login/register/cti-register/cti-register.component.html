@@ -1,0 +1,112 @@
+<div class="login-container">
+  <div class="login-box clearfix">
+    <div class="row">
+      <div class="col-md-6 user-info-box">
+        <a href="https://www.wbcsd.org" target="_blank">
+          <img src="../../assets/img/mock2.png" class="wbscd" alt=""
+        /></a>
+        <img src="../../assets/img/logo-tower.png" class="logo" alt="" />
+
+        <div class="page-head">
+          <span class="page-title" translate>CTI TOOL</span>
+        </div>
+        <span class="spot" translate>register.invitedText</span>
+        <a
+          href="https://www.wbcsd.org"
+          target="_blank"
+          class="forgot btn-circular dark-slate-blue-border"
+          translate
+          >LEARN MORE ABOUT CTI</a
+        >
+      </div>
+      <div class="col-md-6">
+        <div class="form">
+          <div class="page-head">
+            <span class="page-title" translate>REGISTER</span>
+          </div>
+          <form
+            (ngSubmit)="registerCti()"
+            [formGroup]="preregisterForm"
+            novalidate
+          >
+            <div class="row">
+              <div class="col-6">
+                <div class="form-item">
+                  <label translate>FIRST NAME</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="firstName"
+                    autocomplete="firstName"
+                  />
+
+                  <small
+                    [hidden]="
+                      preregisterForm.controls.firstName.valid ||
+                      preregisterForm.controls.firstName.untouched
+                    "
+                    class="text-danger"
+                    translate
+                  >
+                    First Name is required
+                  </small>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-item">
+                  <label translate>LAST NAME</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="lastName"
+                    autocomplete="lastName"
+                  />
+
+                  <small
+                    [hidden]="
+                      preregisterForm.controls.lastName.valid ||
+                      preregisterForm.controls.lastName.untouched
+                    "
+                    class="text-danger"
+                    translate
+                  >
+                    Last Name is required
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="form-item">
+              <label translate>EMAIL ADDRESS</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="email"
+                trim
+                autocomplete="email"
+              />
+              <span hidden translate>Email</span>
+              <small
+                [hidden]="
+                  preregisterForm.controls.email.valid ||
+                  preregisterForm.controls.email.untouched
+                "
+                class="text-danger"
+                translate
+              >
+                Email is required
+              </small>
+            </div>
+            <button
+              class="btn-circular bg-shamrock big"
+              type="submit"
+              [disabled]="preregisterForm.invalid || isLoading"
+            >
+              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+              <span translate>PRE-REGISTER</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

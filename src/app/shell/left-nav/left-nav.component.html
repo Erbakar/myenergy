@@ -1,0 +1,23 @@
+<div sitemap-name="main" class="ng-scope ng-isolate-scope">
+  <a routerLink="/company"> <div class="logo"></div> </a>
+  <div class="sidebar">
+    <div class="ng-scope sidebar-sub-pill">
+      <ul>
+        <li [routerLinkActive]="['active']" routerLink="/company">
+          <i class="fas fa-globe"></i> <span translate>Company</span>
+        </li>
+        <li [routerLinkActive]="['active']" routerLink="/products">
+          <i class="fas fa-tags"></i> <span translate>Products</span>
+        </li>
+        <li [routerLinkActive]="['active']" routerLink="/suppliers">
+          <i class="material-icons">shopping_cart</i>
+          <span translate>Suppliers</span>
+        </li>
+        <li [routerLinkActive]="['active']" routerLink="/import">
+          <i class="material-icons">cloud_upload</i
+          ><span translate>Import Data</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

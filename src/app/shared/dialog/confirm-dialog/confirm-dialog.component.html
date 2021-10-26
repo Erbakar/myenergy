@@ -1,0 +1,27 @@
+<section id="dialog-wrapper" *ngIf="data">
+  <em class="icon icon-close" id="close" (click)="close()"></em>
+
+  <div class="page-head">
+    <span class="page-title">{{ data['title'] }}</span>
+  </div>
+  <p>{{ data['message'] }}</p>
+  <div style="text-align: center; padding: 10px 0">
+    <button
+      tabindex="0"
+      class="btn-circular dark-slate-blue-border no"
+      (click)="onNoClick()"
+      translate
+    >
+      {{ data['noButtonText'] }}
+    </button>
+
+    <button
+      tabindex="1"
+      class="btn-circular bg-shamrock ml-2 yes"
+      (click)="onYesClick()"
+      translate
+    >
+      {{ data['yesButtonText'] }}
+    </button>
+  </div>
+</section>

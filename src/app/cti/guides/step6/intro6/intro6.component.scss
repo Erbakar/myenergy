@@ -1,0 +1,51 @@
+.fixed-steper {
+  height: 90px !important;
+}
+
+iframe,
+object,
+embed {
+  width: 100%;
+  height: auto;
+  display: block;
+  height: calc(100vh - 350px);
+}
+
+.item {
+  background: #fff;
+  height: calc(100vh - 230px);
+  padding: 0 0 1rem 1rem;
+  margin-bottom: -2rem;
+
+  .button-box {
+    position: relative;
+    padding: 1rem 2rem 1rem 1rem;
+    top: -1rem;
+
+    .checkbox-group {
+      display: block;
+      margin-bottom: 1rem;
+
+      .checkbox-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-left: 25px;
+      }
+
+      .checkbox label input[type="checkbox"] + span {
+        width: 1rem;
+        height: 1rem;
+
+        &:before {
+          font-size: 10px;
+          position: relative;
+          top: -14px;
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          content: "\f00c";
+          color: #fff;
+        }
+      }
+    }
+  }
+}

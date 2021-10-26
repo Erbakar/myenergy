@@ -1,0 +1,277 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.full-width {
+  display: block;
+  margin: 0 auto;
+  border-bottom: solid 1px #c9d1e0;
+  padding: 10px 0 !important;
+  width: 100% !important;
+  label {
+    display: block;
+    width: 100%;
+    height: auto;
+    font-size: 0.875rem;
+    position: relative;
+    font-weight: 600;
+    color: $dark-slate-blue;
+  }
+
+  .filter-text {
+    margin-left: 1rem;
+    font-size: 13px;
+    font-weight: 700;
+    position: relative;
+    top: 1rem;
+  }
+
+  .filter-box {
+    display: block;
+    width: 60%;
+    float: left;
+    overflow: hidden;
+  }
+
+  .filter {
+    display: block;
+    margin-bottom: 3rem;
+  }
+
+  .input-btn {
+    cursor: default;
+  }
+
+  .defult-form-element {
+    height: 3.2rem;
+    border: 2px solid #e8e8ef;
+    line-height: 3rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: $dark-slate-blue;
+    overflow: hidden;
+    padding: 0 0.5rem;
+    background: #fff;
+
+    input {
+      border: 0;
+    }
+
+    &.error {
+      border-color: lightcoral;
+    }
+
+    &.textarea {
+      height: 148px;
+      line-height: 18px;
+      padding: 1px 10px;
+      margin-bottom: 20px;
+
+      textarea.mat-input-element {
+        height: 148px;
+      }
+    }
+  }
+}
+h6 {
+  display: block;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.full-width {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  border-bottom: solid 1px #c9d1e0;
+  padding: 10px 20px;
+  position: relative;
+
+  .info {
+    font-size: 10px;
+    position: relative;
+    top: -8px;
+  }
+
+  .check-info {
+    border: 1px solid #c7d6ee;
+    color: #5e839a;
+    background-color: #edf2fa;
+    display: -webkit-box;
+    padding: 5px;
+  }
+
+  .checkbox-group {
+    position: absolute;
+    left: 20px;
+    top: 25px;
+    margin-right: 20px;
+  }
+
+  label {
+    display: block;
+    width: 40%;
+    float: left;
+    font-size: 13px;
+    font-weight: 700;
+    padding-top: 15px;
+    text-transform: uppercase;
+
+    &.check {
+      margin-left: 40px;
+    }
+
+    &.long {
+      padding-top: 5px;
+    }
+  }
+
+  .defult-form-element {
+    cursor: not-allowed;
+    display: block;
+    width: 60%;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid #b0bdd1;
+    float: left;
+    overflow: hidden;
+    padding: 0 10px;
+
+    &.error {
+      border-color: lightcoral;
+    }
+
+    &.textarea {
+      height: 148px;
+      line-height: 18px;
+      padding: 1px 10px;
+      margin-bottom: 20px;
+
+      textarea.mat-input-element {
+        height: 148px;
+      }
+    }
+  }
+
+  .file-uplaoad-name {
+    margin: 0 20px;
+    border-bottom: solid 1px #000;
+    padding: 0 0 7px;
+  }
+
+  a {
+    display: block;
+    color: #000;
+    text-decoration: underline;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .file-upload {
+    border-radius: 0;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-infix {
+    height: 48px;
+    line-height: 48px;
+    padding: 0;
+  }
+
+  .input-btn {
+    display: block;
+    float: left;
+    height: 48px;
+    line-height: 46px;
+    border-radius: 10px;
+    min-width: 80px;
+    max-width: 220px;
+    background: #edeff1;
+    padding: 0 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid #b0bdd1;
+    cursor: pointer;
+
+    &.focus {
+      background: transparent;
+    }
+
+    &.noLineHeight {
+      line-height: 22px;
+    }
+  }
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+.select {
+  height: auto;
+  width: 100%;
+  position: relative;
+  margin-bottom: 1rem;
+
+  ul {
+    border: solid 1px $pale-grey;
+    border-top: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+    background: #fff;
+    margin: 0;
+    li {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      i {
+        margin-right: 0.5rem;
+        color: $pale-grey;
+      }
+    }
+  }
+
+  .head {
+    display: block;
+    height: 3.2rem;
+    line-height: 3.2rem;
+    background: $pale-grey;
+    font-weight: 600;
+    font-size: 0.81rem;
+    text-align: left;
+    padding-left: 1rem;
+  }
+
+  &.active {
+    .head {
+      background: $dark-slate-blue;
+      color: $white;
+    }
+    ul {
+      border: solid 1px $dark-slate-blue;
+      border-top: 0;
+      li {
+        i {
+          color: $shamrock;
+        }
+      }
+    }
+  }
+}
+.toggle {
+  position: absolute;
+  top: 14px;
+  right: 8px;
+}
+.close {
+  zoom: 0.8;
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+    color: #fff;
+  }
+}
+.btn:focus,
+.btn.focus {
+  box-shadow: none;
+}

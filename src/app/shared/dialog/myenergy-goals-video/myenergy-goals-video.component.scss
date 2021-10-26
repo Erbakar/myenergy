@@ -1,0 +1,37 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+:host .mat-dialog-container {
+  background: $myenergy !important;
+}
+
+#dialog-wrapper {
+  position: relative;
+}
+
+.icon-close {
+  position: absolute;
+  right: 0;
+  font-size: 36px;
+  color: #253e4e;
+  background: #e3e5ec;
+  border-radius: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+button {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+}
+form {
+  margin-bottom: 20px;
+}
+.my-energy-title {
+  color: $myenergy;
+  font-size: 24px;
+}
+span.myenergy {
+  color: $myenergy;
+  font-size: 18px;
+}

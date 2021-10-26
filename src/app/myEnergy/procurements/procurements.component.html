@@ -1,0 +1,22 @@
+<div class="purches">
+  <h1>Purchases</h1>
+  <button
+    [routerLink]="[
+      '/myenergy/purchases/direct-procurement/purchase/new/detail/0'
+    ]"
+    class="btn-circular bg-shamrock absolute"
+  >
+    ADD NEW PURCHASE
+  </button>
+  <mat-tab-group
+    (selectedTabChange)="onLinkClick($event)"
+    [(selectedIndex)]="activeTab"
+  >
+    <mat-tab label="Direct procurement">
+      <app-direct-procurement></app-direct-procurement>
+    </mat-tab>
+    <mat-tab label="Tender procurement">
+      <app-tender-procurement></app-tender-procurement>
+    </mat-tab>
+  </mat-tab-group>
+</div>

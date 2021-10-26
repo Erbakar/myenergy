@@ -1,0 +1,38 @@
+<section id="dialog-wrapper">
+  <div class="page-head">
+    <span class="page-title" translate>Actual Recovery Rate</span>
+  </div>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-4">
+        <strong translate>Source Material</strong>
+        <ul class="shadow parrent">
+          <li
+            *ngFor="let item of data"
+            [ngClass]="{ active: selelctedParrent === item }"
+            (click)="setParrentData(item)"
+          >
+            {{ item }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-8">
+        <strong translate>Source Application</strong>
+        <ul class="shadow child">
+          <ng-container *ngFor="let item of subdata">
+            <li *ngIf="selelctedParrent === item.material">
+              {{ item.application }}
+              <button
+                tabindex="1"
+                class="btn-circular bg-shamrock"
+                (click)="onYesClick(item)"
+              >
+                <span translate>USE DATABASE</span>
+              </button>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

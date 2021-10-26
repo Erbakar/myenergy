@@ -1,0 +1,381 @@
+<div class="loading" *ngIf="!formShow">
+  <div class="lds-roller">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="form"
+  *ngIf="formShow"
+  class="page-body pb-1"
+>
+  <mat-tab-group>
+    <mat-tab label="{{ cat ? cat : 'undefined' }}" *ngFor="let cat of catArray">
+      <div *ngFor="let item of formGenarateArray">
+        <ng-container *ngIf="item.category === cat">
+          <ng-container formGroupName="questionnaire">
+            <div
+              class="form-item clearfix"
+              [ngClass]="{ long: item.stringLenght > 70 }"
+              *ngIf="item.type === 'input' && !item.multipleAllowed"
+            >
+              <label>{{ item.description }}</label>
+              <mat-form-field class="input-box">
+                <input
+                  matInput
+                  [(ngModel)]="item.value"
+                  [formControlName]="item.code"
+                  readonly
+                  ng-required="item.required"
+                />
+                <span class="info" *ngIf="item.unit">{{ item.unit }}</span>
+              </mat-form-field>
+            </div>
+            <div
+              class="form-item clearfix"
+              [ngClass]="{ long: item.stringLenght > 70 }"
+              *ngIf="item.type === 'number'"
+            >
+              <label>{{ item.description }}</label>
+              <mat-form-field class="input-box">
+                <input
+                  readonly
+                  matInput
+                  type="number"
+                  [(ngModel)]="item.value"
+                  [formControlName]="item.code"
+                  (keyup)="onKeydown(formvalue)"
+                  ng-required="item.required"
+                />
+                <span class="info" *ngIf="item.unit">{{ item.unit }}</span>
+              </mat-form-field>
+            </div>
+            <div
+              class="form-item clearfix"
+              [ngClass]="{ long: item.stringLenght > 70 }"
+              *ngIf="item.type === 'hidden'"
+            >
+              <label>{{ item.description }}</label>
+              <mat-form-field class="input-box">
+                <input
+                  matInput
+                  type="number"
+                  readonly
+                  [(ngModel)]="hiddenvalue"
+                  [formControlName]="item.code"
+                  ng-required="item.required"
+                />
+              </mat-form-field>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="groupData && item.multipleAllowed">
+            <div class="group">
+              <div formArrayName="addMultipleAllowed">
+                <div
+                  *ngFor="
+                    let contact of contactFormGroup.controls
+                      ? contactFormGroup.controls.slice(0, item.dubliceCount)
+                      : [];
+                    let i = index
+                  "
+                >
+                  <div [formGroupName]="i">
+                    <ng-container *ngFor="let c of groupData">
+                      <ng-container *ngIf="c.parent === item.code">
+                        <div
+                          class="form-item clearfix"
+                          *ngIf="c.type === 'input'"
+                        >
+                          <label>{{ c.description }}</label>
+                          <mat-form-field class="input-box">
+                            <input
+                              matInput
+                              [formControlName]="c.code"
+                              [(ngModel)]="c.value[i]"
+                              [value]="c.value[i] ? c.value[i] : ''"
+                              type="text"
+                            />
+                          </mat-form-field>
+                        </div>
+                        <div
+                          class="form-item clearfix"
+                          *ngIf="c.type === 'select'"
+                        >
+                          <label>{{ c.description }}</label>
+                          <mat-form-field class="input-box">
+                            <select
+                              matNativeControl
+                              [(ngModel)]="c.value[i]"
+                              [formControlName]="c.code"
+                              required="c.required"
+                            >
+                              <option
+                                [value]="o.value"
+                                *ngFor="let o of c.options"
+                              >
+                                {{ o.name }}
+                              </option>
+                            </select>
+                          </mat-form-field>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="btn btn-danger remove"
+                type="button"
+                *ngIf="item.dubliceCount > 1"
+                (click)="removeContact(i, item)"
+              >
+                x
+              </button>
+              <button
+                class="btn btn-primary added"
+                type="button"
+                (click)="addGroupItem(item)"
+              >
+                +
+              </button>
+            </div>
+          </ng-container>
+
+          <div
+            class="form-item clearfix select-btn-box"
+            [ngClass]="{ long: item.stringLenght > 70 }"
+            *ngIf="item.type === 'select' && !item.multipleAllowed"
+          >
+            <ng-container formGroupName="questionnaire">
+              <label>{{ item.description }}</label>
+              <mat-form-field class="input-box">
+                <select
+                  readonly
+                  disabled="disabled"
+                  matNativeControl
+                  [(ngModel)]="item.value"
+                  (change)="
+                    item.childShowCase == item.value
+                      ? (item.childShow = true)
+                      : (item.childShow = false)
+                  "
+                  [formControlName]="item.code"
+                  required="item.required"
+                >
+                  <option
+                    disabled="disabled"
+                    value="{{ o.value }}"
+                    *ngFor="let o of item.options"
+                  >
+                    {{ o.name }}
+                  </option>
+                </select>
+              </mat-form-field>
+            </ng-container>
+            <ng-container
+              class="form-item clearfix"
+              formGroupName="questionnaire"
+              *ngFor="let c of item.child"
+            >
+              <div
+                class="form-item clearfix"
+                *ngIf="c.type === 'input' && item.childShow"
+              >
+                <label>{{ c.description }}</label>
+                <mat-form-field class="input-box">
+                  <input
+                    matInput
+                    [(ngModel)]="c.value"
+                    [formControlName]="c.code"
+                    required="c.required"
+                  />
+                </mat-form-field>
+              </div>
+              <div
+                class="form-item clearfix"
+                *ngIf="c.type === 'select' && item.childShow"
+              >
+                <label>{{ c.description }}</label>
+                <mat-form-field class="input-box">
+                  <select
+                    matNativeControl
+                    [(ngModel)]="c.value"
+                    [formControlName]="c.code"
+                    required="c.required"
+                  >
+                    <option value="{{ o }}" *ngFor="let o of c.options">
+                      {{ o }}
+                    </option>
+                  </select>
+                </mat-form-field>
+              </div>
+            </ng-container>
+          </div>
+          <div
+            class="form-item clearfix"
+            [ngClass]="{ long: item.stringLenght > 70 }"
+            *ngIf="item.type === 'radio'"
+          >
+            <label>{{ item.description }}</label>
+            <ng-container formGroupName="questionnaire">
+              <mat-radio-group
+                readonly
+                disabled="disabled"
+                [(ngModel)]="item.value"
+                [formControlName]="item.code"
+                required="item.required"
+                aria-label="Select an option"
+                class="select"
+              >
+                <mat-radio-button
+                  [value]="o.value"
+                  disabled="disabled"
+                  class="radio-item"
+                  *ngFor="let o of item.options"
+                  >{{ o.name }}</mat-radio-button
+                >
+              </mat-radio-group>
+            </ng-container>
+            <ng-container *ngFor="let c of item.child">
+              <ng-container formGroupName="questionnaire">
+                <div class="form-item clearfix" *ngIf="c.type === 'input'">
+                  <label>{{ c.description }}</label>
+                  <mat-form-field class="input-box">
+                    <input
+                      matInput
+                      [(ngModel)]="c.value"
+                      [formControlName]="c.code"
+                      required="c.required"
+                    />
+                    <span class="info" *ngIf="item.unit">{{ item.unit }}</span>
+                  </mat-form-field>
+                </div>
+                <div class="form-item clearfix" *ngIf="c.type === 'select'">
+                  <label>{{ c.description }}</label>
+                  <mat-form-field class="input-box">
+                    <select
+                      matNativeControl
+                      [(ngModel)]="c.value"
+                      [formControlName]="c.code"
+                      required="c.required"
+                    >
+                      <option value="{{ o }}" *ngFor="let o of c.options">
+                        {{ o }}
+                      </option>
+                    </select>
+                  </mat-form-field>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="c.showCase.includes(item.value) && !c.multipleAllowed"
+              >
+                <div formGroupName="questionnaire">
+                  <div *ngFor="let g of c.child">
+                    <div class="form-item clearfix" *ngIf="g.type === 'input'">
+                      <label>{{ g.description }}</label>
+                      <mat-form-field class="input-box">
+                        <input
+                          matInput
+                          [formControlName]="g.code"
+                          [(ngModel)]="g.value"
+                          [value]="g.value"
+                          type="text"
+                        />
+                        <span class="info" *ngIf="item.unit">{{
+                          item.unit
+                        }}</span>
+                      </mat-form-field>
+                    </div>
+                    <div class="form-item clearfix" *ngIf="g.type === 'select'">
+                      <label>{{ g.description }}</label>
+                      <mat-form-field class="input-box">
+                        <select
+                          matNativeControl
+                          [(ngModel)]="g.value"
+                          [formControlName]="g.code"
+                          required="g.required"
+                        >
+                          <option
+                            value="{{ o.value }}"
+                            *ngFor="let o of g.options"
+                          >
+                            {{ o.name }}
+                          </option>
+                        </select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="groupData && c.multipleAllowed">
+                <ng-container *ngIf="c.showCase.includes(item.value)">
+                  <div formArrayName="addMultipleAllowed">
+                    <div
+                      class="group"
+                      *ngFor="
+                        let contact of contactFormGroup.controls
+                          ? contactFormGroup.controls.slice(
+                              0,
+                              item.dubliceCount
+                            )
+                          : [];
+                        let i = index
+                      "
+                    >
+                      <div [formGroupName]="i">
+                        <ng-container *ngFor="let c of groupData">
+                          <ng-container *ngIf="c.parent === item.code">
+                            <div class="form-item clearfix">
+                              <label>{{ c.description }}</label>
+                              <mat-form-field class="input-box">
+                                <input
+                                  matInput
+                                  [formControlName]="c.code"
+                                  [(ngModel)]="c.value[i]"
+                                  [value]="c.value[i] ? c.value[i] : ''"
+                                  type="text"
+                                />
+                              </mat-form-field>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="btn btn-danger remove"
+                    type="button"
+                    (click)="removeContact(i, item)"
+                  >
+                    x
+                  </button>
+                  <button
+                    class="btn btn-primary added"
+                    type="button"
+                    (click)="addGroupItem(item)"
+                  >
+                    +
+                  </button>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <!-- <div class="foot">
+    <button type="submit" class="btn-circular bg-shamrock big">
+      PUBLISH
+    </button>
+  </div> -->
+</form>

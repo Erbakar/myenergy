@@ -1,0 +1,45 @@
+@import "src/theme/theme-variables";
+.logo {
+  height: 9rem;
+  width: 100%;
+  position: relative;
+  background: url(../../../assets/img/light.png) center center no-repeat;
+}
+
+.sidebar {
+  height: calc(100vh - 11rem);
+}
+
+.sidebar-sub-pill {
+  ul {
+    list-style-type: none;
+    padding: 0;
+    li {
+      margin: 2rem 0;
+      text-align: center;
+      cursor: pointer;
+      outline: 0;
+      &.active {
+        span,
+        i {
+          font-weight: bold;
+        }
+      }
+      span {
+        color: $black;
+        font-size: 0.75rem;
+        letter-spacing: normal;
+      }
+      i {
+        font-size: 1rem;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      span {
+        cursor: pointer;
+        margin-left: 3px;
+        text-transform: capitalize;
+      }
+    }
+  }
+}

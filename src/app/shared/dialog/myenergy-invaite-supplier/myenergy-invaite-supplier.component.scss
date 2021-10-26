@@ -1,0 +1,48 @@
+#dialog-wrapper {
+  position: relative;
+}
+.page-title {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+form {
+  .form-item {
+    height: auto;
+    padding: 0 0.5rem;
+    &:hover {
+      background: transparent;
+    }
+    .text-danger {
+      background: #f6f4f7;
+    }
+    label {
+      display: block;
+      width: 100%;
+      height: auto;
+      top: 0;
+      font-weight: 600;
+      font-size: 14px;
+      margin-left: 3px;
+    }
+    .form-control {
+      border: 0;
+      &:focus {
+        background: #fff;
+      }
+    }
+  }
+}
+.icon-close {
+  position: absolute;
+  right: 0;
+  font-size: 36px;
+  color: #253e4e;
+  background: #e3e5ec;
+  border-radius: 100%;
+  cursor: pointer;
+  z-index: 2;
+}

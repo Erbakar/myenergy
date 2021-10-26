@@ -1,0 +1,68 @@
+<div id="dialog-wrapper" class="custom-modal-box critical-label">
+  <div class="form-box">
+    <div class="item clearfix">
+      <div class="page-head">
+        <span class="page-title" translate>Critical materials</span>
+      </div>
+      <h2 translate>criticalMaterialText</h2>
+      <div class="row">
+        <button
+          class="btn-circular dark-slate-blue-border"
+          [ngClass]="{ active: selectedCriticalGrup === 'all' }"
+          (click)="selectedCriticalGrup = 'all'"
+          translate
+        >
+          ALL
+        </button>
+
+        <button
+          class="btn-circular dark-slate-blue-border"
+          [ngClass]="{ active: selectedCriticalGrup === 'eu' }"
+          (click)="selectedCriticalGrup = 'eu'"
+          translate
+        >
+          EU
+        </button>
+
+        <button
+          class="btn-circular dark-slate-blue-border"
+          [ngClass]="{ active: selectedCriticalGrup === 'usa' }"
+          (click)="selectedCriticalGrup = 'usa'"
+          translate
+        >
+          USA
+        </button>
+      </div>
+
+      <div class="select-group" *ngFor="let c of circularAll">
+        <mat-checkbox
+          (click)="selectItem(c.name)"
+          *ngIf="selectedCriticalGrup === 'all'"
+          [(ngModel)]="c.selected"
+          class="check-item"
+          >{{ c.name }}</mat-checkbox
+        >
+      </div>
+      <div class="select-group" *ngFor="let c of criticlaEU">
+        <mat-checkbox
+          (click)="selectItem(c.name)"
+          *ngIf="selectedCriticalGrup === 'eu'"
+          [(ngModel)]="c.selected"
+          class="check-item"
+          >{{ c.name }}</mat-checkbox
+        >
+      </div>
+      <div class="select-group" *ngFor="let c of criticlaUSA">
+        <mat-checkbox
+          (click)="selectItem(c.name)"
+          *ngIf="selectedCriticalGrup === 'usa'"
+          [(ngModel)]="c.selected"
+          class="check-item"
+          >{{ c.name }}</mat-checkbox
+        >
+      </div>
+      <span class="back" (click)="cancel()" translate>BACK</span>
+      <button class="save" (click)="save()" translate>SAVE</button>
+    </div>
+  </div>
+</div>

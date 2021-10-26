@@ -1,0 +1,16 @@
+@import "./media.scss";
+@import "./base.scss";
+@import "./fonts.scss";
+
+.wrapper {
+  display: block;
+  width: 95vw;
+  height: 75vh;
+}
+
+#chart {
+  background-color: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,69 @@
+<div class="item shadow clearfix" *ngIf="whichIsShow && data">
+  <div class="page-head">
+    <span class="page-title" translate>Value the loop</span>
+  </div>
+  <div class="form-item with-icon clearfix">
+    <label translate
+      >Revenue Budget for this
+      <strong>{{ selectedUnitDetails.businessLevel }}</strong></label
+    >
+    <mat-form-field class="input-box">
+      <input
+        matInput
+        currencyMask
+        [options]="{
+          prefix: selectedUnitDetails.currencyType,
+          thousands: ',',
+          decimal: '.',
+          precision: 0,
+          align: 'left'
+        }"
+        #currency
+        [(ngModel)]="selectedUnitDetails.budget"
+      />
+      <div class="info combo">
+        <mat-select
+          [(ngModel)]="selectedUnitDetails.currencyType"
+          (selectionChange)="
+            currencyTypeChange(selectedUnitDetails.currencyType)
+          "
+        >
+          <mat-option value="$">$</mat-option>
+          <mat-option value="€">€</mat-option>
+        </mat-select>
+      </div>
+    </mat-form-field>
+  </div>
+  <div class="line">
+    <button
+      class="btn-circular big bg-shamrock float-right"
+      (click)="setBudget()"
+    >
+      Save
+    </button>
+  </div>
+  <div>
+    <p translate>step4.producttivityText1</p>
+    <p translate>step4.producttivityText2</p>
+  </div>
+</div>
+
+<div class="right-box shadow clearfix" *ngIf="!whichIsShow && data">
+  <div class="percent clearfix">
+    <h3 translate>Circular material productivity</h3>
+    <span
+      >{{ data.currency }}{{ data.productivity | number: '1.2-2'
+      }}<label>/kg</label>
+    </span>
+  </div>
+  <p translate>step4.producttivityText1</p>
+  <p translate>step4.producttivityText2</p>
+  <button
+    type="submit"
+    class="btn-circular white-border mb-3"
+    (click)="whichIsShow = true"
+    translate
+  >
+    UPDATE
+  </button>
+</div>

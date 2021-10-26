@@ -1,0 +1,343 @@
+<div class="row" *ngIf="data">
+  <div class="col-6">
+    <div class="item shadow detail clearfix" style="padding-bottom: 200px">
+      <div class="page-head" style="height: 8rem">
+        <span class="page-title" translate>Energy analysis</span>
+        <h3 translate>step5-energy-spot</h3>
+      </div>
+
+      <div class="shadow clearfix" style="border-radius: 0.5rem">
+        <section class="item-list-contenet head">
+          <div class="list-item">
+            <div class="info box name" translate>&nbsp;</div>
+            <div class="part left" style="margin-left: 0">
+              <span class="guidance-btn" translate>Amount</span>
+            </div>
+            <div class="part right">
+              <span class="guidance-btn" translate>Improvement</span>
+            </div>
+          </div>
+        </section>
+        <section class="item-list-contenet">
+          <div class="list-item claerfix">
+            <div class="info box">
+              <div class="tradeName">
+                <span translate>Renewable energy</span>
+              </div>
+            </div>
+            <div class="part border left">
+              <span (click)="openCalculete('renewableChange')">
+                <em
+                  [ngClass]="{
+                    increase: data.renewableEnergyConsumptionIncrease,
+                    decrease: data.renewableEnergyConsumptionDecrease
+                  }"
+                  ><ng-container *ngIf="data.renewableEnergyConsumptionIncrease"
+                    >+</ng-container
+                  >{{
+                    data.renewableEnergyConsumptionDelta
+                      | number: environment.integerFormat
+                  }}
+                  {{ data.energyUnit }}</em
+                >{{
+                  data.currentRenewableEnergyConsumption
+                    | number: environment.integerFormat
+                }}
+                {{ data.energyUnit }}</span
+              >
+              <div *ngIf="renewableChange" class="calculate shadow clearfix">
+                <div class="actions clearfix">
+                  <b
+                    (click)="
+                      setOperation(
+                        '-',
+                        data.currentRenewableEnergyConsumption,
+                        diffrent,
+                        'renewableChange'
+                      )
+                    "
+                    [ngClass]="{ active: selectedOperation == '-' }"
+                    class="btn-circular float-left real-grey-border"
+                    >-</b
+                  >
+                  <b
+                    (click)="
+                      setOperation(
+                        '+',
+                        data.currentRenewableEnergyConsumption,
+                        diffrent,
+                        'renewableChange'
+                      )
+                    "
+                    [ngClass]="{ active: selectedOperation == '+' }"
+                    class="btn-circular float-left real-grey-border"
+                    >+</b
+                  >
+                </div>
+                <div class="calc clearfix" *ngIf="selectedOperation">
+                  <div class="value">
+                    {{
+                      data.currentRenewableEnergyConsumption
+                        | number: environment.integerFormat
+                    }}
+                    {{ data.energyUnit }}
+                  </div>
+                  <b class="btn-circular selected real-grey-border">{{
+                    selectedOperation
+                  }}</b>
+                  <input
+                    type="text"
+                    currencyMask
+                    [options]="{
+                      prefix: '',
+                      suffix: '',
+                      thousands: '.',
+                      allowNegative: false,
+                      decimal: ',',
+                      precision: 0,
+                      align: 'left'
+                    }"
+                    max="data.weight"
+                    placeholder="{{ 'Enter value' | translate }}"
+                    [(ngModel)]="diffrent"
+                    (keyup)="
+                      setRenewable(
+                        data.currentRenewableEnergyConsumption,
+                        diffrent,
+                        'renewableChange'
+                      )
+                    "
+                    (change)="
+                      setRenewable(
+                        data.currentRenewableEnergyConsumption,
+                        diffrent,
+                        'renewableChange'
+                      )
+                    "
+                  />
+                  <b
+                    *ngIf="selectedOperation == '-' || selectedOperation == '+'"
+                  ></b>
+                </div>
+                <div class="result-box clearfix" *ngIf="selectedOperation">
+                  <b translate>Result :</b>
+                  <strong
+                    >{{
+                      data.renewableChangeValue
+                        | number: environment.integerFormat
+                    }}
+                    {{ data.energyUnit }}</strong
+                  >
+                  <div
+                    (click)="calculateDone()"
+                    class="btn-circular bg-shamrock float-right"
+                    style="color: #fff"
+                    translate
+                  >
+                    SAVE
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="part border right" style="margin-right: 15px">
+              <span
+                [ngClass]="{
+                  increase: data.renewableEnergyConsumptionIncrease,
+                  decrease: data.renewableEnergyConsumptionDecrease
+                }"
+              >
+                {{
+                  data.targetRenewableEnergyConsumption
+                    | number: environment.integerFormat
+                }}
+                {{ data.energyUnit }}
+              </span>
+            </div>
+          </div>
+          <div class="list-item claerfix">
+            <div class="info box">
+              <div class="tradeName">
+                <span translate>Total energy</span>
+              </div>
+            </div>
+            <div class="part border left">
+              <span (click)="openCalculete('totalChange')">
+                <em
+                  [ngClass]="{
+                    increase: data.totalEnergyConsumptionIncrease,
+                    decrease: data.totalEnergyConsumptionDecrease
+                  }"
+                  ><ng-container *ngIf="data.totalEnergyConsumptionIncrease"
+                    >+</ng-container
+                  >{{ data.totalEnergyConsumptionDelta | number: '1.2-2' }}
+                  {{ data.energyUnit }}</em
+                >{{ data.currentTotalEnergyConsumption | number: '1.2-2' }}
+                {{ data.energyUnit }}</span
+              >
+
+              <div *ngIf="totalChange" class="calculate shadow clearfix">
+                <div class="actions clearfix">
+                  <b
+                    (click)="
+                      setOperation(
+                        '-',
+                        data.currentTotalEnergyConsumption,
+                        diffrent,
+                        'totalChange'
+                      )
+                    "
+                    [ngClass]="{ active: selectedOperation == '-' }"
+                    class="btn-circular float-left real-grey-border"
+                    >-</b
+                  >
+                  <b
+                    (click)="
+                      setOperation(
+                        '+',
+                        data.currentTotalEnergyConsumption,
+                        diffrent,
+                        'totalChange'
+                      )
+                    "
+                    [ngClass]="{ active: selectedOperation == '+' }"
+                    class="btn-circular float-left real-grey-border"
+                    >+</b
+                  >
+                </div>
+                <div class="calc clearfix" *ngIf="selectedOperation">
+                  <div class="value">
+                    {{ data.currentTotalEnergyConsumption }}
+                    {{ data.energyUnit }}
+                  </div>
+                  <b class="btn-circular selected real-grey-border">{{
+                    selectedOperation
+                  }}</b>
+                  <input
+                    type="text"
+                    currencyMask
+                    [options]="{
+                      prefix: '',
+                      suffix: '',
+                      thousands: '.',
+                      allowNegative: false,
+                      decimal: ',',
+                      precision: 2,
+                      align: 'left'
+                    }"
+                    max="data.weight"
+                    placeholder="{{ 'Enter value' | translate }}"
+                    [(ngModel)]="diffrent"
+                    (keyup)="
+                      setTotal(
+                        data.currentTotalEnergyConsumption,
+                        diffrent,
+                        'totalChange'
+                      )
+                    "
+                    (change)="
+                      setTotal(
+                        data.currentTotalEnergyConsumption,
+                        diffrent,
+                        'totalChange'
+                      )
+                    "
+                  />
+                  <b
+                    *ngIf="selectedOperation == '-' || selectedOperation == '+'"
+                  ></b>
+                </div>
+                <div class="result-box clearfix" *ngIf="selectedOperation">
+                  <b translate>Result :</b>
+                  <strong
+                    >{{ data.totalChangeValue }} {{ data.energyUnit }}</strong
+                  >
+                  <div
+                    (click)="calculateDone(item)"
+                    class="btn-circular bg-shamrock float-right"
+                    style="color: #fff"
+                    translate
+                  >
+                    SAVE
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="part border right" style="margin-right: 15px">
+              <span
+                [ngClass]="{
+                  increase: data.totalEnergyConsumptionIncrease,
+                  decrease: data.totalEnergyConsumptionDecrease
+                }"
+              >
+                {{ data.targetTotalEnergyConsumption | number: '1.2-2' }}
+                {{ data.energyUnit }}
+              </span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="total">
+        <div class="row">
+          <div class="col-10">
+            <div class="h-line">
+              <span class="first">&nbsp;</span>
+              <span translate>Change</span>
+              <span translate>New value</span>
+            </div>
+            <div class="i-item">
+              <span class="first" translate
+                >% renewable energy
+                <div class="info-tooltip-box">
+                  <div class="info-tooltip shadow">
+                    <div class="row">
+                      <div class="col-1">
+                        <em class="material-icons">info</em>
+                      </div>
+                      <div class="col-10">
+                        <p translate>step5-energy-tooltip-text</p>
+                      </div>
+                    </div>
+                  </div>
+                  <em class="main material-icons">error_outline</em>
+                </div>
+              </span>
+              <span
+                [ngClass]="{
+                  increase: data.renewablePercentageIncrease,
+                  decrease: data.renewablePercentageDecrease
+                }"
+                >{{
+                  data.renewablePercentageDelta
+                    | number: environment.decimalFormat
+                }}%</span
+              >
+              <span
+                [ngClass]="{
+                  increase: data.renewablePercentageIncrease,
+                  decrease: data.renewablePercentageDecrease
+                }"
+                >{{
+                  data.targetRenewablePercentage
+                    | number: environment.decimalFormat
+                }}%</span
+              >
+            </div>
+          </div>
+          <div class="col-2">
+            <button
+              class="btn-circular bg-shamrock big center float-right"
+              style="margin-top: 10px"
+              (click)="submit(true)"
+              translate
+            >
+              SAVE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="loader" *ngIf="!data"></div>

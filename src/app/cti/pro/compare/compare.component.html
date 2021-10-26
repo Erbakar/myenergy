@@ -1,0 +1,56 @@
+<div class="pro">
+  <div class="compare-box clearfix">
+    <div class="head">
+      <strong translate>Compare</strong>
+      <!-- <button class="btn-circular bg-dark-slate-blue float-right ml-2" translate>DOWNLOAD REPORT</button> -->
+    </div>
+    <div class="main-content clearfix">
+      <div class="major-part">
+        <div class="row">
+          <div
+            class="col"
+            (click)="seletedMajorPart = 'close'"
+            [ngClass]="{ seleted: seletedMajorPart === 'close' }"
+          >
+            <div class="part">
+              <strong translate>Close the loop</strong>
+              <p translate>compare.subtext1</p>
+            </div>
+          </div>
+          <div
+            class="col border"
+            (click)="seletedMajorPart = 'optimize'"
+            [ngClass]="{ seleted: seletedMajorPart === 'optimize' }"
+          >
+            <div class="part">
+              <strong translate>Optimize the loop</strong>
+              <p translate>compare.subtext2</p>
+            </div>
+          </div>
+          <div
+            class="col"
+            (click)="seletedMajorPart = 'value'"
+            [ngClass]="{ seleted: seletedMajorPart === 'value' }"
+          >
+            <div class="part">
+              <strong translate>Value the loop</strong>
+              <p translate>compare.subtext3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-compare-close
+        *ngIf="seletedMajorPart === 'close'"
+        [data]="data"
+      ></app-compare-close>
+      <app-compare-optimize
+        *ngIf="seletedMajorPart === 'optimize'"
+        [data]="data"
+      ></app-compare-optimize>
+      <app-compare-value
+        *ngIf="seletedMajorPart === 'value'"
+        [data]="data"
+      ></app-compare-value>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,510 @@
+<div class="new-purches" *ngIf="showOverview">
+  <h1>Purchases</h1>
+  <div class="row">
+    <div class="col-7">
+      <div class="item">
+        <div class="head">
+          <h2>OverView</h2>
+          <!-- <em class="material-icons" id="close" (click)="edit()">more_vert</em> -->
+        </div>
+        <div class="head">
+          <strong>Purchase details</strong>
+          <button
+            *ngIf="!detailEdit"
+            (click)="detailEdit = true"
+            class="btn-circular real-grey-border"
+            id="edit"
+          >
+            EDIT
+          </button>
+          <button
+            *ngIf="detailEdit"
+            (click)="detailSave()"
+            id="edit"
+            class="btn-circular bg-shamrock"
+          >
+            SAVE
+          </button>
+        </div>
+        <ng-container *ngIf="detailData">
+          <form
+            (ngSubmit)="productDetailSave()"
+            class="mb-5"
+            [formGroup]="detailForm"
+            novalidate
+          >
+            <div class="form-item">
+              <label translate>Name of the purchase</label>
+              <input
+                [readonly]="!detailEdit"
+                type="text"
+                class="form-control"
+                formControlName="name"
+              />
+            </div>
+            <div class="form-item">
+              <label translate>Select a product category</label>
+              <mat-select
+                [disabled]="!detailEdit"
+                (selectionChange)="selectedCategory($event.value)"
+                formControlName="categoryId"
+              >
+                <mat-option
+                  *ngFor="let category of categoryData"
+                  [value]="category.uuid"
+                >
+                  {{ category.name }}
+                </mat-option>
+              </mat-select>
+            </div>
+            <div class="form-item">
+              <label translate>Select a product sub-category</label>
+              <mat-select
+                [disabled]="!detailEdit"
+                formControlName="subCategoryId"
+              >
+                <mat-option disabled="true" value="Choose a sub-category"
+                  >Choose a sub-category</mat-option
+                >
+                <mat-option
+                  *ngFor="let subCategory of subCategories"
+                  [value]="subCategory.uuid"
+                >
+                  {{ subCategory.name }}
+                </mat-option>
+              </mat-select>
+            </div>
+            <div class="form-item">
+              <label translate>Quantity</label>
+              <input
+                currencyMask
+                [options]="{
+                  prefix: '',
+                  thousands: ',',
+                  decimal: '.',
+                  precision: 0,
+                  align: 'left'
+                }"
+                #currency
+                [readonly]="!detailEdit"
+                placeholder="12"
+                type="text"
+                class="form-control"
+                formControlName="quantity"
+              />
+            </div>
+            <div class="form-item">
+              <label translate>Budget</label>
+              <input
+                [readonly]="!detailEdit"
+                currencyMask
+                [options]="{
+                  prefix: '€',
+                  thousands: ',',
+                  decimal: '.',
+                  precision: 0,
+                  align: 'left'
+                }"
+                #currency
+                type="text"
+                class="form-control"
+                formControlName="budget"
+              />
+            </div>
+            <!-- <div class="form-item purchase-date">
+              <label translate>Date</label>
+              <input
+                [readonly]="!detailEdit"
+                class="form-control"
+                [formControl]="date"
+                matInput
+                [matDatepicker]="dp"
+                placeholder="MM/YYYY"
+              />
+              <mat-datepicker-toggle [disabled]="!detailEdit" matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker
+                [disabled]="!detailEdit"
+                #dp
+                startView="year"
+                (monthSelected)="chosenMonthHandler($event, dp)"
+                panelClass="example-month-picker"
+              >
+              </mat-datepicker>
+            </div> -->
+            <div class="form-item">
+              <label translate>Date</label>
+              <div class="two-item">
+                <mat-select
+                  [disabled]="!detailEdit"
+                  class="date-item first"
+                  formControlName="mounth"
+                >
+                  <mat-option
+                    *ngFor="let mounth of mounthList"
+                    [value]="mounth.num"
+                  >
+                    {{ mounth.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-select
+                  [disabled]="!detailEdit"
+                  class="date-item"
+                  formControlName="year"
+                >
+                  <mat-option *ngFor="let year of yearList" [value]="year">
+                    {{ year }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="form-item recurring">
+              <label translate>Recurring purchase?</label>
+              <mat-radio-group
+                [disabled]="!detailEdit"
+                class="select custom-check-group"
+                [formControlName]="'period'"
+              >
+                <mat-radio-button class="radio-item long" value="NONE"
+                  >No</mat-radio-button
+                >
+                <mat-radio-button class="radio-item long" value="MONTHLY"
+                  >Monthly</mat-radio-button
+                >
+                <mat-radio-button class="radio-item long" value="QUARTERLY"
+                  >Quarterly</mat-radio-button
+                >
+                <mat-radio-button class="radio-item long" value="HALF_YEARLY"
+                  >Half-yearly</mat-radio-button
+                >
+                <mat-radio-button class="radio-item long last" value="YEARLY"
+                  >Yearly</mat-radio-button
+                >
+              </mat-radio-group>
+            </div>
+          </form>
+        </ng-container>
+        <div class="head">
+          <strong>Labels</strong>
+          <button
+            *ngIf="!labelsEdit"
+            (click)="labelsEditEvent()"
+            class="btn-circular real-grey-border"
+            id="edit"
+          >
+            EDIT
+          </button>
+          <button
+            *ngIf="labelsEdit"
+            (click)="labelsSubmit()"
+            id="edit"
+            class="btn-circular bg-shamrock"
+          >
+            SAVE
+          </button>
+        </div>
+        <div *ngIf="!labelsEdit" class="labels-box clearfix mb-5">
+          <ng-container *ngFor="let item of labelsData">
+            <div class="label-big" *ngIf="item.isselected">
+              <div class="name">{{ item.name }}</div>
+              <div class="img-box"><img [src]="item.imageUrl" alt="" /></div>
+              <ng-container *ngIf="item.challenges">
+                <div class="info" *ngFor="let challenge of item.challenges">
+                  {{ challenge.name }}
+                  <em [ngClass]="{ active: challenge.score > 2 }"></em>
+                  <em [ngClass]="{ active: challenge.score > 1 }"></em>
+                  <em [ngClass]="{ active: challenge.score > 0 }"></em>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+          <div class="alert" *ngIf="!detailData.products[0].labels">
+            label is not selected!
+          </div>
+        </div>
+
+        <form *ngIf="labelsEdit && detailData" [formGroup]="labelsForm">
+          <div class="radio-box clearfix" formGroupName="labels">
+            <div class="radio-item clearfix" *ngFor="let item of labelsData">
+              <input
+                type="checkbox"
+                (change)="selectLabelList()"
+                [formControlName]="item.uuid"
+                id="{{ item.uuid }}"
+              />
+              <label for="{{ item.uuid }}">
+                <img [src]="item.imageUrl" alt="" />
+                <strong>{{ item.name }}</strong>
+                <ng-container *ngIf="item.challenges">
+                  <div class="info" *ngFor="let challenge of item.challenges">
+                    {{ challenge.name }}
+                    <em [ngClass]="{ active: challenge.score > 2 }"></em>
+                    <em [ngClass]="{ active: challenge.score > 1 }"></em>
+                    <em [ngClass]="{ active: challenge.score > 0 }"></em>
+                  </div>
+                </ng-container>
+              </label>
+            </div>
+          </div>
+        </form>
+
+        <div class="head">
+          <strong>Product data</strong>
+          <button
+            *ngIf="!productData"
+            (click)="productData = true"
+            class="btn-circular real-grey-border"
+            id="edit"
+          >
+            EDIT
+          </button>
+          <button
+            *ngIf="productData"
+            (click)="productDataSave()"
+            id="edit"
+            class="btn-circular bg-shamrock"
+          >
+            SAVE
+          </button>
+        </div>
+        <ng-container *ngIf="detailData">
+          <form
+            (ngSubmit)="productDataSave()"
+            class="mb-5"
+            [formGroup]="dataForm"
+            novalidate
+          >
+            <div class="form-item">
+              <label translate>Weight</label>
+              <input
+                currencyMask
+                [options]="{
+                  prefix: '',
+                  suffix: ' Kg',
+                  allowNegative: false,
+                  thousands: ',',
+                  decimal: '.',
+                  precision: 0,
+                  align: 'left'
+                }"
+                #currency
+                [readonly]="!productData"
+                type="text"
+                class="form-control"
+                formControlName="MYE1"
+              />
+            </div>
+            <div class="form-item">
+              <label translate>% recycled content</label>
+              <input
+                currencyMask
+                (keyup)="
+                  dataForm.value.MYE2 > 100
+                    ? (MYE2 = 100)
+                    : (MYE2 = dataForm.value.MYE2)
+                "
+                [(ngModel)]="MYE2"
+                [options]="{
+                  prefix: '',
+                  suffix: '%',
+                  allowNegative: false,
+                  thousands: ',',
+                  decimal: '.',
+                  precision: 0,
+                  align: 'left'
+                }"
+                #currency
+                [readonly]="!productData"
+                type="text"
+                class="form-control"
+                formControlName="MYE2"
+              />
+            </div>
+            <div class="form-item">
+              <label translate>% renewable content</label>
+              <input
+                currencyMask
+                (keyup)="
+                  dataForm.value.MYE3 > 100
+                    ? (MYE3 = 100)
+                    : (MYE3 = dataForm.value.MYE3)
+                "
+                [(ngModel)]="MYE3"
+                [options]="{
+                  prefix: '',
+                  suffix: '%',
+                  allowNegative: false,
+                  thousands: ',',
+                  decimal: '.',
+                  precision: 0,
+                  align: 'left'
+                }"
+                #currency
+                [readonly]="!productData"
+                type="text"
+                class="form-control"
+                formControlName="MYE3"
+              />
+            </div>
+            <div class="form-item">
+              <label translate>% recovery potential</label>
+              <input
+                currencyMask
+                (keyup)="
+                  dataForm.value.MYE4 > 100
+                    ? (MYE4 = 100)
+                    : (MYE4 = dataForm.value.MYE4)
+                "
+                [(ngModel)]="MYE4"
+                [options]="{
+                  prefix: '',
+                  suffix: '%',
+                  allowNegative: false,
+                  thousands: ',',
+                  decimal: '.',
+                  precision: 0,
+                  align: 'left'
+                }"
+                #currency
+                [readonly]="!productData"
+                type="text"
+                class="form-control"
+                formControlName="MYE4"
+              />
+            </div>
+            <div class="form-item">
+              <label translate>% actual recovery</label>
+              <input
+                currencyMask
+                (keyup)="
+                  dataForm.value.MYE5 > 100
+                    ? (MYE5 = 100)
+                    : (MYE5 = dataForm.value.MYE5)
+                "
+                [(ngModel)]="MYE5"
+                [options]="{
+                  prefix: '',
+                  suffix: '%',
+                  allowNegative: false,
+                  thousands: ',',
+                  decimal: '.',
+                  precision: 0,
+                  align: 'left'
+                }"
+                #currency
+                [readonly]="!productData"
+                type="text"
+                class="form-control"
+                formControlName="MYE5"
+              />
+            </div>
+            <div class="form-item">
+              <label translate>Can the product be repaired?</label>
+              <mat-radio-group
+                [disabled]="!productData"
+                class="select custom-check-group"
+                [formControlName]="'MYE6'"
+              >
+                <mat-radio-button class="radio-item long" value="Yes"
+                  >Yes</mat-radio-button
+                >
+                <mat-radio-button class="radio-item long" value="No"
+                  >No</mat-radio-button
+                >
+              </mat-radio-group>
+            </div>
+            <div class="form-item">
+              <label translate>Can the product be refurbished?</label>
+              <mat-radio-group
+                class="select custom-check-group"
+                [formControlName]="'MYE7'"
+              >
+                <mat-radio-button class="radio-item long" value="Yes"
+                  >Yes</mat-radio-button
+                >
+                <mat-radio-button class="radio-item long" value="No"
+                  >No</mat-radio-button
+                >
+              </mat-radio-group>
+            </div>
+            <div class="form-item">
+              <label translate>Energy consumption during production</label>
+              <input
+                [readonly]="!productData"
+                type="text"
+                class="form-control"
+                formControlName="MYE8"
+              />
+            </div>
+            <div class="form-item">
+              <label translate>% renewable energy content</label>
+              <input
+                currencyMask
+                (keyup)="
+                  dataForm.value.MYE9 > 100
+                    ? (MYE9 = 100)
+                    : (MYE9 = dataForm.value.MYE9)
+                "
+                [(ngModel)]="MYE9"
+                [options]="{
+                  prefix: '',
+                  suffix: '%',
+                  allowNegative: false,
+                  thousands: ',',
+                  decimal: '.',
+                  precision: 0,
+                  align: 'left'
+                }"
+                #currency
+                [readonly]="!productData"
+                type="text"
+                class="form-control"
+                formControlName="MYE9"
+              />
+            </div>
+          </form>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="item">
+        <div class="track">
+          <b>Track your progress</b>
+          <strong>Purchase completed</strong>
+          <div class="proggres completed">
+            <span></span>
+            <span></span>
+            <span class="last"></span>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="item">
+        <strong>*Product information quality* TBC</strong>
+        <span>*What does it say about the contribution to my selected challenges?*</span>
+        <div class="labels-box two clearfix">
+          <ng-container *ngFor="let item of labelsData">
+            <div class="label-big" *ngIf="item.label.isselected">
+              <div class="name">{{ item.label.name }}</div>
+              <div class="img-box"><img [src]="item.label.image_url" alt="" /></div>
+              <ng-container *ngIf="item.challenges">
+                <div class="info" *ngFor="let challenge of item.challenges">
+                  {{ challenge.name }}
+                  <em [ngClass]="{ active: challenge.score > 2 }"></em>
+                  <em [ngClass]="{ active: challenge.score > 1 }"></em>
+                  <em [ngClass]="{ active: challenge.score > 0 }"></em>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </div> -->
+      <!-- <div class="item">
+        <strong>*Based on product data* TBC</strong>
+        <span>*What does it say about the contribution to my selected challenges?*</span>
+        <div class="chart">
+          <div class="active"></div>
+          <div class="text">2 % of spent of circularity data</div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

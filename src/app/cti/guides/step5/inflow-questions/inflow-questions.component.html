@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-6">
+    <div class="item shadow clearfix" *ngIf="rightItems">
+      <div class="page-head">
+        <span class="page-title" translate> Inflow questions </span>
+      </div>
+      <h6>
+        The questions below will help you interpret the results of your data
+        calculations.
+      </h6>
+      <form (ngSubmit)="submit(true)" [formGroup]="registerForm" novalidate>
+        <div class="form-item">
+          <label translate
+            >inflow.question1
+            <b *ngIf="inflowCircularPercentage"
+              >{{ inflowCircularPercentage }}%</b
+            >?</label
+          >
+          <textarea
+            type="text"
+            class="form-control"
+            placeholder="{{ 'inflow.question1.placeholder' | translate }}"
+            formControlName="why"
+            autocomplete="why"
+          >
+          </textarea>
+        </div>
+
+        <div class="form-item">
+          <label translate>inflow.question2 </label>
+          <textarea
+            type="text"
+            class="form-control"
+            formControlName="expect"
+            placeholder="{{ 'inflow.question2.placeholder' | translate }}"
+            autocomplete="expect"
+          >
+          </textarea>
+        </div>
+
+        <div class="form-item">
+          <label translate>inflow.question3</label>
+          <div class="multi">
+            <textarea
+              type="text"
+              class="form-control"
+              formControlName="focus"
+              placeholder="{{ 'inflow.question3.placeholder' | translate }}"
+              autocomplete="focus"
+            >
+            </textarea>
+            <label translate>Why</label>
+            <textarea
+              type="text"
+              class="form-control"
+              formControlName="whyFocus"
+              autocomplete="whyFocus"
+            >
+            </textarea>
+          </div>
+        </div>
+
+        <div class="form-item">
+          <label translate>inflow.question4</label>
+          <div class="multi">
+            <textarea
+              type="text"
+              class="form-control"
+              formControlName="limitations"
+              placeholder="{{ 'inflow.question4.placeholder' | translate }}"
+              autocomplete="limitations"
+            >
+            </textarea>
+            <label translate>Why</label>
+            <textarea
+              type="text"
+              class="form-control"
+              formControlName="whyLimitations"
+              placeholder="{{ 'inflow.question4.why.placeholder' | translate }}"
+              autocomplete="whyLimitations"
+            >
+            </textarea>
+          </div>
+        </div>
+
+        <button
+          class="btn-circular bg-shamrock big center float-right"
+          type="submit"
+          [disabled]="registerForm.invalid"
+          translate
+        >
+          SAVE
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.item {
+  padding: 2rem;
+  .form-item {
+    height: auto;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+
+    &:hover {
+      background: transparent;
+    }
+
+    label {
+      width: 100%;
+      font-size: 0.81rem;
+      text-indent: 3px;
+      top: 0;
+      height: auto;
+      font-weight: bold;
+    }
+  }
+  .form-group {
+    label {
+      display: inline;
+      font-size: 0.81rem;
+      text-indent: 3px;
+      top: 0;
+      font-weight: bold;
+    }
+    input {
+      margin-top: 0.3rem;
+    }
+  }
+  span {
+    vertical-align: 0;
+  }
+}
+.help-block {
+  font-size: 0.76rem;
+  color: $watermelon;
+  line-height: 1;
+}
+.fa-eye {
+  position: relative;
+  top: 2px;
+  left: 10px;
+  cursor: pointer;
+}

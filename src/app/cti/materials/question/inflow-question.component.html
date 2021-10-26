@@ -1,0 +1,193 @@
+<form [formGroup]="form" style="position: relative" *ngIf="showForm">
+  <div formGroupName="questionnaire" *ngFor="let q of questions; let i = index">
+    <div
+      class="form-item clearfix"
+      [ngClass]="{ first: i === 0 }"
+      *ngIf="
+        q.type === 'input' &&
+        q.code !== 'TI17' &&
+        q.code !== 'TI1' &&
+        q.code !== 'TI2' &&
+        q.code !== 'TI9' &&
+        q.code !== 'TI3'
+      "
+    >
+      <label *ngIf="q.code !== 'M18' && q.code !== 'TI5'"
+        >{{ q.description.en }}
+      </label>
+      <label *ngIf="q.code === 'M18'" translate>Name of the inflow</label>
+      <mat-form-field class="input-box">
+        <input
+          matInput
+          type="text"
+          [formControlName]="q.code"
+          [(ngModel)]="q.value[0]"
+        />
+      </mat-form-field>
+      <app-proof class="app-proof" [master]="q"></app-proof>
+      <div class="guidance" (click)="openPatica(q.code)">
+        <img src="../../../assets/img/questin.png" alt="" />
+      </div>
+    </div>
+    <div
+      class="form-item clearfix"
+      [ngClass]="{ first: i === 0 }"
+      *ngIf="
+        q.type === 'select' &&
+        q.code !== 'TI16' &&
+        q.code !== 'TI22' &&
+        q.code !== 'TI7'
+      "
+    >
+      <label>{{ q.description.en }}</label>
+      <mat-form-field class="input-box">
+        <mat-select
+          matNativeControl
+          [formControlName]="q.code"
+          [(ngModel)]="q.value[0]"
+        >
+          <mat-option *ngFor="let o of q.options" [value]="o.value"
+            >{{ o.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <app-proof class="app-proof" [master]="q"></app-proof>
+      <div class="guidance" (click)="openPatica(q.code)">
+        <img src="../../../assets/img/questin.png" alt="" />
+      </div>
+    </div>
+    <div
+      class="form-item first clearfix"
+      *ngIf="q.code === 'TI7' && criticalBoxShow"
+    >
+      <label>{{ q.description.en }}</label>
+      <mat-form-field class="input-box">
+        <mat-select
+          matNativeControl
+          [formControlName]="q.code"
+          [(ngModel)]="q.value[0]"
+        >
+          <mat-option *ngFor="let o of q.options" [value]="o.value"
+            >{{ o.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <app-proof class="app-proof" [master]="q"></app-proof>
+      <div class="guidance" (click)="openPatica(q.code)">
+        <img src="../../../assets/img/questin.png" alt="" />
+      </div>
+    </div>
+    <div class="mass-box clearfix">
+      <div class="form-item clearfix" *ngIf="q.code === 'TI3'">
+        <label>{{ q.description.en }}</label>
+        <mat-form-field class="input-box">
+          <input
+            matInput
+            type="text"
+            formControlName="kg"
+            [(ngModel)]="q.massValue[0]"
+            currencyMask
+            [options]="{
+              prefix: '',
+              suffix: '',
+              thousands: '.',
+              allowNegative: false,
+              decimal: ',',
+              precision: 0,
+              align: 'left'
+            }"
+          />
+          <div class="info">kg</div>
+        </mat-form-field>
+        <mat-form-field class="input-box last">
+          <input
+            matInput
+            type="text"
+            formControlName="gram"
+            [(ngModel)]="q.massValue[1]"
+            currencyMask
+            min="0"
+            max="999"
+            maxlength="3"
+            [options]="{
+              prefix: '',
+              suffix: '',
+              thousands: '.',
+              allowNegative: false,
+              decimal: ',',
+              precision: 0,
+              align: 'left'
+            }"
+          />
+          <div class="info">g</div>
+        </mat-form-field>
+        <app-proof class="app-proof" [master]="q"></app-proof>
+        <div class="guidance" (click)="openPatica(q.code)">
+          <img src="../../../assets/img/questin.png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-item four-box clearfix" *ngIf="q.code === 'TI9'">
+      <label translate>Material Source Type</label>
+      <div class="four-item-box">
+        <ng-container *ngFor="let q of questions; let i = index">
+          <div
+            class="four-item"
+            [ngClass]="{ active: q.value > 0 }"
+            *ngIf="
+              q.code === 'TI17' ||
+              q.code === 'TI1' ||
+              q.code === 'TI2' ||
+              q.code === 'TI9'
+            "
+          >
+            <span *ngIf="q.code === 'TI17'">Non-virgin Renewable</span>
+            <span *ngIf="q.code === 'TI1'">Virgin Renewable</span>
+            <span *ngIf="q.code === 'TI2'">Non-virgin Non-renewable</span>
+            <span *ngIf="q.code === 'TI9'">Virgin Non-renewable</span>
+            <mat-form-field class="input-box">
+              <input
+                matInput
+                type="text"
+                (keyup)="inputKeyUp()"
+                [formControlName]="q.code"
+                currencyMask
+                min="0"
+                max="100"
+                [options]="{
+                  prefix: '',
+                  suffix: '%',
+                  precision: 0,
+                  align: 'center'
+                }"
+                [(ngModel)]="q.value"
+              />
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </div>
+      <ng-container *ngFor="let q of questions; let i = index">
+        <ng-container *ngIf="q.code === 'TI17'">
+          <app-proof class="app-proof" [master]="q"></app-proof>
+          <div class="guidance" (click)="openPatica(q.code)">
+            <img src="../../../assets/img/questin.png" alt="" />
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div (click)="saveForm(false)" class="btn-circular bg-white" translate>
+      SAVE DRAFT
+    </div>
+    <div
+      (click)="saveAndPublishForm()"
+      class="btn-circular bg-shamrock big"
+      translate
+    >
+      SUBMIT
+    </div>
+  </div>
+</form>

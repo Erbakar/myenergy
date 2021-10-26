@@ -1,0 +1,495 @@
+<div class="fixed-steper">
+  <app-stepper></app-stepper>
+</div>
+<div class="narrow">
+  <div class="row fix-height">
+    <div class="col-8">
+      <app-step-info></app-step-info>
+    </div>
+    <div class="col-4">
+      <app-step4></app-step4>
+    </div>
+  </div>
+  <div class="row fix-height mb-5">
+    <div class="col-12">
+      <app-sankey-info></app-sankey-info>
+    </div>
+  </div>
+  <div *ngIf="data">
+    <div class="row fix-height mb-4">
+      <div class="col-6">
+        <div
+          class="info-item"
+          *ngIf="!data.indicators.renewableEnergy; else renewableEnergy"
+        >
+          <div class="tool-tip shadow" [ngClass]="{ show: energyBoxShow[0] }">
+            <span translate>gotoStep2</span>
+            <button (click)="goToTheStep2('energy')" translate>
+              GO TO STEP 2
+            </button>
+          </div>
+          <div class="pasive clearfix">
+            <span translate>Renewable energy</span>
+            <button (click)="tooltipShow(0)" translate>SELECT</button>
+          </div>
+        </div>
+        <ng-template #renewableEnergy>
+          <div class="active shadow">
+            <div class="head renewable" translate>
+              Renewable energy
+              <strong
+                >{{
+                  data.energy.renewablePercentage
+                    | number: environment.integerFormat
+                }}%</strong
+              >
+            </div>
+            <div class="info">
+              <div class="row">
+                <div class="col-11">
+                  <div class="line" translate>
+                    renewable energy <span>n</span>
+                  </div>
+                  <hr />
+                  <div class="line" translate>total energy <span>n</span></div>
+                </div>
+                <div class="col-1">
+                  <div class="line total">x 100%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-6">
+        <div
+          class="info-item"
+          *ngIf="!data.indicators.waterCircularity; else waterCircularity"
+        >
+          <div class="tool-tip shadow" [ngClass]="{ show: energyBoxShow[1] }">
+            <span translate>gotoStep2</span>
+            <button (click)="goToTheStep2('water')" translate>
+              GO TO STEP 2
+            </button>
+          </div>
+          <div class="pasive clearfix">
+            <span translate>Water circularity</span>
+            <button (click)="tooltipShow(1)" translate>SELECT</button>
+          </div>
+        </div>
+        <ng-template #waterCircularity>
+          <div class="active shadow">
+            <div class="head water" translate>
+              Water circularity<strong
+                >{{
+                  data.water.waterCircularity
+                    | number: environment.integerFormat
+                }}%</strong
+              >
+            </div>
+            <div class="info">
+              <div class="line">
+                <strong translate>Water circularity </strong> =
+                <label translate>waterFormule</label>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="row fix-height mb-4">
+      <div class="col-12">
+        <div class="page-head">
+          <span class="page-title" translate>Optimize the loop</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div
+          class="info-item"
+          *ngIf="!data.indicators.criticalInflow; else criticalInflow"
+        >
+          <div class="tool-tip shadow" [ngClass]="{ show: energyBoxShow[2] }">
+            <span translate>gotoStep2</span>
+            <button (click)="goToTheStep2('critical')" translate>
+              GO TO STEP 2
+            </button>
+          </div>
+          <div class="pasive clearfix">
+            <span translate>Critical inflow</span>
+            <button (click)="tooltipShow(2)" translate>SELECT</button>
+          </div>
+        </div>
+        <ng-template #criticalInflow>
+          <div class="active shadow">
+            <div class="head inflow" translate>
+              Critical inflow
+              <strong
+                >{{
+                  data.criticalData.criticalPercentage
+                    | number: environment.integerFormat
+                }}%</strong
+              >
+            </div>
+            <div class="info">
+              <div class="row">
+                <div class="col-11">
+                  <div class="line" translate>
+                    criticalFormule1 <span>n</span>
+                  </div>
+                  <hr />
+                  <div class="line" translate>
+                    criticalFormule2 <span>n</span>
+                  </div>
+                </div>
+                <div class="col-1">
+                  <div class="line total">x 100%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-6">
+        <div
+          class="info-item"
+          *ngIf="
+            !data.indicators.onSiteWaterCirculation;
+            else onSiteWaterCirculation
+          "
+        >
+          <div class="tool-tip shadow" [ngClass]="{ show: energyBoxShow[3] }">
+            <span translate>gotoStep2</span>
+            <button (click)="goToTheStep2('circulation')" translate>
+              GO TO STEP 2
+            </button>
+          </div>
+          <div class="pasive clearfix">
+            <span translate>Onsite water circulation</span>
+            <button (click)="tooltipShow(3)" translate>SELECT</button>
+          </div>
+        </div>
+        <ng-template #onSiteWaterCirculation>
+          <div class="active shadow">
+            <div class="head onsite" translate>
+              Onsite water circulation
+              <strong
+                >{{
+                  data.onSiteWater.onSiteWaterCircularity
+                    | number: environment.integerFormat
+                }}x</strong
+              >
+            </div>
+            <div class="info">
+              <div class="row">
+                <div class="col-12">
+                  <div class="line" translate>
+                    onsiteFormule1 <span>n</span>
+                  </div>
+                  <hr />
+                  <div class="line" translate>
+                    onsiteFormule2 <span>n</span>
+                  </div>
+                </div>
+                <!-- <div class="col-1">
+                  <div class="line total">x 100%</div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="row fix-height mb-4">
+      <div class="col-12">
+        <div
+          class="info-item"
+          *ngIf="!data.indicators.recoveryType; else recoveryType"
+        >
+          <div class="tool-tip shadow" [ngClass]="{ show: energyBoxShow[4] }">
+            <span translate>gotoStep2</span>
+            <button (click)="goToTheStep2('recovery')" translate>
+              GO TO STEP 2
+            </button>
+          </div>
+          <div class="pasive clearfix">
+            <span translate>Recovery type</span>
+            <button (click)="tooltipShow(4)" translate>SELECT</button>
+          </div>
+        </div>
+        <ng-template #recoveryType>
+          <div class="active shadow">
+            <div class="head recovery" translate>Recovery type</div>
+            <div class="content">
+              <h6 translate>Breakdown of recovery type</h6>
+              <div class="chart">
+                <div
+                  class="technical"
+                  [style.width.%]="
+                    data.recoveryType.breakdown[0].percentage * 0.48 + 13
+                  "
+                >
+                  <div class="text-box">
+                    <span translate
+                      >{{ data.recoveryType.breakdown[0].name }}
+                    </span>
+                    <strong
+                      >{{ data.recoveryType.breakdown[0].weight }}kg</strong
+                    >
+                  </div>
+                  <label
+                    >{{
+                      data.recoveryType.breakdown[0].percentage
+                        | number: environment.decimalFormat
+                    }}%</label
+                  >
+                </div>
+                <div
+                  class="non-food"
+                  [style.width.%]="
+                    data.recoveryType.breakdown[1].percentage * 0.48 + 13
+                  "
+                >
+                  <div class="text-box">
+                    <span translate>{{
+                      data.recoveryType.breakdown[1].name
+                    }}</span>
+                    <strong
+                      >{{ data.recoveryType.breakdown[1].weight }}kg</strong
+                    >
+                  </div>
+                  <label
+                    >{{
+                      data.recoveryType.breakdown[1].percentage
+                        | number: environment.decimalFormat
+                    }}%</label
+                  >
+                </div>
+                <div
+                  class="food"
+                  [style.width.%]="
+                    data.recoveryType.breakdown[2].percentage * 0.48 + 13
+                  "
+                >
+                  <div class="text-box">
+                    <span translate>{{
+                      data.recoveryType.breakdown[2].name
+                    }}</span>
+                    <strong
+                      >{{ data.recoveryType.breakdown[2].weight }}kg</strong
+                    >
+                  </div>
+                  <label
+                    >{{
+                      data.recoveryType.breakdown[2].percentage
+                        | number: environment.decimalFormat
+                    }}%</label
+                  >
+                </div>
+                <div
+                  class="other"
+                  [style.width.%]="
+                    data.recoveryType.breakdown[3].percentage * 0.48 + 13
+                  "
+                >
+                  <div class="text-box">
+                    <span translate>{{
+                      data.recoveryType.breakdown[3].name
+                    }}</span>
+                    <strong
+                      >{{ data.recoveryType.breakdown[3].weight }}kg</strong
+                    >
+                  </div>
+                  <label
+                    >{{
+                      data.recoveryType.breakdown[3].percentage
+                        | number: environment.decimalFormat
+                    }}%</label
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <div class="line">
+                    <strong translate>{{
+                      data.recoveryType.breakdown[0].name
+                    }}</strong>
+                    <strong
+                      >{{ data.recoveryType.breakdown[0].weight }}kg</strong
+                    >
+                  </div>
+                  <div
+                    class="line"
+                    *ngFor="let item of data.recoveryType.technical"
+                  >
+                    <span translate>{{ item.name }}</span>
+                    <span class="value">{{ item.weight }} Kg</span>
+                    <div class="percentage">
+                      <div
+                        class="per technical"
+                        [style.width.%]="item.percentage"
+                      ></div>
+                      <label
+                        >{{
+                          item.percentage | number: environment.integerFormat
+                        }}%</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="line">
+                    <strong translate>{{
+                      data.recoveryType.breakdown[1].name
+                    }}</strong>
+                    <strong
+                      >{{ data.recoveryType.breakdown[1].weight }}kg</strong
+                    >
+                  </div>
+                  <div
+                    class="line"
+                    *ngFor="let item of data.recoveryType.nonFood"
+                  >
+                    <span translate>{{ item.name }}</span>
+                    <span class="value">{{ item.weight }} Kg</span>
+                    <div class="percentage">
+                      <div
+                        class="per nonFood"
+                        [style.width.%]="item.percentage"
+                      ></div>
+                      <label
+                        >{{
+                          item.percentage | number: environment.integerFormat
+                        }}%</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="line">
+                    <strong translate>{{
+                      data.recoveryType.breakdown[2].name
+                    }}</strong>
+                    <strong
+                      >{{ data.recoveryType.breakdown[2].weight }}kg</strong
+                    >
+                  </div>
+                  <div class="line" *ngFor="let item of data.recoveryType.food">
+                    <span translate>{{ item.name }}</span>
+                    <span class="value">{{ item.weight }} Kg</span>
+                    <div class="percentage">
+                      <div
+                        class="per food"
+                        [style.width.%]="item.percentage"
+                      ></div>
+                      <label
+                        >{{
+                          item.percentage | number: environment.integerFormat
+                        }}%</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="row fix-height mb-4">
+      <div class="col-12">
+        <div class="page-head">
+          <span class="page-title" translate>Value the loop</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div
+          class="info-item"
+          *ngIf="
+            !data.indicators.circularMaterialProductivity;
+            else circularMaterialProductivity
+          "
+        >
+          <div class="tool-tip shadow" [ngClass]="{ show: energyBoxShow[5] }">
+            <span translate>gotoStep2</span>
+            <button (click)="goToTheStep2('productivity')" translate>
+              GO TO STEP 2
+            </button>
+          </div>
+          <div class="pasive clearfix">
+            <span translate>Circular material productivity</span>
+            <button (click)="tooltipShow(5)" translate>SELECT</button>
+          </div>
+        </div>
+        <ng-template #circularMaterialProductivity>
+          <div class="active shadow">
+            <div class="head productivity" translate>
+              Circular material productivity
+              <strong
+                >{{ data.productivity.currency
+                }}{{
+                  data.productivity.productivity
+                    | number: environment.decimalFormat
+                }}/kg</strong
+              >
+            </div>
+            <div class="info">
+              <div class="row">
+                <div class="col-11">
+                  <div class="line" translate>revenue <span>n</span></div>
+                  <hr />
+                  <div class="line" translate>
+                    productivityFormule <span>n</span>
+                  </div>
+                </div>
+                <div class="col-1">
+                  <div class="line total">
+                    {{ data.productivity.currency }}/kg
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-6">
+        <div
+          class="info-item"
+          *ngIf="!data.indicators.ctiRevenue; else ctiRevenue"
+        >
+          <div class="tool-tip shadow" [ngClass]="{ show: energyBoxShow[6] }">
+            <span translate>gotoStep2</span>
+            <button (click)="goToTheStep2('revenue')" translate>
+              GO TO STEP 2
+            </button>
+          </div>
+          <div class="pasive clearfix">
+            <span translate>CTI revenue</span>
+            <button (click)="tooltipShow(6)" translate>SELECT</button>
+          </div>
+        </div>
+        <ng-template #ctiRevenue>
+          <div class="active shadow">
+            <div class="head revenue" translate>
+              CTI revenue
+              <strong
+                >{{ data.ctiRevenue.currency
+                }}{{
+                  data.ctiRevenue.ctirevenue | number: environment.integerFormat
+                }}</strong
+              >
+            </div>
+            <div class="info">
+              <div class="line">
+                <strong translate>CTI revenue</strong> =
+                <label translate> revenueFormule</label>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

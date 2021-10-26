@@ -1,0 +1,468 @@
+<div class="row" *ngIf="itemList">
+  <div class="col-6" *ngIf="!isPatica">
+    <div class="item shadow clearfix">
+      <div class="page-head">
+        <span class="page-title" translate>Inflow analysis</span>
+      </div>
+      <h3 translate>step5.inflowText</h3>
+
+      <section class="item-list-contenet head">
+        <div class="list-item">
+          <div class="info sort name" (click)="sortName()">
+            <em class="fas fa-sort" *ngIf="sortNameDirection == null"></em>
+            <em class="fas fa-sort-up" *ngIf="sortNameDirection == true"></em>
+            <em
+              class="fas fa-sort-down"
+              *ngIf="sortNameDirection == false"
+            ></em>
+            <span style="top: -4px" translate> Name</span>
+          </div>
+          <div class="part sort left" (click)="sortMass()">
+            <em class="fas fa-sort" *ngIf="sortWeightDirection == null"></em>
+            <em class="fas fa-sort-up" *ngIf="sortWeightDirection == true"></em>
+            <em
+              class="fas fa-sort-down"
+              *ngIf="sortWeightDirection == false"
+            ></em>
+            <span translate>Mass</span>
+          </div>
+          <div class="part sort" (click)="sortLinearInflow()">
+            <em class="fas fa-sort" *ngIf="sortLinearDirection == null"></em>
+            <em class="fas fa-sort-up" *ngIf="sortLinearDirection == true"></em>
+            <em
+              class="fas fa-sort-down"
+              *ngIf="sortLinearDirection == false"
+            ></em>
+            <span translate>Circular inflow</span>
+          </div>
+          <div class="part sort last right" (click)="sortMassLinear()">
+            <em
+              class="fas fa-sort"
+              *ngIf="sortMassLinearDirection == null"
+            ></em>
+            <em
+              class="fas fa-sort-up"
+              *ngIf="sortMassLinearDirection == true"
+            ></em>
+            <em
+              class="fas fa-sort-down"
+              *ngIf="sortMassLinearDirection == false"
+            ></em>
+            <span translate>Mass * circular inflow</span>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="item-list-contenet"
+        style="border-radius: 0 0 0.5rem 0.5rem"
+      >
+        <ng-container *ngFor="let item of itemList">
+          <div class="list-item claerfix" *ngIf="!item.selected">
+            <div class="info box" (click)="addItem(item)">
+              <i class="material-icons add" *ngIf="!item.selected"> add </i>
+              <div class="tradeName">
+                <span [ngClass]="{ multi: item.critical || item.priority }">{{
+                  item.tradeName
+                }}</span>
+                <b class="critical" *ngIf="item.critical" translate>CRITICAL</b
+                ><b class="focus" *ngIf="item.priority" translate>FOCUS FLOW</b>
+              </div>
+            </div>
+            <div class="part left">
+              <ng-container *ngIf="item.weight"
+                >{{
+                  item.weight | number: environment.decimalFormat
+                }}
+                Kg</ng-container
+              >
+            </div>
+            <div class="part">
+              <ng-container>
+                {{
+                  item.circularPercentage | number: environment.integerFormat
+                }}%
+              </ng-container>
+            </div>
+            <div class="part right">
+              {{ item.wip | number: environment.decimalFormat }}
+            </div>
+          </div>
+        </ng-container>
+      </section>
+    </div>
+  </div>
+
+  <div class="col-6" *ngIf="selectedArray">
+    <div
+      class="item shadow detail clearfix"
+      style="padding-bottom: 200px"
+      *ngIf="selectedArray.length > 0"
+    >
+      <div class="page-head" style="height: 6rem">
+        <h3 translate>step5.spot</h3>
+        <strong translate>Selected Inflows</strong>
+      </div>
+
+      <div class="shadow clearfix" style="border-radius: 0.5rem">
+        <section class="item-list-contenet head">
+          <div class="list-item">
+            <div class="info box name" translate>Name</div>
+            <div class="part left" style="margin-left: 0">
+              <span class="guidance-btn" translate>Mass</span>
+            </div>
+            <div class="part">
+              <span class="guidance-btn" translate>Circular inflow</span>
+            </div>
+            <div class="part right">
+              <span class="guidance-btn" translate>Improvement</span>
+            </div>
+          </div>
+        </section>
+        <section class="item-list-contenet">
+          <div class="list-item claerfix" *ngFor="let item of selectedArray">
+            <div class="info box">
+              <i class="material-icons add" (click)="removeItem(item)">
+                remove
+              </i>
+              <div class="tradeName">
+                <span [ngClass]="{ multi: item.critical || item.priority }">{{
+                  item.name
+                }}</span>
+                <b class="critical" *ngIf="item.critical" translate>CRITICAL</b
+                ><b class="focus" *ngIf="item.priority" translate>FOCUS FLOW</b>
+              </div>
+            </div>
+            <div class="part border left">
+              <span (click)="openCalculete(item, 'weight')">
+                <em
+                  [ngClass]="{
+                    increase: item.weightIncrease,
+                    decrease: item.weightDecrease
+                  }"
+                >
+                  <ng-container *ngIf="item.weightIncrease">+</ng-container>
+                  {{ item.weightDiff | number: environment.decimalFormat }} kg
+                </em>
+                {{ item.targetWeight | number: environment.decimalFormat }}
+                Kg</span
+              >
+
+              <div *ngIf="item.weightChange" class="calculate shadow clearfix">
+                <div class="actions clearfix">
+                  <b
+                    (click)="setOperation('-', item, diffrent, 'weight')"
+                    [ngClass]="{ active: selectedOperation == '-' }"
+                    class="btn-circular float-left real-grey-border"
+                    >-</b
+                  >
+                  <b
+                    (click)="setOperation('+', item, diffrent, 'weight')"
+                    [ngClass]="{ active: selectedOperation == '+' }"
+                    class="btn-circular float-left real-grey-border"
+                    >+</b
+                  >
+
+                  <b
+                    (click)="setOperation('+%', item, diffrent, 'weight')"
+                    [ngClass]="{ active: selectedOperation == '+%' }"
+                    class="btn-circular float-right real-grey-border"
+                    >+%</b
+                  >
+                  <b
+                    (click)="setOperation('-%', item, diffrent, 'weight')"
+                    [ngClass]="{ active: selectedOperation == '-%' }"
+                    class="btn-circular float-right real-grey-border"
+                    >-%</b
+                  >
+                </div>
+                <div class="calc clearfix" *ngIf="selectedOperation">
+                  <div class="value">
+                    {{ item.targetWeight | number: environment.decimalFormat }}
+                    kg
+                  </div>
+                  <b class="btn-circular selected real-grey-border">{{
+                    selectedOperation
+                  }}</b>
+                  <input
+                    type="text"
+                    currencyMask
+                    [options]="{
+                      prefix: '',
+                      suffix: '',
+                      thousands: '.',
+                      allowNegative: false,
+                      decimal: ',',
+                      precision: 2,
+                      align: 'left'
+                    }"
+                    max="item.weight"
+                    placeholder="{{ 'Enter value' | translate }}"
+                    [(ngModel)]="diffrent"
+                    (keyup)="setWeight(item, diffrent, 'weight')"
+                    (change)="setWeight(item, diffrent, 'weight')"
+                  />
+                  <b
+                    *ngIf="selectedOperation == '-' || selectedOperation == '+'"
+                  ></b>
+                </div>
+                <div class="result-box clearfix" *ngIf="selectedOperation">
+                  <b translate>Result :</b>
+                  <strong
+                    >{{
+                      item.weightChangeValue | number: environment.decimalFormat
+                    }}
+                    kg</strong
+                  >
+                  <div
+                    (click)="calculateDone(item)"
+                    class="btn-circular bg-shamrock float-right"
+                    style="color: #fff"
+                    style="color: #fff"
+                    translate
+                  >
+                    SAVE
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="part border">
+              <span (click)="openCalculete(item, 'circularity')">
+                <em
+                  [ngClass]="{
+                    increase: item.inflowCircularityIncrease,
+                    decrease: item.inflowCircularityDecrease
+                  }"
+                >
+                  <ng-container *ngIf="item.inflowCircularityIncrease"
+                    >+</ng-container
+                  >{{
+                    item.inflowCircularityDiff
+                      | number: environment.integerFormat
+                  }}% </em
+                >{{
+                  item.targetInflowCircularity
+                    | number: environment.integerFormat
+                }}%</span
+              >
+              <div *ngIf="item.circularityChange" class="calculate shadow">
+                <div class="actions clearfix">
+                  <b
+                    (click)="setOperation('-', item, diffrent, 'circularity')"
+                    [ngClass]="{ active: selectedOperation == '-' }"
+                    class="btn-circular float-left real-grey-border"
+                    >-</b
+                  >
+                  <b
+                    (click)="setOperation('+', item, diffrent, 'circularity')"
+                    [ngClass]="{ active: selectedOperation == '+' }"
+                    class="btn-circular float-left real-grey-border"
+                    >+</b
+                  >
+                </div>
+                <div class="calc clearfix" *ngIf="selectedOperation">
+                  <div class="value">
+                    {{
+                      item.targetInflowCircularity
+                        | number: environment.integerFormat
+                    }}
+                    %
+                  </div>
+                  <b class="btn-circular selected real-grey-border">{{
+                    selectedOperation
+                  }}</b>
+                  <input
+                    type="text"
+                    currencyMask
+                    [options]="{
+                      prefix: '',
+                      suffix: '',
+                      thousands: '.',
+                      allowNegative: false,
+                      decimal: ',',
+                      precision: 0,
+                      align: 'left'
+                    }"
+                    max="item.weight"
+                    placeholder="{{ 'Enter value' | translate }}"
+                    [(ngModel)]="diffrent"
+                    (keyup)="setPotential(item, diffrent, 'circularity')"
+                    (change)="setPotential(item, diffrent, 'circularity')"
+                  />
+                </div>
+                <div class="result-box clearfix" *ngIf="selectedOperation">
+                  <b translate>Result :</b>
+                  <strong
+                    >{{
+                      item.circularityChangeValue
+                        | number: environment.integerFormat
+                    }}%</strong
+                  >
+                  <div
+                    (click)="calculateDone(item)"
+                    class="btn-circular bg-shamrock float-right"
+                    style="color: #fff"
+                    style="color: #fff"
+                    translate
+                  >
+                    SAVE
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="part border right">
+              <span
+                [ngClass]="{
+                  increase: item.resultIncrease,
+                  decrease: item.resultDecrease
+                }"
+              >
+                <ng-container *ngIf="item.resultIncrease">+</ng-container
+                >{{ item.result | number: environment.decimalFormat }}%
+              </span>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="total">
+        <div class="row">
+          <div class="col-10">
+            <div class="h-line">
+              <span class="first">&nbsp;</span>
+              <span translate>Change</span>
+              <span translate>New value</span>
+            </div>
+            <div class="i-item">
+              <span class="first" translate
+                >% circular inflow
+                <div class="info-tooltip-box">
+                  <div class="info-tooltip shadow">
+                    <div class="row">
+                      <div class="col-1">
+                        <em class="material-icons">info</em>
+                      </div>
+                      <div class="col-10">
+                        <p translate>step5-inflow-tooltip-text</p>
+                      </div>
+                    </div>
+                  </div>
+                  <em class="main material-icons">error_outline</em>
+                </div>
+              </span>
+              <span
+                [ngClass]="{
+                  increase: rightItems.totalChangeIncrease,
+                  decrease: rightItems.totalChangeDecrease
+                }"
+                >{{
+                  rightItems.totalChange | number: environment.decimalFormat
+                }}
+                %</span
+              >
+              <span
+                [ngClass]="{
+                  increase: rightItems.totalChangeIncrease,
+                  decrease: rightItems.totalChangeDecrease
+                }"
+                >{{
+                  rightItems.targetCircularity
+                    | number: environment.decimalFormat
+                }}
+                %</span
+              >
+            </div>
+            <div class="i-item">
+              <span class="first" translate>Critical materials</span>
+              <span
+                [ngClass]="{
+                  increase: rightItems.criticalPercentageDecrease,
+                  decrease: rightItems.criticalPercentageIncrease
+                }"
+                >{{
+                  rightItems.criticalPercentageDiff
+                    | number: environment.decimalFormat
+                }}
+                %</span
+              >
+              <span
+                [ngClass]="{
+                  increase: rightItems.criticalPercentageDecrease,
+                  decrease: rightItems.criticalPercentageIncrease
+                }"
+                >{{
+                  rightItems.targetCriticalPercentage
+                    | number: environment.decimalFormat
+                }}
+                %</span
+              >
+            </div>
+            <div class="i-item">
+              <span class="first" translate
+                >Circular material productivity</span
+              >
+              <span
+                [ngClass]="{
+                  increase: rightItems.productivityPercentageIncrease,
+                  decrease: rightItems.productivityPercentageDecrease
+                }"
+                >{{
+                  rightItems.productivityDiff
+                    | number: environment.decimalFormat
+                }}
+                %</span
+              >
+              <span
+                [ngClass]="{
+                  increase: rightItems.productivityPercentageIncrease,
+                  decrease: rightItems.productivityPercentageDecrease
+                }"
+                >{{ rightItems.currency }}
+                {{
+                  rightItems.targetProductivity
+                    | number: environment.integerFormat
+                }}
+                /kg</span
+              >
+            </div>
+            <div class="i-item">
+              <span class="first" translate>CTI revenue</span>
+              <span
+                [ngClass]="{
+                  increase: rightItems.revenueIncrease,
+                  decrease: rightItems.revenuePercentageDecrease
+                }"
+                >{{
+                  rightItems.revenueDiff | number: environment.decimalFormat
+                }}
+                %</span
+              >
+              <span
+                [ngClass]="{
+                  increase: rightItems.revenueIncrease,
+                  decrease: rightItems.revenuePercentageDecrease
+                }"
+                >{{ rightItems.currency
+                }}{{
+                  rightItems.targetRevenue | number: environment.integerFormat
+                }}</span
+              >
+            </div>
+          </div>
+          <div class="col-2">
+            <button
+              class="btn-circular bg-shamrock big center float-right"
+              style="margin-top: 100px"
+              (click)="submit(true)"
+              translate
+            >
+              SAVE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="loader" *ngIf="!itemList"></div>

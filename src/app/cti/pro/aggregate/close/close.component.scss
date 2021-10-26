@@ -1,0 +1,139 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.info-item {
+  .pasive {
+    background: #fff;
+    border-radius: 16px;
+    padding: 8px;
+    display: block;
+
+    span {
+      float: left;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 40px;
+      color: #1c195b;
+      opacity: 0.3;
+    }
+
+    button {
+      float: right;
+      color: #1c195b;
+      border-radius: 28px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 16px;
+      padding: 8px 16px;
+      margin-top: 4px;
+      text-align: center;
+    }
+  }
+}
+
+.active {
+  border-radius: 16px;
+
+  .head {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 40px;
+    border-radius: 8px 8px 0 0;
+    label {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 0;
+    }
+    &.renewable {
+      background: #33af92;
+    }
+
+    &.water {
+      background: #5dcc85;
+    }
+
+    &.inflow {
+      background: #ff386b;
+      opacity: 0.66;
+    }
+
+    &.onsite {
+      background: #3d95b2;
+    }
+
+    &.recovery {
+      background: #fff;
+      color: #1c195b;
+    }
+
+    &.productivity {
+      background: #6f6d95;
+    }
+
+    &.revenue {
+      background: #8a6d95;
+    }
+
+    strong {
+      float: right;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 40px;
+    }
+  }
+
+  .info {
+    background: #fff;
+    padding: 20px 40px;
+    min-height: 91px;
+    border-radius: 0;
+    &.border {
+      border-radius: 0 0 8px 8px;
+    }
+    hr {
+      background: rgba(28, 25, 91, 0.7);
+      margin: 5px 0;
+    }
+
+    .line {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.01em;
+      color: #1c195b;
+
+      &.total {
+        float: left;
+        text-align: left;
+        font-weight: bold;
+        position: relative;
+        top: 13px;
+        left: -15px;
+        white-space: nowrap;
+      }
+
+      strong {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      span {
+        float: right;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.01em;
+        color: #1c195b;
+      }
+    }
+  }
+}

@@ -1,0 +1,179 @@
+@import "src/theme/theme-variables";
+
+.temp {
+  position: fixed;
+  right: 10px;
+  top: 85px;
+  z-index: 9999999999;
+}
+
+.dropdown-menu {
+  right: 0 !important;
+  top: 37px !important;
+  left: inherit !important;
+  min-width: auto !important;
+
+  .dropdown-item {
+    display: block;
+    width: 9rem !important;
+  }
+}
+
+.icon-close {
+  background: $dark-slate-blue;
+  border-radius: 100%;
+
+  &:before {
+    color: #fff;
+  }
+}
+
+.sub {
+  position: absolute;
+  top: 0;
+  left: 4.5rem;
+  font-size: 0.5rem;
+  font-weight: 600;
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding: 0 6px;
+
+  &.critical {
+    color: $watermelon;
+    background: #ffcdda;
+  }
+
+  &.priority {
+    color: $cerulean;
+    background: #cfebf5;
+  }
+
+  &.second {
+    left: 8rem;
+  }
+}
+
+.mh {
+  margin: 0 10px 0 6px;
+}
+
+.oval {
+  line-height: 2.2rem;
+
+  i {
+    font-size: 12px;
+  }
+}
+
+.add {
+  cursor: pointer;
+
+  span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    position: relative;
+    left: 1rem;
+    top: 0.5rem;
+    color: $dark-slate-blue;
+  }
+}
+
+.toggle {
+  top: 6px;
+}
+
+.cover-supplier {
+  width: 2.5rem;
+  height: 2.5rem;
+  float: left;
+}
+
+.page-head .page-title {
+  display: inline-flex;
+  font-size: 28px;
+  line-height: 40px;
+  font-weight: 900;
+  letter-spacing: normal;
+  color: #1c195b;
+  margin-bottom: 20px !important;
+
+  span {
+    font-size: 28px;
+    line-height: 40px;
+    font-weight: 900;
+    letter-spacing: normal;
+    color: #1c195b;
+  }
+}
+
+.btn-box {
+  margin-bottom: 20px;
+  margin-top: -1rem;
+}
+
+.btn-item {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px 10px 5px;
+  cursor: pointer;
+
+  span {
+    font-weight: 500;
+    font-size: 14px;
+    position: relative;
+    top: -4px;
+  }
+
+  .icon {
+    display: inline-block;
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 2.5rem;
+    line-height: 2.2rem;
+    border: 2px solid #e8e8ef;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 10px;
+    overflow: hidden;
+    .path {
+      fill: #1c195b;
+    }
+  }
+  &.active {
+    .icon {
+      border: 2px solid #00b140;
+      background: #00b140;
+      .path {
+        fill: #fff;
+      }
+    }
+  }
+}
+.pond {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 30px;
+  width: 100%;
+  z-index: 2;
+  opacity: 0;
+  cursor: pointer;
+}
+.empty {
+  display: flex;
+  width: 100%;
+  height: 20px;
+  justify-content: center;
+  align-items: flex-end;
+}
+dl dd,
+dl dt {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.75rem;
+  margin: -10px 5px 0 0;
+  padding: 0;
+  float: left;
+  font-weight: normal;
+}

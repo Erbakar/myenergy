@@ -51,8 +51,8 @@ body {
   font-family: "aktiv-grotesk";
   font-weight: normal;
   font-size: 116px;
-  background: $main;
-  color: $dark-slate-blue;
+  background: $white;
+  color: $blue;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -267,4 +267,85 @@ textarea {
   /* 1 */
   font: inherit;
   /* 2 */
+}
+
+.mat-select {
+  height: 3.2rem;
+}
+
+.mat-select-value-text {
+  vertical-align: top;
+}
+
+.mat-select-arrow-wrapper {
+  display: block !important;
+  width: 1.5rem;
+  background: $blue;
+  border-radius: 0.75rem;
+  height: 1.5rem;
+  position: relative;
+  top: 7px;
+
+  .mat-select-arrow {
+    position: absolute;
+    color: #fff;
+    top: 10px;
+    left: 3px;
+  }
+}
+
+.mat-select-disabled .mat-select-arrow-wrapper {
+  opacity: 0;
+}
+
+.form-item .info.combo .mat-select-arrow-wrapper {
+  vertical-align: initial !important;
+}
+
+.form-control:disabled,
+.form-control[readonly],
+.mat-select-disabled {
+  background: $grey;
+}
+
+.mat-select-disabled .mat-select-value {
+  font-size: 0.81rem;
+  color: $blue;
+  font-weight: 500;
+}
+
+.form-control:focus {
+  background: transparent;
+  border-color: $blue;
+}
+
+.login-box .mat-select-trigger {
+  top: -5px !important;
+  font-size: 0.81rem !important;
+  color: $blue !important;
+  font-weight: 500 !important;
+}
+
+.mat-select-value,
+.mat-select-value-text span {
+  font-weight: 500 !important;
+  font-size: 0.81rem !important;
+  color: $blue !important;
+}
+
+.combo .mat-select-value-text span {
+  top: 0 !important;
+  font-weight: 500 !important;
+  font-size: 0.81rem !important;
+  color: #fff !important;
+}
+
+.combo .mat-select-empty .mat-select-arrow-wrapper {
+  top: 0 !important;
+}
+
+.mat-option-text {
+  color: #1c195b !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
 }

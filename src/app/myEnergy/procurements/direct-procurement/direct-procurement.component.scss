@@ -142,7 +142,7 @@
         }
         .material-icons {
           display: block;
-          color: $dark-slate-blue;
+          color: $blue;
           line-height: 32px;
           height: 32px;
           width: 32px;
@@ -150,7 +150,7 @@
           font-size: 20px;
         }
         &.active {
-          background: $dark-slate-blue;
+          background: $blue;
           .material-icons {
             color: #fff;
           }
@@ -170,7 +170,7 @@
             font-weight: normal;
             font-size: 14px;
             background: #e3e5ec;
-            color: $dark-slate-blue;
+            color: $blue;
             &.delete {
               background: #fff;
               color: #ff386b;

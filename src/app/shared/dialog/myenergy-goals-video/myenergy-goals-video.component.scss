@@ -2,7 +2,7 @@
 @import "~bootstrap/scss/mixins/_breakpoints";
 
 :host .mat-dialog-container {
-  background: $myenergy !important;
+  background: $blue;
 }
 
 #dialog-wrapper {
@@ -28,10 +28,10 @@ form {
   margin-bottom: 20px;
 }
 .my-energy-title {
-  color: $myenergy;
+  color: $blue;
   font-size: 24px;
 }
 span.myenergy {
-  color: $myenergy;
+  color: $blue;
   font-size: 18px;
 }

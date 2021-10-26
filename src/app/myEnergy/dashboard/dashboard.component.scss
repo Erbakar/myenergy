@@ -127,7 +127,7 @@
     line-height: 26px;
     display: flex;
     align-items: center;
-    color: $myenergy;
+    color: $blue;
     b {
       font-weight: bold;
       margin-left: 3px;
@@ -233,7 +233,7 @@
         width: 24px;
         height: 24px;
         border-radius: 100%;
-        background: $myenergy-orange;
+        background: $orange;
         color: #fff;
         text-align: center;
         font-style: normal;
@@ -242,7 +242,7 @@
       }
       &.pass {
         .number {
-          background: $shamrock;
+          background: $green;
         }
       }
       &.active {

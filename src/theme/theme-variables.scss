@@ -16,26 +16,18 @@ $fa-font-path: "~@fortawesome/fontawesome-free-webfonts/webfonts";
 //
 
 $white: #fff;
-$main: #fafafa;
 $black: #000;
-$watermelon: #ff386b;
-$dark-slate-blue: #1c195b;
-$pale-lilac: #e8e8ef;
-$pale-pink: #ffcdda;
-$pale-grey: #f3f3f7;
-$bluey-grey: #8d8cad;
-$real-grey: #e3e5ec;
-$purple: #be37d1;
-$light-purple: #6558f5;
-$mango: #f89c27;
-$brownish-grey: #676767;
-$grey: #dfdfe7;
-$dusk: #4b497a;
-$shamrock: #00b140;
-$cerulean: #0095c6;
-$lipstick: #b62373;
-$myenergy: #253e4e;
-$myenergy-orange: #f6c744;
+$red: #bf0c26;
+$pink: #ef3340;
+$blue: #5c82a5;
+$light-blue: #5cb8b2;
+$purple: #84329b;
+$orange: #ff9e1b;
+$grey: #b7a99a;
+$green: #00b140;
+$light-green: #33c166;
+$grass: #b7bf10;
+
 // Use Bootstrap defaults for other variables, imported here so we can access all app variables in one place when used
 // in components.
 @import "~bootstrap/scss/_functions";

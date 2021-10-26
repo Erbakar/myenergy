@@ -9,7 +9,7 @@
   background-size: cover;
 
   .user-info-box {
-    background: $pale-lilac;
+    background: $grey;
     height: 100vh;
     padding: 2.5rem 3rem 2rem;
 
@@ -139,18 +139,18 @@
     }
   }
   &.myenergy {
-    background: $myenergy;
+    background: $blue;
     .login-box {
-      background: $myenergy;
+      background: $blue;
       height: 432px;
       margin-top: -230px;
       .page-title {
         font-size: 24px;
-        color: $myenergy;
+        color: $blue;
       }
       span {
         font-style: normal;
-        color: $myenergy;
+        color: $blue;
         line-height: 20px;
         letter-spacing: 0.01em;
       }

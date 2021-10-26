@@ -31,32 +31,12 @@ export class TfaComponent implements OnInit {
     const data = { code: this.tfaForm.value.code, user_uuid: userId };
     this.http
       .callService(
-        new Method(environment.services.authenticatetfa(), data, 'post')
+        new Method(environment.myEnergyServices.authenticatetfa(), data, 'post')
       )
       .subscribe((response) => {
         this.credentials = JSON.stringify(response);
         sessionStorage.setItem('credentials', this.credentials);
-        this.route.queryParams.subscribe((params) => {
-          this.http
-            .callService(
-              new Method(environment.services.ctiGuidance(), '', 'get')
-            )
-            .subscribe((res) => {
-              if (res['newUser']) {
-                this.router.navigate(['/cti/guide/new-user'], {
-                  replaceUrl: true,
-                });
-              } else if (res['newOrganisation']) {
-                this.router.navigate(['/cti/guide/organisation'], {
-                  replaceUrl: true,
-                });
-              } else {
-                this.router.navigate(['/cti/guide/step1'], {
-                  replaceUrl: true,
-                });
-              }
-            });
-        });
+        this.router.navigate(['/myenergy/dashboard']);
       });
   }
 

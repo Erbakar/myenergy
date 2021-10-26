@@ -15,21 +15,8 @@ export class LeftNavComponent implements OnInit {
   businessLevelLength;
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private commonService: CommonService
-  ) {
-    this.user = JSON.parse(sessionStorage.getItem('credentials'));
-    this.freeOrganisation = this.user.organisation.licenseType === 'Free';
-    const credentials = JSON.parse(sessionStorage.getItem('credentials'));
-    credentials['organisation'].features.forEach((element) => {
-      if (element === 'unlimited_unit') {
-        this.isPro = true;
-      }
-    });
-    this.commonService.businessLevelLength.subscribe((res) => {
-      this.businessLevelLength = res;
-    });
-  }
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {}
   logout() {

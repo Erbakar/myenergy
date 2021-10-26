@@ -17,7 +17,7 @@ export class ResetPasswordService {
     return this.httpClient
       .request(
         'get',
-        environment.serverUrl + environment.services.token(context)
+        environment.serverUrl + environment.myEnergyServices.token(context)
       )
       .pipe(
         map((body: any) => body),
@@ -26,9 +26,13 @@ export class ResetPasswordService {
   }
   setPassword(data: any) {
     return this.httpClient
-      .post(environment.serverUrl + environment.services.setPassword(), data, {
-        headers: { 'Content-Type': 'application/json' },
-      })
+      .post(
+        environment.serverUrl + environment.myEnergyServices.setPassword(),
+        data,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      )
       .pipe(
         map((body: any) => body),
         catchError((error) => of(error.message))

@@ -27,13 +27,16 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   forgotPassword() {
-    fetch(environment.serverUrl + environment.services.forgottenPassword(), {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(this.forgotPasswordForm.value),
-    }).then((res) => {
+    fetch(
+      environment.serverUrl + environment.myEnergyServices.forgottenPassword(),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(this.forgotPasswordForm.value),
+      }
+    ).then((res) => {
       if (res.ok) {
         this.snackBar.open('Check your email', '', {
           duration: 5000,

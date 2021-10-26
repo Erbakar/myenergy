@@ -37,104 +37,12 @@ export class LoginService {
       .login(data)
       .pipe(
         finalize(() => {
-          // this.loginForm.markAsPristine();
           this.isLoading = false;
         })
       )
       .subscribe(
         (credentials) => {
-          if (this.project === 'cti') {
-            this.getQuestionList();
-          }
-          this.freeOrganisation =
-            credentials['organisation']['licenseType'] === 'Free';
-          if (credentials['tfaRequired']) {
-            this.router.navigate(['/tfa'], { replaceUrl: true });
-          } else {
-            credentials['roles'].forEach((element) => {
-              if (element.name === 'Super admin') {
-                this.router.navigate(['/admin'], { replaceUrl: true });
-              } else {
-                this.route.queryParams.subscribe((params) => {
-                  this.http
-                    .callService(
-                      new Method(environment.services.ctiGuidance(), '', 'get')
-                    )
-                    .subscribe((res) => {
-                      if (environment.project === 'cti') {
-                        if (res['newUser']) {
-                          this.router.navigate(['/cti/guide/new-user'], {
-                            replaceUrl: true,
-                          });
-                        } else {
-                          if (this.freeOrganisation) {
-                            this.router.navigate(['/cti/materials'], {
-                              replaceUrl: true,
-                            });
-                          } else {
-                            if (res['newOrganisation']) {
-                              this.router.navigate(
-                                ['/cti/guide/organisation'],
-                                { replaceUrl: true }
-                              );
-                            } else {
-                              this.isPro = false;
-                              credentials['organisation'].features.forEach(
-                                (element) => {
-                                  if (element === 'unlimited_unit') {
-                                    this.isPro = true;
-                                  }
-                                }
-                              );
-                              this.http
-                                .callService(
-                                  new Method(
-                                    environment.services.listBusinessLevels(),
-                                    '',
-                                    'get'
-                                  )
-                                )
-                                .subscribe((level) => {
-                                  if (this.isPro) {
-                                    this.router.navigate(['/cti/pro'], {
-                                      replaceUrl: true,
-                                    });
-                                  } else {
-                                    this.http
-                                      .callService(
-                                        new Method(
-                                          environment.services.ctiUnitGuidance(
-                                            level[0].assessments[0].unitId
-                                          ),
-                                          '',
-                                          'get'
-                                        )
-                                      )
-                                      .subscribe((step) => {
-                                        sessionStorage.setItem(
-                                          'ctiUnitGuidance',
-                                          JSON.stringify(step)
-                                        );
-                                        this.router.navigate(
-                                          ['/cti/guide/step1'],
-                                          { replaceUrl: true }
-                                        );
-                                      });
-                                  }
-                                });
-                            }
-                          }
-                        }
-                      } else if (this.project === 'myenergy') {
-                        this.router.navigate(['/myenergy']);
-                      } else {
-                        this.router.navigate(['/products']);
-                      }
-                    });
-                });
-              }
-            });
-          }
+          this.router.navigate(['/myenergy/dashboard']);
         },
         (error) => {
           this.snackBar.open(error.error.message, '', {
@@ -146,13 +54,5 @@ export class LoginService {
           this.error = error;
         }
       );
-  }
-
-  getQuestionList() {
-    this.http
-      .callService(new Method(environment.services.questionList(), '', 'get'))
-      .subscribe((res) => {
-        sessionStorage.setItem('questionList', JSON.stringify(res));
-      });
   }
 }

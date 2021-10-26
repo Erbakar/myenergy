@@ -72,7 +72,10 @@ export class AuthenticationService {
 
   login(context: LoginContext): Observable<Credentials> {
     return this.http
-      .post<any>(environment.serverUrl + environment.services.login(), context)
+      .post<any>(
+        environment.serverUrl + environment.myEnergyServices.login(),
+        context
+      )
       .pipe(
         map((user) => {
           if (user) {

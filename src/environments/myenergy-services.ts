@@ -1,4 +1,22 @@
 export const myEnergyServices = {
+  login() {
+    return '/login';
+  },
+  forgottenPassword() {
+    return '/forgottenPassword';
+  },
+  authenticatetfa() {
+    return '/authenticatetfa';
+  },
+  token(token: string) {
+    return `/token/${token}`;
+  },
+  setPassword() {
+    return `/setPassword`;
+  },
+  resendSingup() {
+    return `/signup/resend`;
+  },
   challenges(organisationId: any) {
     return `/organisation-service/organisation/${organisationId}/challenges`;
   },

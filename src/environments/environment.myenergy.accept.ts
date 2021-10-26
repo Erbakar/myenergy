@@ -7,7 +7,7 @@ import { myEnergyServices } from './myenergy-services';
 import { services } from './services';
 export const environment = {
   stroyblockUrl:
-    'https://api.storyblok.com/v2/cdn/stories/test?cv=1634799796&token=b3sqRHiuBmK6Bdu0qlK1zQtt&version=published',
+    'https://api.storyblok.com/v2/cdn/stories/test?token=b3sqRHiuBmK6Bdu0qlK1zQtt&version=published',
   production: true,
   decimalFormat: '1.2-2',
   integerFormat: '1.0-0',

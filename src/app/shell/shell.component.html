@@ -1,18 +1,10 @@
 <div class="col">
   <div class="row" id="main">
     <div id="left-nav">
-      <ng-container *ngIf="project === 'pcip'">
-        <app-left-nav></app-left-nav>
-      </ng-container>
-      <ng-container *ngIf="project === 'cti'">
-        <app-cti-left-nav></app-cti-left-nav>
-      </ng-container>
-      <ng-container *ngIf="project === 'myenergy'">
-        <app-myenergy-left-nav></app-myenergy-left-nav>
-      </ng-container>
+      <app-myenergy-left-nav></app-myenergy-left-nav>
     </div>
     <app-header id="header"></app-header>
-    <div id="main-content" [ngClass]="{ myenergyBG: project === 'myenergy' }">
+    <div id="main-content" class="myenergyBG">
       <router-outlet></router-outlet>
     </div>
   </div>

@@ -34,7 +34,7 @@
                     </p>
                   </div>
                   <div class="col-3">
-                    <span class="btn-circular grey-border">I UNDERSTAND</span>
+                    <span class="btn-myenergy grey-border">I UNDERSTAND</span>
                   </div>
                 </div>
               </div>
@@ -57,7 +57,7 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn-circular bg-shamrock center">
+              <button type="submit" class="btn-myenergy bg-green center">
                 SEARCH LABELS
               </button>
             </form>
@@ -166,7 +166,7 @@
                   </div>
                   <ng-container *ngIf="labelsSplitData.length > 2">
                     <span
-                      class="btn-circular grey-border more"
+                      class="btn-myenergy grey-border more"
                       (click)="showMoreLabels = true"
                       *ngIf="!showMoreLabels"
                     >
@@ -174,7 +174,7 @@
                       <em class="material-icons-outlined">expand_more</em>
                     </span>
                     <span
-                      class="btn-circular grey-border more"
+                      class="btn-myenergy grey-border more"
                       (click)="showMoreLabels = false"
                       *ngIf="showMoreLabels"
                     >
@@ -191,7 +191,7 @@
                           document to share with your colleagues and
                           suppliers.</span
                         >
-                        <em class="btn-circular grey-border">DOWLOAD PDF</em>
+                        <em class="btn-myenergy grey-border">DOWLOAD PDF</em>
                       </div>
                       <div class="col-6">
                         <span
@@ -202,7 +202,7 @@
                         <button
                           [disabled]="!labelsButtonActive"
                           type="submit"
-                          class="btn-circular bg-shamrock center"
+                          class="btn-myenergy bg-green center"
                         >
                           REQUEST PRODUCT
                         </button>
@@ -260,7 +260,7 @@
           <div class="item">
             <div class="head">
               <h2>&nbsp;</h2>
-              <button (click)="setActiveTab(0)" class="btn-circular">
+              <button (click)="setActiveTab(0)" class="btn-myenergy">
                 <em class="material-icons-outlined"> chevron_left </em>GO BACK
               </button>
               <em class="icon icon-close" id="close" (click)="close()"></em>
@@ -268,7 +268,7 @@
             <strong
               >Ask supplier for product recommendation
               <button
-                class="btn-circular bg-dark-slate-blue head-btn"
+                class="btn-myenergy bg-dark-slate-blue head-btn"
                 (click)="invaiteSupplierModal()"
               >
                 INVITE SUPPLIER
@@ -313,7 +313,7 @@
               <button
                 (click)="productSupplierSave()"
                 style="display: block; margin: 10px auto 0"
-                class="btn-circular bg-shamrock center"
+                class="btn-myenergy bg-green center"
               >
                 SELECT AND CONTINUE
               </button>
@@ -367,7 +367,7 @@
           <div class="item">
             <div class="head">
               <h2>&nbsp;</h2>
-              <button (click)="setActiveTab(1)" class="btn-circular">
+              <button (click)="setActiveTab(1)" class="btn-myenergy">
                 <em class="material-icons-outlined"> chevron_left </em>GO BACK
               </button>
               <em class="icon icon-close" id="close" (click)="close()"></em>
@@ -439,7 +439,7 @@
               <button
                 type="submit"
                 (click)="recommendationConfirm()"
-                class="btn-circular bg-shamrock center"
+                class="btn-myenergy bg-green center"
               >
                 CONFIRM REQUEST
               </button>

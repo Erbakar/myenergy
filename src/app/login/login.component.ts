@@ -29,6 +29,7 @@ export class LoginComponent {
   }
 
   login() {
+    this.isLoading = true;
     this.loginService.login(this.loginForm.value);
   }
 

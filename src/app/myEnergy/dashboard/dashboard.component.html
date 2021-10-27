@@ -226,7 +226,7 @@
       </form>
       <div class="text-center">
         <button
-          class="btn-circular bg-shamrock"
+          class="btn-myenergy bg-green"
           [disabled]="
             !challengesData.climateChange && !challengesData.wasteGeneration && !challengesData.resourceDepletion
           "
@@ -276,7 +276,7 @@
       </div>
       <div class="col">
         <div class="text-right" style="margin-top: 100px">
-          <button class="btn-circular real-grey-border" (click)="selectedChallenges = null">storyblok.button</button>
+          <button class="btn-myenergy grey-border" (click)="selectedChallenges = null">storyblok.button</button>
         </div>
       </div>
     </div>
@@ -322,7 +322,7 @@
         </div>
         <div class="absolute-center">
           <button
-            class="btn-circular bg-shamrock"
+            class="btn-myenergy bg-green"
             routerLink="/myenergy/product-recommendation"
           >
             {{ storyblok.myenergy_dashboard_recommendation_more_button }}
@@ -380,7 +380,7 @@
               </div>
               <div class="text-center">
                 <button
-                  class="btn-circular bg-shamrock"
+                  class="btn-myenergy bg-green"
                   (click)="setGoal(challengesForm, 'direct-procurement')"
                 >
                   {{ storyblok.myenergy_dashboard_purchases_left_desc }}
@@ -403,7 +403,7 @@
               </div>
               <div class="text-center">
                 <button
-                  class="btn-circular bg-shamrock"
+                  class="btn-myenergy bg-green"
                   (click)="setGoal(challengesForm, 'tender-procurement')"
                 >
                   {{ storyblok.myenergy_dashboard_purchases_right_button }}

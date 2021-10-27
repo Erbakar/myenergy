@@ -1,171 +1,5 @@
 <div class="login-container" [ngClass]="{ myenergy: project === 'myenergy' }">
-  <div class="login-box clearfix" *ngIf="project === 'cti'">
-    <div class="row">
-      <div class="col-md-6 user-info-box">
-        <img src="../../assets/img/WBCSDCIQ2.png" class="logo" alt="" />
-        <div class="page-head"><span class="page-title">CTI Tool</span></div>
-        <span class="spot" translate>loginText</span>
-        <a
-          href="http://wbcsd.org/ctice"
-          target="_blank"
-          class="forgot btn-circular dark-slate-blue-border"
-          translate
-          >LEARN MORE
-        </a>
-      </div>
-      <div class="col-md-6">
-        <div class="form">
-          <div class="page-head">
-            <span class="page-title">Login</span>
-            <!-- <a [routerLink]="['/register']" class="create btn-circular dark-slate-blue-border" translate
-              >CREATE AN ACCOUNT</a
-            > -->
-          </div>
-          <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-            <div class="form-item">
-              <label translate>EMAIL</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="email"
-                autocomplete="email"
-              />
-              <span hidden translate>Email</span>
-              <small
-                [hidden]="
-                  loginForm.controls.email.valid ||
-                  loginForm.controls.email.untouched
-                "
-                class="text-danger"
-                translate
-              >
-                Email is required
-              </small>
-            </div>
-            <div class="form-item">
-              <label translate>PASSWORD</label>
-              <input
-                type="password"
-                class="form-control"
-                formControlName="password"
-                autocomplete="current-password"
-                required
-              />
-              <span hidden translate>Password</span>
-              <small
-                [hidden]="
-                  loginForm.controls.password.valid ||
-                  loginForm.controls.password.untouched
-                "
-                class="text-danger"
-                translate
-              >
-                Password is required
-              </small>
-            </div>
-
-            <!-- <div class="checkbox-group">
-              <div class="checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    formControlName="remember"
-                    [(ngModel)]="remember"
-                    class="ng-untouched ng-valid ng-dirty ng-valid-parse ng-not-empty"
-                    aria-invalid="false"
-                    (change)="rememeberme(remember)"
-                  />
-                  <span class="icon-check"></span>
-                  <span class="checkbox-label ng-binding" translate>Keep me signed in</span>
-                </label>
-              </div>
-            </div> -->
-            <br />
-
-            <button class="btn-circular bg-shamrock big" type="submit">
-              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
-              <span translate>LOGIN</span>
-            </button>
-            <span
-              [routerLink]="['/forgot-password']"
-              class="forgot btn-circular dark-slate-blue-border"
-              translate
-              >FORGOT PASSWORD?</span
-            >
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <img
-    class="logo-vertical"
-    *ngIf="project === 'pcip'"
-    src="../../assets/img/logo-vertical-2.svg"
-    alt=""
-  />
-  <div class="login-box core clearfix" *ngIf="project === 'pcip'">
-    <div class="form">
-      <div class="page-head">
-        <span class="page-title" translate>Login</span>
-      </div>
-      <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-        <div class="form-item">
-          <label translate>EMAIL</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="email"
-            autocomplete="email"
-          />
-          <span hidden translate>Email</span>
-          <small
-            [hidden]="
-              loginForm.controls.email.valid ||
-              loginForm.controls.email.untouched
-            "
-            class="text-danger"
-            translate
-          >
-            Email is required
-          </small>
-        </div>
-        <div class="form-item">
-          <label translate>PASSWORD</label>
-          <input
-            type="password"
-            class="form-control"
-            formControlName="password"
-            autocomplete="current-password"
-            required
-          />
-          <span hidden translate>Password</span>
-          <small
-            [hidden]="
-              loginForm.controls.password.valid ||
-              loginForm.controls.password.untouched
-            "
-            class="text-danger"
-            translate
-          >
-            Password is required
-          </small>
-        </div>
-        <br />
-        <button class="btn-circular bg-shamrock big" type="submit">
-          <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
-          <span translate>LOGIN</span>
-        </button>
-        <span
-          [routerLink]="['/forgot-password']"
-          class="forgot btn-circular dark-slate-blue-border"
-          translate
-          >FORGOT PASSWORD?</span
-        >
-      </form>
-    </div>
-  </div>
-
-  <div class="login-box clearfix" *ngIf="project === 'myenergy'">
+  <div class="login-box clearfix">
     <div class="row">
       <div class="col-md-6 user-info-box">
         <img
@@ -175,7 +9,10 @@
           alt=""
         />
         <div class="page-head">
-          <span class="page-title">Welcome to myenergy</span>
+          <span class="page-title"
+            >Welcome to <br />
+            myenergy Circular Procurement Platform</span
+          >
         </div>
         <span class="spot" translate
           >Log in to your account to start with your circular procurement or
@@ -184,7 +21,7 @@
         <a
           href="#"
           target="_blank"
-          class="forgot btn-circular dark-slate-blue-border"
+          class="forgot btn-myenergy grey-border"
           translate
           >LEARN MORE
         </a>
@@ -193,12 +30,12 @@
         <div class="form">
           <div class="page-head">
             <span class="page-title">Log in to your account</span>
-            <!-- <a [routerLink]="['/register']" class="create btn-circular dark-slate-blue-border" translate
+            <!-- <a [routerLink]="['/register']" class="create btn-myenergy grey-border" translate
               >CREATE AN ACCOUNT</a
             > -->
           </div>
           <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-            <div class="form-item mb-4">
+            <div class="form-item-new-line mb-4">
               <label translate>EMAIL</label>
               <input
                 type="text"
@@ -218,7 +55,7 @@
                 Email is required
               </small>
             </div>
-            <div class="form-item mb-4">
+            <div class="form-item-new-line mb-4">
               <label translate>PASSWORD</label>
               <input
                 type="password"
@@ -240,8 +77,8 @@
               </small>
             </div>
 
-            <button class="btn-circular bg-shamrock login-button" type="submit">
-              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+            <button class="btn-myenergy bg-green login-button" type="submit">
+              <i class="fas fa-cog fa-spin loading" [hidden]="!isLoading"></i>
               <span translate>LOGIN</span>
             </button>
             <span

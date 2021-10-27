@@ -38,83 +38,78 @@ h1.myenergy {
   color: #f6c744;
 }
 
-.btn-circular {
+.btn-myenergy {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  font-size: 0.75rem;
+  padding: 8px 24px;
+  font-size: 16px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.67;
+  color: $white;
   letter-spacing: normal;
   text-align: center;
-  color: $blue;
-  border-radius: 2rem;
+  border-radius: 28px;
   border: solid 2px transparent;
   cursor: pointer;
+  background: transparent;
+  span {
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.67;
+    color: $white;
+  }
 
   &.big {
     padding: 0.5rem 3rem;
   }
+  &.bg-green {
+    background: $green;
+  }
+  &.bg-orange {
+    background: $orange;
+  }
+  &.bg-red {
+    background: $red;
+  }
+  &.grey-border {
+    border-color: $grey;
+    color: $black;
+  }
 }
 
-.watermelon-border {
-  border: solid 2px$orange;
+.form-item-new-line {
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+  }
+  input {
+    background: $white;
+    padding: 8px 12px;
+    border: 1px solid #f1f2f5;
+    color: $holder;
+    font-size: 14px;
+    line-height: 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  .ng-valid,
+  .ng-pristine,
+  .ng-dirty {
+    background: #e3e5ec !important;
+    color: #253e4e !important;
+  }
 }
 
-.dark-slate-blue-border {
-  border: solid 2px $blue;
-}
-
-.real-grey-border {
-  border: solid 2px $grey;
-}
-
-.shamrock-border {
-  border: solid 2px $green;
-}
-
-.brownish-grey-border {
-  border: solid 2px $grey;
-}
-
-.grey-border {
-  border: solid 2px $grey;
-}
-
-.white-border {
-  border: solid 2px #fff;
-  color: #fff;
-}
-
-.bg-watermelon {
-  background: $orange;
+.loading {
   color: $white;
-}
-
-.bg-dark-slate-blue {
-  background: $blue;
-  color: $white;
-}
-
-.bg-shamrock {
-  background: $green;
-  color: $white;
-}
-
-.bg-cerulean {
-  background: $light-blue;
-  color: $white;
-}
-
-.bg-real-grey {
-  background: $grey;
-  color: $blue;
-}
-
-.bg-light-purple {
-  background: $purple;
-  color: $white;
+  position: relative !important;
+  top: 0 !important;
+  left: -10px;
 }
 
 .myenergy-box {

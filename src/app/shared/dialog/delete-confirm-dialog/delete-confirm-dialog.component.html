@@ -6,7 +6,7 @@
   <div style="text-align: right; padding: 10px 0">
     <button
       tabindex="0"
-      class="btn-circular dark-slate-blue-border"
+      class="btn-myenergy grey-border"
       (click)="onNoClick()"
       translate
     >
@@ -14,7 +14,7 @@
     </button>
     <button
       tabindex="1"
-      class="btn-circular bg-shamrock ml-2"
+      class="btn-myenergy bg-green ml-2"
       *ngIf="!data.yesButtonText"
       (click)="onYesClick()"
       translate
@@ -23,7 +23,7 @@
     </button>
     <button
       tabindex="1"
-      class="btn-circular bg-shamrock ml-2"
+      class="btn-myenergy bg-green ml-2"
       *ngIf="data.yesButtonText"
       (click)="onYesClick()"
       translate

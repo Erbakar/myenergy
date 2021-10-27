@@ -42,6 +42,8 @@ html {
     .filepond--root .filepond--drop-label,
     .filepond--drop-label.filepond--drop-label label {
       font-family: "Poppins", sans-serif !important;
+      letter-spacing: -0.01em;
+      color: $grey;
     }
   }
 }
@@ -51,8 +53,8 @@ body {
   font-family: "aktiv-grotesk";
   font-weight: normal;
   font-size: 116px;
-  background: $white;
-  color: $blue;
+  letter-spacing: -0.01em;
+  color: $grey;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -69,6 +71,8 @@ main {
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
+  letter-spacing: -0.01em;
+  color: $grey;
 }
 
 hr {
@@ -92,6 +96,8 @@ a {
   font-family: "aktiv-grotesk";
   font-weight: normal;
   font-size: 1rem;
+  letter-spacing: -0.01em;
+  color: $grey;
 
   &:hover {
     text-decoration: none;
@@ -121,6 +127,8 @@ button {
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.61;
+  letter-spacing: -0.01em;
+  color: $grey;
 }
 
 code,
@@ -345,7 +353,8 @@ textarea {
 }
 
 .mat-option-text {
-  color: #1c195b !important;
+  letter-spacing: -0.01em;
+  color: $grey;
   font-size: 12px !important;
   font-weight: normal !important;
 }

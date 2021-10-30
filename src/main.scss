@@ -46,7 +46,7 @@ h1.myenergy {
   font-stretch: normal;
   font-style: normal;
   line-height: 1.67;
-  color: $white;
+  color: $white !important;
   letter-spacing: normal;
   text-align: center;
   border-radius: 28px;
@@ -76,7 +76,7 @@ h1.myenergy {
   }
   &.grey-border {
     border-color: $grey;
-    color: $black;
+    color: $black !important;
   }
 }
 
@@ -110,6 +110,44 @@ h1.myenergy {
   position: relative !important;
   top: 0 !important;
   left: -10px;
+}
+
+.mat-snack-bar-container {
+  position: absolute !important;
+  top: -20px;
+  z-index: 99;
+  margin-left: -180px !important;
+  span {
+    color: #fff !important;
+  }
+}
+
+.success-snackBar {
+  background: url(./assets/img/check.png) left 3px no-repeat $green !important;
+  padding: 1rem 1rem 1rem 4rem !important;
+  color: #f2f2f2;
+  font-family: "aktiv-grotesk" !important;
+}
+
+.error-snackBar {
+  background: url(./assets/img/warning.png) 10px 7px no-repeat $red !important;
+  padding: 1rem 1rem 1rem 4rem !important;
+  color: #f2f2f2;
+  font-family: "aktiv-grotesk" !important;
+
+  .mat-simple-snackbar-action button {
+    background: #fff;
+    font-family: "aktiv-grotesk" !important;
+    border-radius: 2rem;
+    margin-left: 1rem;
+
+    .mat-button-wrapper {
+      font-size: 12px;
+      color: $grey !important;
+      font-weight: 600;
+      top: 0.6rem;
+    }
+  }
 }
 
 .myenergy-box {

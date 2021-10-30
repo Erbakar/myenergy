@@ -15,7 +15,7 @@
     background: #f6f4f7;
     border-radius: 16px;
     .head {
-      margin-bottom: 20px;
+      margin-bottom: 40px;
       h2 {
         font-weight: bold;
         font-size: 28px;
@@ -37,7 +37,7 @@
       }
       button {
         font-size: 14px;
-        color: #7c8b95;
+        color: #7c8b95 !important;
         background: #fff;
         border-radius: 28px;
         padding: 8px 16px 8px 24px;
@@ -160,6 +160,7 @@
         span {
           position: relative;
           top: 50%;
+          font-size: 11px;
           margin-top: -20px;
           background: $white;
           float: right;

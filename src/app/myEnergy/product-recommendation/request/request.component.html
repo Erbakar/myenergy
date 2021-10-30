@@ -6,10 +6,10 @@
         <div class="col-7">
           <div class="item">
             <div class="head">
-              <h2>&nbsp;</h2>
               <em class="icon icon-close" id="close" (click)="close()"></em>
+              <strong>Product details</strong>
             </div>
-            <strong>Product details</strong>
+
             <app-family
               (setBrickUuid)="selectedSubCategory($event)"
             ></app-family>
@@ -268,7 +268,7 @@
             <strong
               >Ask supplier for product recommendation
               <button
-                class="btn-myenergy bg-dark-slate-blue head-btn"
+                class="btn-myenergy bg-green head-btn"
                 (click)="invaiteSupplierModal()"
               >
                 INVITE SUPPLIER

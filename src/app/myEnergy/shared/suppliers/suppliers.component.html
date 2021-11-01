@@ -1,0 +1,46 @@
+<strong
+  >Ask supplier for product recommendation
+  <button
+    class="btn-myenergy bg-green head-btn"
+    (click)="invaiteSupplierModal()"
+  >
+    INVITE SUPPLIER
+  </button>
+</strong>
+<span
+  >If can't find a supplier in the list below, you can invite them to the
+  platform.</span
+>
+<ng-container *ngIf="supplierList">
+  <form
+    style="padding: 0; margin: 10px 0 20px"
+    [formGroup]="supplierForm"
+    novalidate
+  >
+    <div class="row supplier-check" formGroupName="supplier">
+      <div class="supplier-item clearfix" *ngFor="let sup of supplierList">
+        <ng-container *ngIf="!sup.uuid">
+          <input type="checkbox" disabled="true" checked="true" />
+          <label>
+            <strong>{{ sup.name }}</strong>
+            <span>{{ sup.email }}</span>
+          </label>
+        </ng-container>
+        <ng-container *ngIf="sup.uuid">
+          <input type="checkbox" [formControlName]="sup.uuid" [id]="sup.uuid" />
+          <label [for]="sup.uuid">
+            <strong>{{ sup.name }}</strong>
+            <span>lorem ipsun</span>
+          </label>
+        </ng-container>
+      </div>
+    </div>
+  </form>
+  <button
+    (click)="productSupplierSave()"
+    style="display: block; margin: 10px auto 0"
+    class="btn-myenergy bg-green center"
+  >
+    SELECT AND CONTINUE
+  </button>
+</ng-container>

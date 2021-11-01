@@ -41,6 +41,8 @@ import { ProductRecommendationComponent } from './product-recommendation/product
 import { RequestComponent } from './product-recommendation/request/request.component';
 import { FamilyComponent } from './shared/family/family.component';
 import { CriteriaComponent } from './shared/criteria/criteria.component';
+import { LabelsComponent } from './shared/labels/labels.component';
+import { SuppliersComponent } from './shared/suppliers/suppliers.component';
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -90,6 +92,8 @@ registerPlugin(
     RequestComponent,
     FamilyComponent,
     CriteriaComponent,
+    LabelsComponent,
+    SuppliersComponent,
   ],
 })
 export class MyEnergyModule {}

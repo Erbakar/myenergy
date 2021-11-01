@@ -1,0 +1,44 @@
+<form
+  *ngIf="criteriaData"
+  (ngSubmit)="criteriaSubmit()"
+  [formGroup]="criteriaForm"
+  novalidate
+>
+  <strong>Select your circular criteria for this product</strong>
+  <div class="disclaimer">
+    <div class="row">
+      <div class="col-9">
+        <strong>Disclaimer:</strong>
+        <p>
+          The labels and criteria presented here are for recommendation purposes
+          only.
+        </p>
+        <p>
+          Each buyer is solely responsible for adapting these to their specific
+          needs and the context of the contract.
+        </p>
+      </div>
+      <div class="col-3">
+        <span class="btn-myenergy grey-border">I UNDERSTAND</span>
+      </div>
+    </div>
+  </div>
+  <div class="row criteria-check" formGroupName="criteria">
+    <div class="col-4" *ngFor="let item of allCriteria">
+      <b>{{ item.name }}</b>
+      <div
+        class="check-item clearfix"
+        [ngClass]="{ match: cr.match }"
+        *ngFor="let cr of item.criteria"
+      >
+        <input type="checkbox" [formControlName]="cr.uuid" [id]="cr.uuid" />
+        <label [for]="cr.uuid">
+          <span>{{ cr.name }}</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn-myenergy bg-green center">
+    SEARCH LABELS
+  </button>
+</form>

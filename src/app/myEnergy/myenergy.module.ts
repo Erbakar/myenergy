@@ -40,6 +40,7 @@ import { OverviewComponent } from './procurements/direct-procurement/overview/ov
 import { ProductRecommendationComponent } from './product-recommendation/product-recommendation.component';
 import { RequestComponent } from './product-recommendation/request/request.component';
 import { FamilyComponent } from './shared/family/family.component';
+import { CriteriaComponent } from './shared/criteria/criteria.component';
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -88,6 +89,7 @@ registerPlugin(
     ProductRecommendationComponent,
     RequestComponent,
     FamilyComponent,
+    CriteriaComponent,
   ],
 })
 export class MyEnergyModule {}

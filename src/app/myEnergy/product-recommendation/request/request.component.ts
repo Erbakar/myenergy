@@ -55,15 +55,6 @@ export class RequestComponent {
   ) {
     // this.infoVideoModal('recommendation');
     this.router.navigate([`/myenergy/product-recommendation/new/detail`]);
-    if (!sessionStorage.getItem('allCriteria')) {
-      this.procurementsService.allCriteria().then((res) => {
-        this.allCriteria = res;
-        sessionStorage.setItem('allCriteria', JSON.stringify(this.allCriteria));
-      });
-    } else {
-      this.allCriteria = JSON.parse(sessionStorage.getItem('allCriteria'));
-    }
-
     if (!sessionStorage.getItem('categoryData')) {
       this.procurementsService.getCategory().then((res) => {
         this.categoryData = res;
@@ -116,30 +107,8 @@ export class RequestComponent {
 
   async selectedSubCategory(familyData: any) {
     this.familyData = familyData;
-    if (this.familyData.req) {
-      await this.allCriteria.forEach((item) => {
-        item.criteria.forEach((cr) => {
-          cr.match = false;
-        });
-      });
-      await this.procurementsService
-        .subCategoryCriteria(familyData.brick_uuid)
-        .then((res) => {
-          this.allCriteria.forEach((item) => {
-            item.criteria.forEach((cr) => {
-              res.forEach((ri) => {
-                if (ri.uuid === cr.uuid) {
-                  cr.match = true;
-                }
-              });
-            });
-          });
-          this.criteriaData = res;
-          this.labelsSplitData = '';
-          this.createCriteriaForm();
-        });
-    }
   }
+
   selectLabelList(match?: any, index?: any) {
     this.labelUuids = [];
     for (const [key, value] of Object.entries(this.labelsForm.value.labels)) {
@@ -193,40 +162,29 @@ export class RequestComponent {
     await this.createLabelsForm();
   }
 
-  criteriaSubmit(request: boolean) {
-    this.criteriaArray = [];
-    for (const [key, value] of Object.entries(
-      this.criteriaForm.value.criteria
-    )) {
-      if (value === true) {
-        this.criteriaArray.push(key);
-      }
-      this.critariaButtonActive = this.criteriaArray.length > 0 ? true : false;
-    }
-    if (request) {
-      this.procurementsService
-        .getCriteriaLabels(
-          this.criteriaArray.toString().replace(/\,/gi, '&id=')
-        )
-        .then((res) => {
-          this.labelsData = res;
-          this.createLabelsForm();
-          const labelsSplitData = this.labelsData.reduce((res2, curr) => {
-            if (res2[curr.match]) {
-              res2[curr.match].push(curr);
-            } else {
-              Object.assign(res2, { [curr.match]: [curr] });
-            }
-            return res2;
-          }, {});
-          const test = [];
-          for (const [key, value] of Object.entries(labelsSplitData)) {
-            test.push(value);
+  getLabels(selectedCriterias: any) {
+    this.criteriaArray = selectedCriterias;
+    this.procurementsService
+      .getCriteriaLabels(selectedCriterias.toString().replace(/\,/gi, '&id='))
+      .then((res) => {
+        this.labelsData = res;
+        this.createLabelsForm();
+        const labelsSplitData = this.labelsData.reduce((res2, curr) => {
+          if (res2[curr.match]) {
+            res2[curr.match].push(curr);
+          } else {
+            Object.assign(res2, { [curr.match]: [curr] });
           }
-          this.labelsSplitData = test.reverse();
-          console.log(this.labelsSplitData);
-        });
-    }
+          return res2;
+        }, {});
+        const test = [];
+        for (const [key, value] of Object.entries(labelsSplitData)) {
+          test.push(value);
+        }
+        this.labelsSplitData = test.reverse();
+        console.log(this.labelsData);
+        console.log(this.labelsSplitData);
+      });
   }
 
   infoVideoModal(topic: any) {
@@ -347,18 +305,6 @@ export class RequestComponent {
     this.procurementsService
       .recommendationConfirm(this.recommendationId, data)
       .then((res) => {});
-  }
-
-  private createCriteriaForm() {
-    this.controls = {};
-    this.allCriteria.forEach((cr) => {
-      cr.criteria.forEach((item) => {
-        this.controls[item.uuid] = new FormControl(false);
-      });
-    });
-    this.criteriaForm = this.formBuilder.group({
-      criteria: this.formBuilder.group(this.controls),
-    });
   }
 
   private createSupplierForm() {

@@ -9,5 +9,6 @@ import { environment } from '@env/environment';
 export class CommonService {
   public isLogin = new BehaviorSubject<any>('');
   public familyData = null;
+  public allCriteria = null;
   constructor() {}
 }

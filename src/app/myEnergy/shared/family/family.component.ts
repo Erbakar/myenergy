@@ -23,10 +23,6 @@ export class FamilyComponent implements OnInit {
     private formBuilder: FormBuilder,
     private commonService: CommonService
   ) {
-    this.createFamilyForm();
-  }
-
-  ngOnInit(): void {
     if (!this.commonService.familyData) {
       this.procurementsService.getFamily().then((res) => {
         this.familyData = res;
@@ -35,11 +31,13 @@ export class FamilyComponent implements OnInit {
     } else {
       this.familyData = this.commonService.familyData;
     }
+    this.createFamilyForm();
   }
+
+  ngOnInit(): void {}
   selectedBrick(req: boolean) {
     this.familyForm.value.req = req;
     this.setBrickUuid.emit(this.familyForm.value);
-    console.log(this.familyForm.value);
   }
   private createFamilyForm() {
     this.familyForm = this.formBuilder.group({

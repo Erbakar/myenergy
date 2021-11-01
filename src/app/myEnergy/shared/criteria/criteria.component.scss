@@ -1,0 +1,91 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.disclaimer {
+  background: #fdf1d0;
+  border-radius: 8px;
+  padding: 16px 16px 10px;
+  margin-bottom: 16px;
+  display: flex;
+  strong,
+  p {
+    margin: 0 0 5px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  span {
+    position: relative;
+    top: 50%;
+    font-size: 11px;
+    margin-top: -20px;
+    background: $white;
+    float: right;
+    cursor: pointer;
+  }
+}
+
+.criteria-check {
+  .check-item {
+    &.match {
+      background: #e6f8ec;
+      span {
+        font-weight: bold;
+        color: #253e4e;
+      }
+    }
+    input[type="checkbox"] {
+      visibility: hidden;
+      position: absolute;
+    }
+
+    label {
+      position: relative;
+      width: 100%;
+      min-height: 26px;
+      height: auto;
+      content: "";
+      clear: both;
+      display: table;
+
+      span {
+        padding-top: 2px;
+        display: block;
+        float: right;
+        width: 100%;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.01em;
+        color: #253e4e;
+        padding-left: 25px;
+      }
+    }
+
+    input[type="radio"] + label:before,
+    input[type="checkbox"] + label:before {
+      height: 16px;
+      width: 16px;
+      margin-right: 2px;
+      content: " ";
+      display: block;
+      padding: 5px;
+      border: solid 1px #7c8b95;
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      -webkit-box-shadow: 0px 0px 0px 1px #7c8b95;
+      box-shadow: 0px 0px 0px 1px #7c8b95;
+    }
+
+    input[type="radio"]:checked + label:before,
+    input[type="checkbox"]:checked + label:before {
+      background: #253e4e;
+      border: solid 1px #253e4e;
+      -webkit-box-shadow: 0px 0px 0px 1px #253e4e;
+      box-shadow: 0px 0px 0px 1px #253e4e;
+    }
+
+    input[type="checkbox"] + label:before {
+      border-radius: 2px;
+    }
+  }
+}

@@ -17,6 +17,8 @@ import { Output, EventEmitter } from '@angular/core';
 export class FamilyComponent implements OnInit {
   familyData;
   familyForm: FormGroup;
+  selectedMain;
+  selectedClass;
   @Output() setBrickUuid = new EventEmitter<string>();
   constructor(
     public procurementsService: ProcurementsService,

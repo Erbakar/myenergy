@@ -1,20 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { ApiRequestService, Method } from '@app/core/http/api-request.service';
-import { environment } from '@env/environment';
-import { ConfirmDialog } from '@app/shared/dialog/confirm-dialog/confirm-dialog.component';
-
 import { ProcurementsService } from '@app/myEnergy/procurements/procurements.service';
 import { MyenergyGoalsVideoDialog } from '@app/shared/dialog/myenergy-goals-video/myenergy-goals-video.component';
-import { element } from 'protractor';
-import { MyenergyInvaiteSupplier } from '@app/shared/dialog/myenergy-invaite-supplier/myenergy-invaite-supplier.component';
 
 @Component({
   selector: 'app-request',
@@ -22,26 +10,15 @@ import { MyenergyInvaiteSupplier } from '@app/shared/dialog/myenergy-invaite-sup
   styleUrls: ['./request.component.scss'],
 })
 export class RequestComponent {
-  showMoreLabels = false;
   familyData;
   activePurchasTab = 0;
-
-  critariaButtonActive = false;
   allprocurementData;
-
-  criteriaData;
-  allCriteria;
   labelUuids;
   criteriaArray = [];
   supplierList;
   selectedSuppliers = [];
   recommendationId;
-  subCategories;
-  categoryData;
-
-  controls;
   constructor(
-    private formBuilder: FormBuilder,
     private router: Router,
     public procurementsService: ProcurementsService,
     private dialog: MatDialog,

@@ -23,7 +23,6 @@ export class CriteriaComponent implements OnChanges {
   controls;
   allCriteria;
   criteriaData;
-  labelsSplitData;
   criteriaArray = [];
   critariaButtonActive = false;
   labelsData;
@@ -56,11 +55,25 @@ export class CriteriaComponent implements OnChanges {
             });
           });
           this.criteriaData = res;
-          this.labelsSplitData = '';
           this.createCriteriaForm();
         });
     }
   }
+  showInfo(cr: any) {
+    console.log(this.allCriteria);
+
+    this.allCriteria.forEach((element) => {
+      element.criteria.forEach((c) => {
+        if (c.uuid === cr.uuid) {
+          c.selected = true;
+        } else {
+          c.selected = false;
+        }
+      });
+    });
+    console.log(cr);
+  }
+
   async ngOnChanges() {
     if (!this.commonService.allCriteria) {
       this.procurementsService.allCriteria().then((res) => {
@@ -73,7 +86,7 @@ export class CriteriaComponent implements OnChanges {
     await this.setCriterias(this.brick);
   }
 
-  criteriaSubmit() {
+  criteriaSubmit(req: boolean) {
     this.criteriaArray = [];
     for (const [key, value] of Object.entries(
       this.criteriaForm.value.criteria
@@ -83,7 +96,9 @@ export class CriteriaComponent implements OnChanges {
       }
       this.critariaButtonActive = this.criteriaArray.length > 0 ? true : false;
     }
-    this.selectedCriterias.emit(this.criteriaArray);
+    if (req) {
+      this.selectedCriterias.emit(this.criteriaArray);
+    }
   }
 
   private createCriteriaForm() {

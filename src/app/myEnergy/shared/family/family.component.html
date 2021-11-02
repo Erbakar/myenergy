@@ -1,8 +1,8 @@
 <div class="active-item">
-  <span class="mb-2">Select the product family and group.</span>
-
-  <div class="row">
+  <span class="head-text">Select the product family and group.</span>
+  <div class="row" style="padding: 0 16px">
     <div class="col-6">
+      <strong>{{ selectedMain?.name }}</strong>
       <div
         class="check-item clearfix"
         *ngFor="let main of familyData; let i = index"
@@ -19,6 +19,7 @@
       </div>
     </div>
     <div class="col-6" *ngIf="selectedMain">
+      <strong>{{ selectedClass?.name }}</strong>
       <div
         class="check-item clearfix"
         *ngFor="let class of selectedMain.classes"

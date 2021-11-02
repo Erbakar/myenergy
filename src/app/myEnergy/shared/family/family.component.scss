@@ -1,12 +1,24 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+.head-text {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 16px;
+}
 .form-item {
   padding: 0;
   height: 46px;
-  margin: 0 0 10px;
-
+  margin: 20px 0 10px;
   label {
+    position: relative;
     height: initial;
     top: 10px;
     width: 50%;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
   }
   .form-control {
     float: right;
@@ -16,14 +28,6 @@
     border-radius: 8px;
     :focus {
       background: #fff !important;
-    }
-    input {
-      width: 100%;
-      height: 100%;
-      font-size: 14px;
-      line-height: 20px;
-      letter-spacing: 0.01em;
-      color: #7c8b95;
     }
   }
   .two-item {
@@ -55,4 +59,22 @@
 
 .mat-select {
   border: 1px solid #e3e5ec;
+}
+.active-item .check-item {
+  margin-bottom: 10px;
+  label span {
+    font-weight: normal !important;
+  }
+}
+
+strong {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+}
+.new-purches .mat-select-value-text span {
+  font-weight: normal !important;
 }

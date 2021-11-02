@@ -137,60 +137,7 @@
       line-height: 32px;
     }
   }
-  .more {
-    position: relative;
-    label {
-      display: block;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 14px;
-      line-height: 20px;
-      display: flex;
-      align-items: center;
-      letter-spacing: 0.01em;
-      color: #0095c6;
-      text-decoration: underline;
-      margin-top: 10px;
-      margin-bottom: 20px;
-    }
-    .box {
-      position: absolute;
-      background: #4684ad;
-      border-radius: 8px;
-      padding: 16px 16px 0;
-      width: 360px;
-      z-index: 2;
-      &::after {
-        display: block;
-        content: "";
-        position: absolute;
-        top: -10px;
-        left: 40px;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 0 10px 10px 10px;
-        border-color: transparent transparent #4684ad transparent;
-      }
-      em {
-        zoom: 0.7;
-      }
-      strong {
-        display: inline-block;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 24px;
-        color: #ffffff;
-        margin-bottom: 10px;
-      }
-      span {
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 16px;
-        color: #ffffff;
-      }
-    }
-  }
+
   button {
     display: bold;
     font-weight: bold;
@@ -201,16 +148,6 @@
     font-size: 16px;
     line-height: 20px;
     letter-spacing: 0.01em;
-  }
-  .icon-close {
-    position: absolute;
-    right: 20px;
-    font-size: 36px;
-    color: #1c195b;
-    background: #fff;
-    border-radius: 100%;
-    cursor: pointer;
-    z-index: 2;
   }
 
   ul {

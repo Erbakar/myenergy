@@ -1,7 +1,7 @@
 <strong
   >Ask supplier for product recommendation
   <button
-    class="btn-myenergy bg-green head-btn"
+    class="btn-myenergy bg-grey head-btn"
     (click)="invaiteSupplierModal()"
   >
     INVITE SUPPLIER
@@ -18,19 +18,28 @@
     novalidate
   >
     <div class="row supplier-check" formGroupName="supplier">
-      <div class="supplier-item clearfix" *ngFor="let sup of supplierList">
-        <ng-container *ngIf="!sup.uuid">
+      <div
+        class="supplier-item clearfix"
+        *ngFor="let sup of invaiteSupplierList"
+      >
+        <ng-container>
           <input type="checkbox" disabled="true" checked="true" />
           <label>
-            <strong>{{ sup.name }}</strong>
-            <span>{{ sup.email }}</span>
+            <strong>{{ sup.organisationName }}</strong>
+            <span>{{ sup.firstName }} {{ sup.lastName }}</span>
           </label>
         </ng-container>
-        <ng-container *ngIf="sup.uuid">
-          <input type="checkbox" [formControlName]="sup.uuid" [id]="sup.uuid" />
-          <label [for]="sup.uuid">
-            <strong>{{ sup.name }}</strong>
-            <span>lorem ipsun</span>
+      </div>
+      <div class="supplier-item clearfix" *ngFor="let sup of supplierList">
+        <ng-container>
+          <input
+            type="checkbox"
+            [formControlName]="sup.userUuid"
+            [id]="sup.userUuid"
+          />
+          <label [for]="sup.userUuid">
+            <strong>{{ sup.organisationName }}</strong>
+            <span>{{ sup.firstName }} {{ sup.lastName }}</span>
           </label>
         </ng-container>
       </div>

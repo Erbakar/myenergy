@@ -46,3 +46,9 @@ form {
   cursor: pointer;
   z-index: 2;
 }
+.form-item-new-line {
+  input {
+    background: #fff !important;
+    height: 48px !important;
+  }
+}

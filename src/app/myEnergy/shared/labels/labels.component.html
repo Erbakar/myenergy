@@ -1,6 +1,6 @@
-<ng-container *ngIf="labelsSplitData">
+<div class="item" *ngIf="labelsSplitData" style="margin-top: 30px">
   <strong style="margin-bottom: 10px">Labels</strong>
-  <div class="empty">
+  <div class="empty" *ngIf="!criterias">
     Select product category and circular criteria to see suggested labels.
   </div>
   <div>
@@ -9,59 +9,31 @@
       that match your preference. Select as many as apply.
     </h5>
 
-    <form [formGroup]="labelsForm" (ngSubmit)="labelsSubmit()">
-      <div class="radio-box clearfix" formGroupName="labels">
-        <div
-          class="clearfix"
-          *ngFor="
-            let labels of labelsSplitData
-              | slice: 0:(criterias.length > 2 ? 2 : criterias.length);
-            let i = index
-          "
-        >
-          <div class="criteria-met">
-            <em
-              [ngClass]="{
-                allselected: i === 0 ? allSelectedClass1 : allSelectedClass2
-              }"
-              (click)="allLabelSelected(labels[0].match, i)"
-            ></em
-            ><b>{{ labels[0].match }} out of {{ criterias.length }}</b>
-            circular criteria met
-          </div>
-          <div class="radio-item clearfix" *ngFor="let label of labels">
-            <input
-              type="checkbox"
-              (change)="selectLabelList(label.match, i)"
-              [formControlName]="label.uuid"
-              [id]="label.uuid"
-            />
-            <label [for]="label.uuid" class="clearfix">
-              <strong>{{ label.name }}</strong>
-              <img [src]="label.imageUrl" alt="" />
-              <div
-                class="info"
-                [ngClass]="{ green: cr.match }"
-                *ngFor="let cr of label.criteria"
-              >
-                {{ cr.name }}
-              </div>
-            </label>
-          </div>
-        </div>
-        <ng-container *ngIf="criterias.length > 2 && showMoreLabels">
-          <div class="criteria-met">
-            <b> less than {{ labelsSplitData[1][0].match }}</b>
-            circular criteria met
-          </div>
+    <div class="active-item">
+      <form [formGroup]="labelsForm" (ngSubmit)="labelsSubmit()">
+        <div class="radio-box clearfix" formGroupName="labels">
           <div
             class="clearfix"
-            *ngFor="let labels of labelsSplitData | slice: 2:criterias.length"
+            *ngFor="
+              let labels of labelsSplitData
+                | slice: 0:(criterias.length > 2 ? 2 : criterias.length);
+              let i = index
+            "
           >
+            <div class="criteria-met">
+              <em
+                [ngClass]="{
+                  allselected: i === 0 ? allSelectedClass1 : allSelectedClass2
+                }"
+                (click)="allLabelSelected(labels[0].match, i)"
+              ></em
+              ><b>{{ labels[0].match }} out of {{ criterias.length }}</b>
+              circular criteria met
+            </div>
             <div class="radio-item clearfix" *ngFor="let label of labels">
               <input
                 type="checkbox"
-                (change)="selectLabelList()"
+                (change)="selectLabelList(label.match, i)"
                 [formControlName]="label.uuid"
                 [id]="label.uuid"
               />
@@ -78,51 +50,86 @@
               </label>
             </div>
           </div>
+          <ng-container *ngIf="criterias.length > 2 && showMoreLabels">
+            <div class="criteria-met">
+              <b> less than {{ labelsSplitData[1][0].match }}</b>
+              circular criteria met
+            </div>
+            <div
+              class="clearfix"
+              *ngFor="let labels of labelsSplitData | slice: 2:criterias.length"
+            >
+              <div class="radio-item clearfix" *ngFor="let label of labels">
+                <input
+                  type="checkbox"
+                  (change)="selectLabelList()"
+                  [formControlName]="label.uuid"
+                  [id]="label.uuid"
+                />
+                <label [for]="label.uuid" class="clearfix">
+                  <strong>{{ label.name }}</strong>
+                  <img [src]="label.imageUrl" alt="" />
+                  <div
+                    class="info"
+                    [ngClass]="{ green: cr.match }"
+                    *ngFor="let cr of label.criteria"
+                  >
+                    {{ cr.name }}
+                  </div>
+                </label>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <ng-container
+          style="margin-top: 20px; display: block"
+          *ngIf="labelsSplitData.length > 2"
+        >
+          <span
+            class="btn-myenergy grey-border more"
+            (click)="showMoreLabels = true"
+            *ngIf="!showMoreLabels"
+          >
+            SHOW MORE LABELS
+            <em class="material-icons-outlined">expand_more</em>
+          </span>
+          <span
+            class="btn-myenergy grey-border more"
+            (click)="showMoreLabels = false"
+            *ngIf="showMoreLabels"
+          >
+            SHOW LESS LABELS
+            <em class="material-icons-outlined">expand_less</em>
+          </span>
         </ng-container>
-      </div>
-      <ng-container *ngIf="labelsSplitData.length > 2">
-        <span
-          class="btn-myenergy grey-border more"
-          (click)="showMoreLabels = true"
-          *ngIf="!showMoreLabels"
-        >
-          SHOW MORE LABELS
-          <em class="material-icons-outlined">expand_more</em>
-        </span>
-        <span
-          class="btn-myenergy grey-border more"
-          (click)="showMoreLabels = false"
-          *ngIf="showMoreLabels"
-        >
-          SHOW LESS LABELS
-          <em class="material-icons-outlined">expand_less</em>
-        </span>
-      </ng-container>
 
-      <div class="col-12">
-        <div class="row footer-btn-box">
-          <div class="col-6">
-            <span
-              >Download a label selection and product information document to
-              share with your colleagues and suppliers.</span
-            >
-            <em class="btn-myenergy grey-border">DOWLOAD PDF</em>
-          </div>
-          <div class="col-6">
-            <span
-              >Request product from suppliers by sharing label selection and
-              product information directly from the platform.</span
-            >
-            <button
-              [disabled]="!labelsButtonActive"
-              type="submit"
-              class="btn-myenergy bg-green center"
-            >
-              REQUEST PRODUCT
-            </button>
+        <div class="col-12">
+          <div class="row footer-btn-box">
+            <div class="col-6">
+              <span
+                >Download a label selection and product information document to
+                share with your colleagues and suppliers.</span
+              >
+              <em style="opacity: 0.5" class="btn-myenergy grey-border"
+                >DOWLOAD PDF</em
+              >
+            </div>
+            <div class="col-6">
+              <span
+                >Request product from suppliers by sharing label selection and
+                product information directly from the platform.</span
+              >
+              <button
+                [disabled]="!labelsButtonActive"
+                type="submit"
+                class="btn-myenergy bg-green center"
+              >
+                REQUEST PRODUCT
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</ng-container>
+</div>

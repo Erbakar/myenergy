@@ -23,10 +23,11 @@ import { MyenergyInvaiteSupplier } from '@app/shared/dialog/myenergy-invaite-sup
 })
 export class SuppliersComponent implements OnChanges {
   @Output() Suppliers = new EventEmitter<any>();
-
   @Input() supplierList;
   supplierForm: FormGroup;
   selectedSuppliers = [];
+  tempList = [];
+  invaiteSupplierList = [];
   controls;
   constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {}
 
@@ -37,21 +38,28 @@ export class SuppliersComponent implements OnChanges {
   }
 
   productSupplierSave() {
+    this.tempList = [];
+    this.selectedSuppliers = [];
     for (const [index, [key, value]] of Object.entries(
       Object.entries(this.supplierForm.value.supplier)
     )) {
       if (value === true) {
-        this.selectedSuppliers.push({
-          uuid: key,
-          email: '',
-          supplier_name: '',
-          first_name: '',
-          last_name: '',
-        });
-      } else if (value === false) {
-        this.selectedSuppliers.splice(Number(index), 1);
+        this.tempList.push(key);
       }
     }
+
+    this.supplierList.forEach((sup) => {
+      this.tempList.forEach((id) => {
+        if (sup.userUuid === id) {
+          this.selectedSuppliers.push(sup);
+        }
+      });
+    });
+
+    this.invaiteSupplierList.forEach((element) => {
+      this.selectedSuppliers.push(element);
+    });
+
     console.log(this.selectedSuppliers);
     this.Suppliers.emit(this.selectedSuppliers);
   }
@@ -66,8 +74,7 @@ export class SuppliersComponent implements OnChanges {
         return;
       }
       try {
-        this.supplierList.unshift(result);
-        this.selectedSuppliers.push(result);
+        this.invaiteSupplierList.push(result);
       } catch (error) {}
     });
   }
@@ -75,7 +82,7 @@ export class SuppliersComponent implements OnChanges {
   createSupplierForm() {
     this.controls = {};
     this.supplierList.forEach((sup) => {
-      this.controls[sup.uuid] = new FormControl(false);
+      this.controls[sup.userUuid] = new FormControl(false);
     });
     this.supplierForm = this.formBuilder.group({
       supplier: this.formBuilder.group(this.controls),

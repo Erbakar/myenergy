@@ -4,7 +4,27 @@
     <span class="page-title">Add new supplier</span>
   </div>
   <form [formGroup]="createUserFrom" novalidate>
-    <div class="form-item">
+    <div class="form-item-new-line">
+      <label translate>Company</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter your Company name"
+        formControlName="organisationName"
+      />
+      <span hidden translate>Company</span>
+      <small
+        [hidden]="
+          createUserFrom.controls.organisationName.valid ||
+          createUserFrom.controls.organisationName.untouched
+        "
+        class="text-danger"
+        translate
+      >
+        First name is required
+      </small>
+    </div>
+    <div class="form-item-new-line">
       <label>Email</label>
       <input
         type="text"
@@ -27,7 +47,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <div class="form-item">
+        <div class="form-item-new-line">
           <label translate>First name</label>
           <input
             type="text"
@@ -49,7 +69,7 @@
         </div>
       </div>
       <div class="col">
-        <div class="form-item">
+        <div class="form-item-new-line">
           <label translate>Last name</label>
           <input
             type="text"
@@ -64,6 +84,7 @@
   </form>
   <div style="text-align: center; padding: 20px 0 0">
     <button
+      [disabled]="createUserFrom.invalid"
       tabindex="1"
       class="btn-myenergy bg-green ml-2"
       (click)="onYesClick()"

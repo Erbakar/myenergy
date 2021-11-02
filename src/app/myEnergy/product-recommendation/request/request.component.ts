@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ProcurementsService } from '@app/myEnergy/procurements/procurements.service';
 import { MyenergyGoalsVideoDialog } from '@app/shared/dialog/myenergy-goals-video/myenergy-goals-video.component';
@@ -22,6 +23,7 @@ export class RequestComponent {
     private router: Router,
     public procurementsService: ProcurementsService,
     private dialog: MatDialog,
+    private snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute
   ) {
     // this.infoVideoModal('recommendation');
@@ -68,7 +70,14 @@ export class RequestComponent {
 
   setLabels(labels: any) {
     this.labelUuids = labels;
-    this.createRecomandation();
+    if (this.familyData.description) {
+      this.createRecomandation();
+    } else {
+      this.snackBar.open('Product description cannot be left blank!', '', {
+        duration: 5000,
+        panelClass: ['error-snackBar'],
+      });
+    }
   }
 
   setSupplieries(suppliers: any) {

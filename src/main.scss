@@ -74,6 +74,9 @@ h1.myenergy {
   &.bg-red {
     background: $red;
   }
+  &.bg-grey {
+    background: $grey;
+  }
   &.grey-border {
     border-color: $grey;
     color: $black !important;
@@ -579,4 +582,21 @@ button[disabled] {
   border-radius: 100%;
   cursor: pointer;
   z-index: 2;
+}
+h5 {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.page-head {
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  .page-title {
+    display: block;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+  }
 }
